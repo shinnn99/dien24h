@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dien24h.vn/sitemap.xml

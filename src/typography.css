@@ -480,17 +480,9 @@ body{font-size:var(--type-body);line-height:1.6}
   .hv2-process article::before,.hv2-process article::after{display:none}
 }
 
-/* Keep the longest hero assurance label safely on one line */
+/* Keep hero assurance labels on one line at a consistent type size */
 .hv2-proof-row b{white-space:nowrap}
-.hv2-proof-row>div:nth-child(3){
-  gap:6px;
-  padding-inline:8px;
-}
-.hv2-proof-row>div:nth-child(3) b{
-  font-size:13px;
-  letter-spacing:-.15px;
-}
 
-@media(max-width:900px){
-  .hv2-proof-row>div:nth-child(3) b{font-size:14px}
+@media(min-width:901px){
+  .hv2-proof-row{grid-template-columns:.95fr .95fr 1.15fr .95fr}
 }

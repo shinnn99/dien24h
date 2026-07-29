@@ -204,3 +204,28 @@
   .hv2-trust-row{margin-top:18px}
   .hv2-bottom-row{margin-top:18px}
 }
+
+/* Content cards grow with their copy; grid keeps every card in a row equal */
+@media(min-width:761px){
+  .hv2-services article{height:auto;min-height:224px;display:flex;flex-direction:column}
+  .hv2-service-photo{flex:0 0 99px}
+  .hv2-service-body{flex:1;display:flex;flex-direction:column}
+  .hv2-service-body p{height:auto;min-height:48px;display:block;overflow:visible;-webkit-line-clamp:unset}
+  .hv2-service-body button{margin-top:auto;align-self:flex-start}
+
+  .hv2-project-grid article{height:auto;min-height:174px;display:flex;flex-direction:column}
+  .hv2-project-photo{flex:0 0 91px}
+  .hv2-project-grid p{height:auto;min-height:22px;overflow:visible}
+  .hv2-project-grid button{margin-top:auto;align-self:flex-start}
+
+  .hv2-process article{height:auto;min-height:90px}
+  .hv2-process p{display:block;overflow:visible;-webkit-line-clamp:unset}
+
+  .hv2-why article{height:auto;min-height:108px}
+  .hv2-why p{display:block;overflow:visible;-webkit-line-clamp:unset}
+
+  .hv2-trust-row>article{height:auto;min-height:180px}
+  .hv2-testimonial>p{display:block;overflow:visible;-webkit-line-clamp:unset}
+
+  .hv2-faq,.hv2-quote-form,.hv2-engineer{height:auto;min-height:220px}
+}

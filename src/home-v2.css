@@ -146,3 +146,40 @@
   .hv2-services,.hv2-project-grid,.hv2-why,.chrome-footer-grid{grid-template-columns:1fr}
   .hv2-product-grid{grid-template-columns:1fr 1fr}
 }
+
+/* Fluid desktop typography: larger on wide screens without changing geometry */
+@media(min-width:761px){
+  .chrome-topbar{font-size:clamp(10px,.75vw,12px)}
+  .chrome-nav nav>a,.chrome-phone{font-size:clamp(13px,.9vw,15px);white-space:nowrap}
+  .hv2-hero-inner>p{font-size:clamp(12px,1vw,16px)}
+  .hv2-hero-actions a,.hv2-hero-actions button{font-size:clamp(11px,.9vw,14px);white-space:nowrap}
+  .hv2-proof-row b{font-size:clamp(9px,.76vw,12px)}
+  .hv2-proof-row small{font-size:clamp(8px,.7vw,11px);white-space:nowrap}
+  .hv2-kpis strong{font-size:clamp(20px,1.65vw,28px)}
+  .hv2-kpis b{font-size:clamp(10px,.84vw,13px);white-space:nowrap}
+  .hv2-kpis small{font-size:clamp(7.5px,.64vw,10px);white-space:nowrap}
+  .hv2-section>h2,.hv2-why-section>h2,.hv2-panel-title h2{font-size:clamp(14px,1.1vw,18px);white-space:nowrap}
+  .hv2-panel-title button{font-size:clamp(8px,.64vw,10px);white-space:nowrap}
+  .hv2-service-body h3{font-size:clamp(12px,.95vw,15px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hv2-service-body p{font-size:clamp(8px,.7vw,11px);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3}
+  .hv2-project-grid h3{font-size:clamp(8px,.72vw,11px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hv2-project-grid p,.hv2-project-grid button{font-size:clamp(6.5px,.58vw,9px)}
+  .hv2-project-grid button{white-space:nowrap}
+  .hv2-product-grid b{font-size:clamp(7.5px,.65vw,10px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hv2-process strong{font-size:clamp(12px,.95vw,15px)}
+  .hv2-process h3{font-size:clamp(8px,.72vw,11px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hv2-process p{font-size:clamp(6.5px,.58vw,9px);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+  .hv2-why b{font-size:clamp(8px,.72vw,11px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hv2-why p{font-size:clamp(6.7px,.58vw,9px);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+  .hv2-trust-row h2{font-size:clamp(13px,1vw,16px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hv2-capacity>div b{font-size:clamp(8px,.72vw,11px);white-space:nowrap}
+  .hv2-capacity>div small{font-size:clamp(6.5px,.58vw,9px)}
+  .hv2-testimonial>p{font-size:clamp(8px,.7vw,11px);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+  .hv2-client b{font-size:clamp(8px,.7vw,11px);white-space:nowrap}
+  .hv2-client small{font-size:clamp(6.5px,.58vw,9px);white-space:nowrap}
+  .hv2-faq h2,.hv2-quote-form h2{font-size:clamp(14px,1.1vw,18px);white-space:nowrap}
+  .hv2-faq>button{font-size:clamp(7.5px,.64vw,10px)}
+  .hv2-quote-form>p{font-size:clamp(6.5px,.58vw,9px)}
+  .chrome-footer h4{font-size:clamp(9px,.75vw,12px);white-space:nowrap}
+  .chrome-footer-grid>div>a:not(.chrome-footer-phone):not(.footer-logo-v2){font-size:clamp(7px,.62vw,9.5px);white-space:nowrap}
+}

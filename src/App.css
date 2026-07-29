@@ -189,3 +189,15 @@ body{font-size:1rem;line-height:1.6}
   .ref-proofs>div{padding:10px 8px}
   .ref-project-grid{grid-template-columns:1fr}
 }
+
+/* KPI card intentionally overlaps the hero, as in the approved reference */
+.ref-hero{height:auto;min-height:510px}
+.ref-hero-content{padding:42px 0 88px}
+.ref-proofs>div{min-width:0}
+.ref-stats{margin-top:-46px;position:relative;z-index:4}
+
+@media(max-width:768px){
+  .ref-hero{height:auto;min-height:620px}
+  .ref-hero-content{padding:46px 0 92px}
+  .ref-stats{margin-top:-46px}
+}

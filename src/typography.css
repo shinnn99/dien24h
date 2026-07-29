@@ -437,3 +437,12 @@ body{font-size:var(--type-body);line-height:1.6}
 @media(max-width:430px){
   .hv2-partners h2{font-size:clamp(9px,2.8vw,11.5px)}
 }
+
+/* More breathing room between homepage sections and their headings */
+.hv2-section{padding-top:44px}
+.hv2-feature-row,.hv2-trust-row,.hv2-bottom-row{margin-top:38px}
+
+@media(max-width:760px){
+  .hv2-section{padding-top:34px}
+  .hv2-feature-row,.hv2-trust-row,.hv2-bottom-row{margin-top:30px}
+}

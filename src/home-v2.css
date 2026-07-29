@@ -110,7 +110,7 @@
 .hv2-trust-row h2{margin:0 0 8px;color:var(--hv2-blue);font-size:13px;line-height:1.2}
 .hv2-capacity>div{height:38px;display:flex;align-items:center;gap:8px;color:var(--hv2-blue)}
 .hv2-capacity>div>span{flex:1;display:flex;flex-direction:column}.hv2-capacity>div b{color:#172033;font-size:8px}.hv2-capacity>div small{color:#667085;font-size:6.5px;line-height:1.25}
-.hv2-partners>div{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
+.hv2-partners>div{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
 .hv2-partners>div>b{height:100px;border:1px solid #e7ebf1;border-radius:5px;display:grid;place-content:center;text-align:center;font-size:12px;line-height:1}
 .hv2-partners small{font-size:6px}.schneider{color:#159847}.abb{color:#e72f2d;font-size:22px!important}.siemens{color:#00a6a6}.mitsubishi{color:#d9232d}.ls{color:#234d9c}.hyundai{color:#1775a7}
 .hv2-testimonial{position:relative}.hv2-testimonial>svg{color:var(--hv2-blue)}.hv2-testimonial>p{margin:0;color:#344054;font-size:8px;line-height:1.45}.hv2-client{display:flex;align-items:center;gap:8px;margin-top:9px}.hv2-client>span{width:33px;height:33px;border-radius:50%;background:linear-gradient(145deg,#dfe8f4,#8ba1bb);display:grid;place-items:center;color:#0a2d68;font-size:9px;font-weight:800}.hv2-client>div{display:flex;flex-direction:column}.hv2-client b{font-size:8px}.hv2-client small{font-size:6.5px;color:#667085}.hv2-dots{position:absolute;bottom:10px;left:50%;display:flex;gap:6px}.hv2-dots i{width:7px;height:7px;border:1px solid #1662c5;border-radius:50%}.hv2-dots i:first-child{background:#1662c5}

@@ -1,0 +1,405 @@
+:root{
+  --type-body:16px;
+  --type-caption:14px;
+  --type-menu:clamp(15px,1vw,16px);
+  --type-button:16px;
+  --type-page-h1:clamp(40px,4vw,48px);
+  --type-section-h2:clamp(30px,2.5vw,36px);
+  --type-card-h3:clamp(20px,1.35vw,22px);
+  --type-item-title:clamp(18px,1.2vw,20px);
+  --type-kpi:clamp(28px,2vw,36px);
+}
+
+html{font-size:16px}
+body{font-size:var(--type-body);line-height:1.6}
+
+/* Shared chrome */
+.chrome-topbar{height:32px;font-size:13px;line-height:1.4}
+.chrome-header{height:68px}
+.chrome-nav nav>a,.chrome-nav-trigger,.chrome-phone{font-size:var(--type-menu)}
+.chrome-dropdown a{font-size:14px}
+.chrome-phone{height:auto;min-height:44px}
+.chrome-footer{font-size:14px}
+.chrome-footer h4{font-size:16px;line-height:1.35;white-space:normal}
+.chrome-footer p,
+.chrome-footer-grid>div>a:not(.chrome-footer-phone):not(.footer-logo-v2){font-size:14px;line-height:1.6;white-space:normal}
+.chrome-footer-grid>div:first-child>b{font-size:15px}
+.chrome-footer-grid>div:first-child>small{font-size:13px}
+.chrome-footer-phone{height:auto;min-height:60px}
+.chrome-footer-phone b{font-size:18px}
+.chrome-footer-phone small,.chrome-copyright{font-size:13px}
+
+/* Homepage type scale and content-driven heights */
+.home-v2{font-size:16px;line-height:1.6}
+.hv2-hero{height:auto;min-height:510px}
+.hv2-hero-inner{height:auto;min-height:510px;padding-top:34px;padding-bottom:96px}
+.hv2-hero h1{max-width:700px;font-size:clamp(48px,4vw,56px);font-weight:700;line-height:1.08}
+.hv2-hero-inner>p{font-size:18px;line-height:1.6}
+.hv2-hero-actions a,.hv2-hero-actions button{height:auto;min-height:48px;padding:10px 22px;font-size:16px;font-weight:600}
+.hv2-proof-row{width:min(700px,100%)}
+.hv2-proof-row>div{height:auto;min-height:68px}
+.hv2-proof-row b{font-size:14px;line-height:1.4;white-space:normal}
+.hv2-proof-row small{font-size:13px;line-height:1.4;white-space:normal}
+
+.hv2-kpis{height:auto;min-height:120px;padding:18px 24px}
+.hv2-kpis article{min-width:0;padding:8px 12px}
+.hv2-kpis strong{font-size:var(--type-kpi)}
+.hv2-kpis b{font-size:15px;line-height:1.4;white-space:normal}
+.hv2-kpis small{font-size:13px;line-height:1.45;white-space:normal}
+
+.hv2-section>h2,.hv2-why-section>h2,.hv2-panel-title h2,
+.hv2-trust-row h2,.hv2-faq h2,.hv2-quote-form h2{
+  font-size:clamp(30px,2.2vw,34px);
+  line-height:1.2;
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+}
+.hv2-section>h2,.hv2-why-section>h2{margin-bottom:18px}
+.hv2-panel-title{height:auto;min-height:58px;gap:18px;padding-block:8px}
+.hv2-panel-title button{flex:0 0 auto;font-size:15px;line-height:1.4;white-space:normal}
+
+.hv2-services{gap:12px}
+.hv2-services article{height:auto;min-height:330px}
+.hv2-service-photo{height:auto;flex-basis:130px}
+.hv2-service-body{padding:20px 14px 12px}
+.hv2-service-body h3{
+  margin-bottom:8px;
+  font-size:var(--type-card-h3);
+  line-height:1.3;
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+}
+.hv2-service-body p{height:auto;min-height:0;font-size:14px;line-height:1.6;overflow:visible}
+.hv2-service-body button{font-size:16px}
+
+.hv2-project-grid article{height:auto;min-height:260px}
+.hv2-project-photo{height:auto;flex-basis:120px}
+.hv2-project-grid h3{
+  font-size:var(--type-item-title);
+  line-height:1.35;
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+}
+.hv2-project-grid p{height:auto;min-height:0;font-size:13px;line-height:1.5;overflow:visible}
+.hv2-project-grid button{font-size:15px;line-height:1.4;white-space:normal}
+.hv2-product-grid article{height:auto;min-height:112px;padding-bottom:9px}
+.hv2-product-photo{height:76px}
+.hv2-product-grid b{
+  padding-inline:6px;
+  font-size:var(--type-item-title);
+  line-height:1.3;
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+}
+
+.hv2-process article{height:auto;min-height:155px;align-items:start}
+.hv2-process strong{font-size:18px}
+.hv2-process h3{
+  font-size:var(--type-card-h3);
+  line-height:1.3;
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+}
+.hv2-process p{font-size:13px;line-height:1.5;overflow:visible}
+.hv2-why article{height:auto;min-height:175px}
+.hv2-why b{
+  font-size:var(--type-card-h3);
+  line-height:1.3;
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+}
+.hv2-why p{font-size:14px;line-height:1.55;overflow:visible}
+
+.hv2-trust-row>article{height:auto;min-height:270px}
+.hv2-capacity>div{height:auto;min-height:62px}
+.hv2-capacity>div b,.hv2-client b{font-size:15px;line-height:1.4;white-space:normal}
+.hv2-capacity>div small,.hv2-client small{font-size:13px;line-height:1.45;white-space:normal}
+.hv2-testimonial{padding-bottom:34px}
+.hv2-testimonial>p{font-size:15px;line-height:1.6;overflow:visible}
+
+.hv2-faq,.hv2-quote-form,.hv2-engineer{height:auto;min-height:360px}
+.hv2-faq>button{min-height:42px;font-size:15px;line-height:1.45}
+.hv2-faq button p{font-size:14px;line-height:1.55}
+.hv2-quote-form>p{font-size:14px;line-height:1.5}
+.hv2-quote-form input,.hv2-quote-form select{height:auto;min-height:46px;font-size:16px}
+.hv2-quote-form textarea{height:auto;min-height:84px;font-size:16px}
+.hv2-quote-form>button{height:auto;min-height:48px;font-size:16px}
+.hv2-engineer span{width:fit-content;max-width:100%;font-size:14px;line-height:1.45}
+
+/* Shared typography for all existing inner pages */
+.eyebrow{font-size:13px;line-height:1.4}
+.breadcrumb{font-size:14px;line-height:1.5}
+.tag{font-size:13px;line-height:1.4}
+.button{font-size:var(--type-button);line-height:1.35}
+.text-link{font-size:15px}
+
+.page-hero h1,.listing-hero h1,.product-summary h1,.projects-head h1,
+.project-detail-hero h1,.article-head h1,.about-hero h1,.contact-hero h1,.not-found h1{
+  font-size:var(--type-page-h1);
+  line-height:1.1;
+}
+.page-hero p,.listing-hero p,.projects-head p,.project-detail-hero p,
+.article-head>p,.about-hero p,.contact-hero p,.product-summary>p{
+  font-size:16px;
+  line-height:1.7;
+}
+
+.section>h2,.section-title h2,.overview h2,.challenge-solution h2,
+.related-projects h2,.tab-content h2,.related-products h2,.selection-advice h2,
+.documents h2,.faq-block .row-title h2,.evidence-grid h2,.dark-cta h2,.article-content h2{
+  font-size:var(--type-section-h2);
+  line-height:1.2;
+}
+.featured-project h2,.article-card-grid article>h2,.contact-main aside h2,
+.quick-needs>h2,.response-process h2,.emergency-card h2{
+  font-size:clamp(22px,1.6vw,24px);
+  line-height:1.3;
+}
+
+.service-card h3,.issue-grid h3,.service-package-grid h3,.category-grid h3,
+.process-steps h3,.solution-steps h3,.consult-card h3,.article-content h3,.quote-form h3{
+  font-size:var(--type-card-h3);
+  line-height:1.3;
+}
+.project-body h3,.product-card h3,.article-card-grid article>h2{
+  height:auto;
+  min-height:0;
+  font-size:var(--type-item-title);
+  line-height:1.35;
+}
+
+.section p,.section li,.overview p,.overview li,.challenge-solution li,
+.article-content>p,.article-content li,.about-overview>div:first-child>p,.about-overview li{
+  font-size:16px;
+  line-height:1.7;
+}
+.service-card p,.project-body p,.project-body>b,.product-card p,.process-steps p,
+.why-grid>div:first-child>p,.trust-grid p,.trust-grid blockquote,.issue-grid p,
+.service-package-grid ul,.service-package-grid li,.evidence-grid p,.emergency-card p,.category-grid p,
+.featured-project p,.solution-steps p,.results-grid li,.quote-proof p,.consult-card p,
+.article-card-grid article>p,.about-values>article>p,.contact-main aside p,
+.map-box>p,.faqs>button p,.author-card p{
+  height:auto;
+  min-height:0;
+  font-size:14px;
+  line-height:1.6;
+}
+.capability-strip small,.service-commitments small,.product-promises small,
+.project-image>span,.project-image>i,.project-meta b,.project-facts small,
+.results-grid small,.article-head>small,.author-line small,.related-articles button>small,
+.team-placeholder small,.about-docs span>small,.timeline span,.quick-needs button>small,
+.response-process>article>small,.gallery-main>span,.article-cover span{
+  font-size:13px;
+  line-height:1.45;
+}
+
+.capability-strip,.service-commitments,.product-promises{height:auto;min-height:120px}
+.capability-strip>div,.service-commitments>div,.product-promises>div{min-width:0;padding:12px}
+.capability-strip>div>b,.service-commitments>div>b{font-size:var(--type-kpi)}
+.capability-strip strong,.service-commitments strong,.product-promises b{
+  font-size:15px;
+  line-height:1.4;
+}
+
+.service-card,.project-card,.product-card,.issue-grid article,.service-package-grid article,
+.category-grid article,.featured-project,.challenge-solution>article,.results-grid>article,
+.article-card-grid article,.about-values>article,.about-docs>article{
+  height:auto;
+}
+.service-card p,.product-card p{min-height:0}
+
+.service-card button,.project-body button,.product-card>button,.service-package-grid button,
+.category-grid button,.tabs button,.documents article>button,.article-card-grid article>button,
+.related-articles button,.faqs>button>span{
+  height:auto;
+  min-height:44px;
+  font-size:15px;
+  line-height:1.4;
+}
+.service-package-grid button,.product-card>button{padding:9px 12px}
+
+.quote-form label,.filter-bar label,.project-filter label{font-size:14px;line-height:1.45}
+.quote-form input,.quote-form select,.quote-form textarea,
+.filter-bar select,.filter-bar input,.project-filter select{
+  height:auto;
+  min-height:46px;
+  font-size:16px;
+  line-height:1.4;
+}
+.quote-form textarea{min-height:96px}
+.quote-form>small,.quote-form .success{font-size:13px}
+.faqs>button p{margin-top:12px}
+
+.brand-strip b,.empty-state{font-size:14px}
+.verified{font-size:13px}
+.spec-badges small{font-size:13px}
+.spec-badges b{font-size:14px}
+.benefit-row span,.tabs button,.spec-table span,.aside-benefits span,
+.selection-advice>div b,.documents article>b,.documents article>button{
+  font-size:14px;
+  line-height:1.45;
+}
+.article-note,.toc a,.related-docs span,.article-inline-cta span{font-size:13px;line-height:1.55}
+.toc>b,.related-docs>b,.author-line b,.article-inline-cta b,
+.related-articles button>b,.team-placeholder b,.about-docs>article:first-child span,
+.quick-needs button>b,.response-process article>div>span,.response-process article>div>span>b{
+  font-size:14px;
+  line-height:1.45;
+}
+.project-facts b,.results-grid strong,.quote-proof span{font-size:14px;line-height:1.45}
+
+.projects-head{height:auto;min-height:280px;padding-block:42px}
+.contact-hero{min-height:260px}
+.article-sidebar{max-height:calc(100vh - 110px);overflow:auto}
+.tabs{flex-wrap:wrap}
+.selection-advice{height:auto;flex-wrap:wrap}
+.selection-advice h2{width:100%;margin:0}
+
+@media(max-width:1100px){
+  .chrome-topbar .chrome-container span:nth-child(2),
+  .chrome-topbar .chrome-container span:nth-child(3){display:none}
+  .chrome-menu{display:grid}
+  .chrome-nav nav{
+    display:none;
+    position:absolute;
+    top:68px;
+    left:0;
+    right:0;
+    height:auto;
+    margin:0;
+    padding:10px 24px 18px;
+    background:#fff;
+    box-shadow:0 16px 30px rgba(6,42,98,.16);
+  }
+  .chrome-nav nav.open{display:block}
+  .chrome-nav nav>a,.chrome-nav-trigger{
+    width:100%;
+    height:46px;
+    justify-content:space-between;
+    border-bottom:1px solid #edf0f4;
+  }
+  .chrome-nav-item{height:auto;display:block}
+  .chrome-dropdown{
+    position:static;
+    display:none;
+    min-width:0;
+    margin:0 0 6px;
+    padding:4px 0 6px 16px;
+    border:0;
+    border-radius:0 0 7px 7px;
+    background:#f5f8fc;
+    box-shadow:none;
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transform:none;
+    transition:none;
+  }
+  .chrome-nav-item.is-open>.chrome-dropdown{display:block}
+  .chrome-dropdown a{min-height:42px;padding:10px 12px;border-bottom:1px solid #e8eef6;white-space:normal}
+  .chrome-dropdown a:last-child{border-bottom:0}
+  .chrome-phone{display:none}
+
+  .hv2-services{grid-template-columns:repeat(3,1fr)}
+  .hv2-feature-row{grid-template-columns:1fr}
+  .hv2-process{grid-template-columns:repeat(3,1fr)}
+  .hv2-process article:after{display:none}
+  .hv2-why{grid-template-columns:repeat(3,1fr)}
+  .hv2-trust-row{grid-template-columns:1fr 1fr}
+  .hv2-testimonial{grid-column:1/-1}
+  .service-grid.six,.category-grid,.issue-grid{grid-template-columns:repeat(3,1fr)}
+  .service-package-grid{grid-template-columns:1fr 1fr}
+  .process-steps{grid-template-columns:repeat(3,1fr);gap:24px}
+  .process-steps:before{display:none}
+  .chrome-footer-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+@media(max-width:900px){
+  .hv2-proof-row,.hv2-kpis{grid-template-columns:1fr 1fr}
+  .hv2-kpis article{min-height:110px;border-bottom:1px solid var(--hv2-line)}
+  .hv2-kpis article:nth-child(2){border-right:0}
+
+  .service-commitments,.product-promises,.project-facts{grid-template-columns:1fr 1fr}
+  .process-steps{grid-template-columns:repeat(3,1fr);gap:24px}
+  .process-steps:before{display:none}
+  .product-content-grid,.article-layout,.challenge-solution,.about-docs,.contact-main{grid-template-columns:1fr}
+  .article-sidebar{position:static;max-height:none;overflow:visible}
+  .solution-steps{grid-template-columns:1fr 1fr}
+  .quick-needs>div{grid-template-columns:1fr 1fr}
+  .about-docs>article>div{grid-template-columns:1fr 1fr}
+  .contact-main{gap:24px}
+}
+
+@media(max-width:760px){
+  body{font-size:15px}
+  .chrome-topbar{font-size:12px}
+  .chrome-nav nav>a,.chrome-nav-trigger{font-size:15px}
+  .chrome-dropdown a{font-size:14px}
+
+  .hv2-hero{min-height:620px}
+  .hv2-hero-inner{min-height:620px;padding-top:44px;padding-bottom:90px}
+  .hv2-hero h1{font-size:34px}
+  .hv2-hero-inner>p{font-size:16px}
+  .hv2-hero-actions a,.hv2-hero-actions button{font-size:16px}
+  .hv2-proof-row b{font-size:14px}
+  .hv2-proof-row small{font-size:13px}
+  .hv2-kpis strong{font-size:28px}
+  .hv2-kpis b{font-size:14px}
+  .hv2-kpis small{font-size:13px}
+
+  .hv2-section>h2,.hv2-why-section>h2,.hv2-panel-title h2,
+  .hv2-trust-row h2,.hv2-faq h2,.hv2-quote-form h2{font-size:26px}
+  .hv2-service-body h3,.hv2-process h3,.hv2-why b{font-size:18px}
+  .hv2-project-grid h3,.hv2-product-grid b{font-size:17px}
+  .hv2-service-body p,.hv2-why p,.hv2-testimonial>p{font-size:15px}
+  .hv2-project-grid p,.hv2-process p,.hv2-capacity>div small,.hv2-client small{font-size:13px}
+  .hv2-panel-title button,.hv2-project-grid button,.hv2-faq>button,.hv2-quote-form>button{font-size:15px}
+
+  .hv2-services{grid-template-columns:1fr 1fr}
+  .hv2-process{grid-template-columns:1fr}
+  .hv2-why{grid-template-columns:1fr 1fr}
+  .hv2-trust-row{grid-template-columns:1fr}
+  .hv2-testimonial{grid-column:auto}
+  .hv2-services article{min-height:340px}
+  .hv2-project-grid article{min-height:260px}
+  .hv2-process article,.hv2-why article{min-height:170px}
+  .hv2-trust-row>article{min-height:250px}
+  .hv2-faq,.hv2-quote-form,.hv2-engineer{min-height:340px}
+  .chrome-footer-grid{grid-template-columns:1fr 1fr}
+
+  .page-hero h1,.listing-hero h1,.product-summary h1,.projects-head h1,
+  .project-detail-hero h1,.article-head h1,.about-hero h1,.contact-hero h1,.not-found h1{font-size:34px}
+  .section>h2,.section-title h2,.overview h2,.challenge-solution h2,
+  .related-projects h2,.tab-content h2,.related-products h2,.selection-advice h2,
+  .documents h2,.faq-block .row-title h2,.evidence-grid h2,.dark-cta h2,.article-content h2{font-size:26px}
+  .service-card h3,.issue-grid h3,.service-package-grid h3,.category-grid h3,
+  .process-steps h3,.solution-steps h3,.consult-card h3,.article-content h3,.quote-form h3{font-size:18px}
+  .project-body h3,.product-card h3,.article-card-grid article>h2{font-size:17px}
+  .section p,.section li,.page-hero p,.listing-hero p,.projects-head p,
+  .project-detail-hero p,.article-head>p,.about-hero p,.contact-hero p,.product-summary>p{font-size:15px}
+  .service-grid.six,.category-grid,.issue-grid,.service-package-grid{grid-template-columns:1fr 1fr}
+  .process-steps{grid-template-columns:1fr 1fr}
+  .quote-form input,.quote-form select,.quote-form textarea,
+  .filter-bar select,.filter-bar input,.project-filter select{font-size:16px}
+}
+
+@media(max-width:520px){
+  .hv2-proof-row,.hv2-kpis{grid-template-columns:1fr}
+  .hv2-kpis article{border-right:0}
+  .service-commitments,.product-promises,.project-facts,.solution-steps,
+  .quick-needs>div,.about-docs>article>div{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:1fr}
+  .tabs button{flex:1 1 50%}
+}
+
+@media(max-width:430px){
+  .hv2-services,.hv2-project-grid,.hv2-why,
+  .service-grid.six,.category-grid,.issue-grid,.service-package-grid{grid-template-columns:1fr}
+  .chrome-footer-grid{grid-template-columns:1fr}
+}

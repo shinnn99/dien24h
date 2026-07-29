@@ -14,6 +14,7 @@ import {
 } from './pages'
 import './App.css'
 import './home-v2.css'
+import './typography.css'
 
 export type Navigate = (href: string) => void
 

@@ -13,6 +13,7 @@ import {
   ServicePage,
 } from './pages'
 import './App.css'
+import './home-v2.css'
 
 export type Navigate = (href: string) => void
 

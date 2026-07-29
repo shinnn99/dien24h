@@ -165,3 +165,27 @@ body{font-size:1rem;line-height:1.6}
   .ref-form-grid{grid-template-columns:1fr}
   .ref-quote input,.ref-quote select,.ref-quote textarea{font-size:16px}
 }
+
+/* Layout corrections after the readable type-scale update */
+.ref-hero-content{padding-top:42px}
+.ref-hero h1{max-width:760px;margin-bottom:14px}
+.ref-actions{margin-top:16px}
+.ref-proofs{max-width:760px;margin-top:14px}
+.ref-proofs>div{padding-top:10px;padding-bottom:10px}
+.ref-stats{height:auto;min-height:130px;margin-top:0}
+.ref-services{grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.ref-card-photo{background-size:cover}
+.ref-project-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+.ref-project-grid article>div{height:190px;background-size:cover}
+.ref-process{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+.ref-process article{min-height:160px}
+.ref-process article:not(:last-child):after{display:none}
+.ref-why>div{grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+
+@media(max-width:768px){
+  .ref-hero{height:auto;min-height:620px}
+  .ref-hero-content{padding-block:46px 34px}
+  .ref-stats{margin-top:0}
+  .ref-proofs>div{padding:10px 8px}
+  .ref-project-grid{grid-template-columns:1fr}
+}

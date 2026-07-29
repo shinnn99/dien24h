@@ -8,7 +8,7 @@
 }
 
 .home-v2{background:#fff;color:#172033;font-size:16px;line-height:1.45}
-.hv2-container,.chrome-container{width:min(1180px,calc(100% - 90px));margin-inline:auto}
+.hv2-container,.chrome-container{width:min(1560px,calc(100% - 32px));margin-inline:auto}
 
 /* header */
 .chrome-topbar{height:27px;background:#07347d;color:#fff;font-size:10px}
@@ -228,4 +228,106 @@
   .hv2-testimonial>p{display:block;overflow:visible;-webkit-line-clamp:unset}
 
   .hv2-faq,.hv2-quote-form,.hv2-engineer{height:auto;min-height:220px}
+}
+
+/* Wider desktop canvas and one larger, consistent readability scale */
+@media(min-width:761px){
+  .chrome-topbar{font-size:clamp(11px,.78vw,13px)}
+  .chrome-logo{font-size:29px}
+  .chrome-logo small{font-size:8px}
+  .chrome-nav nav>a,.chrome-phone{font-size:clamp(14px,.9vw,16px)}
+
+  .hv2-hero{height:clamp(380px,calc(304px + 8vw),458px)}
+  .hv2-hero h1{max-width:680px;font-size:clamp(42px,3.8vw,58px)}
+  .hv2-hero-inner>p{font-size:clamp(14px,1vw,17px)}
+  .hv2-hero-actions a,.hv2-hero-actions button{height:42px;padding-inline:20px;font-size:clamp(13px,.9vw,15px)}
+  .hv2-proof-row{width:min(720px,100%)}
+  .hv2-proof-row b{font-size:clamp(11px,.74vw,13px)}
+  .hv2-proof-row small{font-size:clamp(9px,.66vw,11px)}
+
+  .hv2-kpis{height:auto;min-height:104px;padding-inline:30px}
+  .hv2-kpis article{gap:18px}
+  .hv2-kpis strong{font-size:clamp(24px,1.7vw,32px)}
+  .hv2-kpis b{font-size:clamp(12px,.82vw,15px)}
+  .hv2-kpis small{font-size:clamp(9px,.64vw,11px)}
+
+  .hv2-section>h2,.hv2-why-section>h2,.hv2-panel-title h2{font-size:clamp(17px,1.12vw,21px)}
+  .hv2-panel-title{height:38px}
+  .hv2-panel-title button{font-size:clamp(10px,.68vw,12px)}
+
+  .hv2-services{gap:12px}
+  .hv2-services article{min-height:244px}
+  .hv2-service-photo{flex-basis:112px}
+  .hv2-service-body{padding:17px 12px 10px}
+  .hv2-service-body h3{font-size:clamp(14px,.94vw,17px)}
+  .hv2-service-body p{min-height:55px;font-size:clamp(10px,.72vw,13px);line-height:1.55}
+
+  .hv2-feature-row{gap:16px}
+  .hv2-project-panel,.hv2-product-panel{padding-inline:8px}
+  .hv2-project-grid{gap:8px}
+  .hv2-project-grid article{min-height:196px}
+  .hv2-project-photo{flex-basis:104px}
+  .hv2-project-grid h3{font-size:clamp(10px,.76vw,13px)}
+  .hv2-project-grid p,.hv2-project-grid button{font-size:clamp(8px,.62vw,11px)}
+  .hv2-product-grid{gap:8px}
+  .hv2-product-grid article{height:88px}
+  .hv2-product-photo{height:64px}
+  .hv2-product-grid b{font-size:clamp(9px,.7vw,12px)}
+
+  .hv2-process strong{font-size:clamp(14px,.96vw,17px)}
+  .hv2-process h3{font-size:clamp(10px,.76vw,13px)}
+  .hv2-process p{font-size:clamp(8px,.62vw,11px);line-height:1.45}
+
+  .hv2-why b{font-size:clamp(10px,.76vw,13px)}
+  .hv2-why p{font-size:clamp(8px,.62vw,11px);line-height:1.45}
+
+  .hv2-trust-row h2{font-size:clamp(15px,1.02vw,19px)}
+  .hv2-capacity>div b{font-size:clamp(10px,.76vw,13px)}
+  .hv2-capacity>div small{font-size:clamp(8px,.62vw,11px)}
+  .hv2-testimonial>p{font-size:clamp(10px,.72vw,13px);line-height:1.55}
+  .hv2-client b{font-size:clamp(10px,.72vw,12px)}
+  .hv2-client small{font-size:clamp(8px,.62vw,10px)}
+
+  .hv2-faq h2,.hv2-quote-form h2{font-size:clamp(17px,1.12vw,21px)}
+  .hv2-faq>button{font-size:clamp(10px,.68vw,12px);line-height:1.4}
+  .hv2-faq button p{font-size:10px}
+  .hv2-quote-form>p{font-size:clamp(9px,.62vw,11px)}
+  .hv2-quote-form input,.hv2-quote-form select,.hv2-quote-form textarea{font-size:12px}
+  .hv2-quote-form>button{font-size:11px}
+  .hv2-engineer span{font-size:9px}
+
+  .chrome-footer p{font-size:clamp(9px,.62vw,11px)}
+  .chrome-footer-grid>div:first-child>b{font-size:clamp(11px,.74vw,13px)}
+  .chrome-footer-grid>div:first-child>small{font-size:9px}
+  .chrome-footer h4{font-size:clamp(12px,.82vw,14px)}
+  .chrome-footer-grid>div>a:not(.chrome-footer-phone):not(.footer-logo-v2){font-size:clamp(9px,.68vw,11px)}
+  .chrome-footer-phone b{font-size:18px}
+  .chrome-footer-phone small{font-size:9px}
+  .chrome-copyright{font-size:8px}
+}
+
+@media(min-width:761px) and (max-width:1100px){
+  .chrome-nav nav{gap:18px}
+  .chrome-phone{margin-left:18px;padding-inline:13px}
+}
+
+@media(max-width:760px){
+  .chrome-topbar{font-size:11px}
+  .chrome-logo{font-size:28px}
+  .hv2-kpis strong{font-size:26px}
+  .hv2-kpis b{font-size:12px}
+  .hv2-kpis small{font-size:10px;line-height:1.4}
+  .hv2-section>h2,.hv2-why-section>h2,.hv2-panel-title h2{font-size:18px}
+  .hv2-panel-title button{font-size:11px}
+  .hv2-service-body p{font-size:12px;line-height:1.55}
+  .hv2-project-grid h3{font-size:14px}
+  .hv2-project-grid p,.hv2-project-grid button{font-size:11px}
+  .hv2-product-grid b{font-size:12px}
+  .hv2-process h3{font-size:14px}
+  .hv2-process p,.hv2-why p{font-size:12px;line-height:1.5}
+  .hv2-why b{font-size:14px}
+  .hv2-trust-row h2{font-size:18px}
+  .hv2-capacity>div b,.hv2-testimonial>p,.hv2-client b{font-size:12px}
+  .hv2-capacity>div small,.hv2-client small{font-size:10px}
+  .chrome-footer-grid>div>a:not(.chrome-footer-phone):not(.footer-logo-v2),.chrome-footer p{font-size:12px}
 }

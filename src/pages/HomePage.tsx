@@ -12,6 +12,7 @@ import serviceSheet from '../assets/service-grid-v2.png'
 import projectSheet from '../assets/project-grid-v2.png'
 import productSheet from '../assets/product-grid-v2.png'
 import engineerImg from '../assets/engineer-form-v2.png'
+import { CustomSelect } from '../components/CustomSelect'
 
 type IconType = (props: { size?: number; strokeWidth?: number; className?: string }) => ReactNode
 
@@ -44,6 +45,12 @@ const faqs = [
   ['Các khu vực phục vụ của Điện 24H?', 'Biên Hòa, các khu công nghiệp tại Đồng Nai và khu vực lân cận.'],
   ['Chính sách bảo hành như thế nào?', 'Hạng mục thi công và thiết bị được bảo hành theo hợp đồng.'],
   ['Có cung cấp thiết bị điện chính hãng không?', 'Có. Thiết bị có đầy đủ hồ sơ xuất xứ, CO–CQ theo phạm vi cung cấp.'],
+]
+
+const homeNeedOptions = [
+  'Khảo sát & báo giá',
+  'Sửa chữa sự cố',
+  'Mua thiết bị điện',
 ]
 
 export function HomePage({ navigate }: { navigate: Navigate }) {
@@ -149,7 +156,21 @@ export function HomePage({ navigate }: { navigate: Navigate }) {
     <section className="hv2-container hv2-bottom-row">
       <div className="hv2-faq"><h2>CÂU HỎI THƯỜNG GẶP</h2>{faqs.map(([q, a], i) => <button className={faq === i ? 'open' : ''} onClick={() => setFaq(faq === i ? null : i)} key={q}><span>{q}{faq === i ? <Minus size={16} /> : <Plus size={16} />}</span>{faq === i && <p>{a}</p>}</button>)}</div>
       <form className="hv2-quote-form" onSubmit={submit}><h2>YÊU CẦU BÁO GIÁ NHANH</h2><p>Vui lòng để lại thông tin, chúng tôi sẽ liên hệ và báo giá trong thời gian sớm nhất!</p>{sent ? <div className="hv2-success">Đã tiếp nhận yêu cầu. Kỹ sư Điện 24H sẽ liên hệ sớm nhất.</div> : <>
-        <div className="hv2-form-grid"><input required placeholder="Họ tên *" /><input required type="tel" placeholder="Số điện thoại *" /><select required defaultValue=""><option value="" disabled>Nhu cầu *</option><option>Khảo sát & báo giá</option><option>Sửa chữa sự cố</option><option>Mua thiết bị điện</option></select><input placeholder="Địa điểm *" /></div><textarea placeholder="Ghi chú thêm (nếu có)" /><button>GỬI YÊU CẦU BÁO GIÁ <Send size={15} /></button>
+        <div className="hv2-form-grid">
+          <input required placeholder="Họ tên *" />
+          <input required type="tel" placeholder="Số điện thoại *" />
+          <CustomSelect
+            label="Nhu cầu *"
+            hideLabel
+            name="need"
+            required
+            placeholder="Nhu cầu *"
+            options={homeNeedOptions}
+          />
+          <input placeholder="Địa điểm *" />
+        </div>
+        <textarea placeholder="Ghi chú thêm (nếu có)" />
+        <button>GỬI YÊU CẦU BÁO GIÁ <Send size={15} /></button>
       </>}</form>
       <div className="hv2-engineer" style={{ backgroundImage: `url(${engineerImg})` }}><div><span>Tư vấn miễn phí<br /><b>100%</b></span><span>Báo giá nhanh<br /><b>&lt; 2 giờ</b></span><span>Hỗ trợ 24/7<br /><b>0888.979.111</b></span></div></div>
     </section>

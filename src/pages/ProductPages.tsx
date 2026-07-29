@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Navigate } from '../App'
 import { Breadcrumb, DarkCta, Eyebrow, FaqBlock, LinkButton, QuoteForm } from '../components/Blocks'
+import { CustomSelect } from '../components/CustomSelect'
 import heroImg from '../assets/dien24h-hero.png'
 import { phoneHref, products } from '../data'
 
@@ -13,6 +14,10 @@ const categories = [
   ['Chống sét', 'Xem danh mục', '72% 28%'],
 ]
 
+const productCategoryOptions = ['Tất cả danh mục', 'Máy biến áp', 'Thiết bị đóng cắt']
+const productBrandOptions = ['Tất cả hãng', 'Schneider', 'THIBIDI']
+const productAvailabilityOptions = ['Tất cả', 'Sẵn hàng', 'Đặt hàng']
+
 export function ProductsPage({ navigate }: { navigate: Navigate }) {
   const [query, setQuery] = useState('')
   const visible = products.filter(p => p.title.toLowerCase().includes(query.toLowerCase()))
@@ -20,7 +25,13 @@ export function ProductsPage({ navigate }: { navigate: Navigate }) {
     <section className="listing-hero" style={{backgroundImage:`url(${heroImg})`}}><div className="listing-overlay"/><div className="container"><Breadcrumb navigate={navigate} light items={[['Trang chủ','/'],['Sản phẩm']]}/><Eyebrow light>DANH MỤC THIẾT BỊ</Eyebrow><h1>Thiết bị điện công nghiệp<br /><span>chính hãng</span></h1><p>Đầy đủ CO-CQ, hỗ trợ kỹ thuật và tư vấn lựa chọn cấu hình phù hợp.</p><div className="hero-actions"><LinkButton href="/lien-he" navigate={navigate}>Yêu cầu báo giá</LinkButton><LinkButton href={phoneHref} navigate={navigate} className="button secondary">Liên hệ kỹ thuật</LinkButton></div></div></section>
     <div className="container product-promises">{[['◎','100% chính hãng','Cam kết từ nhà sản xuất'],['▤','Đầy đủ CO-CQ','Chứng từ rõ ràng'],['♙','Hỗ trợ kỹ thuật','Tư vấn đúng cấu hình'],['▣','Giao hàng nhanh','Kho hàng sẵn']].map(([i,t,s])=><div key={t}><span>{i}</span><b>{t}<small>{s}</small></b></div>)}</div>
     <section className="section container products-main">
-      <div className="filter-bar"><label>Danh mục<select><option>Tất cả danh mục</option><option>Máy biến áp</option><option>Thiết bị đóng cắt</option></select></label><label>Hãng<select><option>Tất cả hãng</option><option>Schneider</option><option>THIBIDI</option></select></label><label className="grow">Công suất / Model<input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Nhập công suất hoặc model"/></label><label>Tình trạng<select><option>Tất cả</option><option>Sẵn hàng</option><option>Đặt hàng</option></select></label><button className="button navy">⌕ Tìm kiếm</button></div>
+      <div className="filter-bar">
+        <CustomSelect label="Danh mục" options={productCategoryOptions} />
+        <CustomSelect label="Hãng" options={productBrandOptions} />
+        <label className="grow">Công suất / Model<input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Nhập công suất hoặc model"/></label>
+        <CustomSelect label="Tình trạng" options={productAvailabilityOptions} />
+        <button className="button navy">⌕ Tìm kiếm</button>
+      </div>
       <div className="category-grid">{categories.map(([t,n,pos])=><article key={t}><div style={{backgroundImage:`url(${heroImg})`,backgroundPosition:pos}}/><span>▣</span><h3>{t}</h3><p>{n}</p><button onClick={()=>setQuery(t==='Máy biến áp'?'máy biến áp':'')}>Xem danh mục →</button></article>)}</div>
         <div className="section-title row-title product-title"><div><h2>Sản phẩm nổi bật</h2><small>Thông tin cấu hình đang chờ đối chiếu catalog chính thức.</small></div><button className="text-link">Xem tất cả sản phẩm →</button></div>
       <div className="product-grid four">{visible.map(p=><article className="product-card" key={p.title}><div className="product-visual" style={{backgroundImage:`url(${heroImg})`,backgroundPosition:p.pos}}/><span>{p.category}</span><h3>{p.title}</h3><p>{p.detail}</p><button onClick={()=>navigate(p.href)}>Xem chi tiết</button></article>)}</div>

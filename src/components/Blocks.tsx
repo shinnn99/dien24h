@@ -3,7 +3,15 @@ import type { FormEvent, ReactNode } from 'react'
 import type { Navigate } from '../App'
 import heroImg from '../assets/dien24h-hero.png'
 import { email, faqs, phoneDisplay, phoneHref } from '../data'
+import { CustomSelect } from './CustomSelect'
 import { SiteLink } from './SiteLink'
+
+const quoteNeedOptions = [
+  'Xử lý sự cố khẩn cấp',
+  'Khảo sát / báo giá công trình',
+  'Mua thiết bị',
+  'Bảo trì định kỳ',
+]
 
 export function LinkButton({ href, navigate, children, className = 'button primary' }: { href: string; navigate: Navigate; children: ReactNode; className?: string }) {
   if (href.startsWith('tel:')) return <a href={href} className={className}>{children}</a>
@@ -41,7 +49,16 @@ export function QuoteForm({ title = 'Yêu cầu báo giá nhanh', compact = fals
     <h3>{sent ? 'Đã tiếp nhận yêu cầu' : title}</h3>
     {sent ? <div className="success">✓ Cảm ơn bạn. Kỹ sư Điện 24H sẽ liên hệ lại trong giờ trực.</div> : <>
       <div className="form-row"><label>Họ và tên *<input required placeholder="Nhập họ và tên" /></label><label>Số điện thoại *<input required type="tel" placeholder="Nhập số điện thoại" /></label></div>
-      <div className="form-row"><label>Email<input type="email" placeholder="name@company.vn" /></label><label>Nhu cầu *<select required defaultValue=""><option value="" disabled>Chọn nhu cầu</option><option>Xử lý sự cố khẩn cấp</option><option>Khảo sát / báo giá công trình</option><option>Mua thiết bị</option><option>Bảo trì định kỳ</option></select></label></div>
+      <div className="form-row">
+        <label>Email<input type="email" placeholder="name@company.vn" /></label>
+        <CustomSelect
+          label="Nhu cầu *"
+          name="need"
+          required
+          placeholder="Chọn nhu cầu"
+          options={quoteNeedOptions}
+        />
+      </div>
       <label>Địa điểm công trình<input placeholder="Khu công nghiệp / địa chỉ" /></label>
       {!compact && <label>Mô tả yêu cầu<textarea placeholder="Công suất, tình trạng hoặc hạng mục cần tư vấn..." /></label>}
       <button className="button primary submit">GỬI YÊU CẦU BÁO GIÁ →</button>

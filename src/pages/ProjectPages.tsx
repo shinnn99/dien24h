@@ -1,15 +1,27 @@
 import { useState } from 'react'
 import type { Navigate } from '../App'
 import { Breadcrumb, CapabilityStrip, DarkCta, Eyebrow, LinkButton } from '../components/Blocks'
+import { CustomSelect } from '../components/CustomSelect'
 import heroImg from '../assets/dien24h-hero.png'
 import { phoneHref, projects } from '../data'
+
+const projectIndustryOptions = ['Tất cả ngành nghề', 'Nhà máy', 'Kho vận']
+const projectScopeOptions = ['Tất cả', 'TRẠM BIẾN ÁP', 'ĐIỆN MẶT TRỜI', 'HỆ THỐNG ĐIỆN']
+const projectPowerOptions = ['Chọn công suất', 'Dưới 1000kVA', 'Trên 1000kVA']
+const projectLocationOptions = ['Đồng Nai', 'Biên Hòa', 'Long Thành']
 
 export function ProjectsPage({ navigate }: { navigate: Navigate }) {
   const [filter, setFilter] = useState('Tất cả')
   const filtered = filter === 'Tất cả' ? projects : projects.filter(p => p.tag.includes(filter))
   return <>
     <section className="projects-head"><div className="projects-head-bg" style={{backgroundImage:`url(${heroImg})`}}/><div className="container"><Breadcrumb navigate={navigate} items={[['Trang chủ','/'],['Dự án']]}/><Eyebrow>DỰ ÁN ĐIỆN CÔNG NGHIỆP</Eyebrow><h1>Dự án tiêu biểu</h1><p>Các nhóm công trình Điện 24H có năng lực triển khai; hồ sơ dự án chi tiết được cập nhật khi được khách hàng cho phép công bố.</p></div></section>
-    <section className="container project-filter"><label>Ngành nghề<select><option>Tất cả ngành nghề</option><option>Nhà máy</option><option>Kho vận</option></select></label><label>Hạng mục<select value={filter} onChange={e=>setFilter(e.target.value)}><option>Tất cả</option><option>TRẠM BIẾN ÁP</option><option>ĐIỆN MẶT TRỜI</option><option>HỆ THỐNG ĐIỆN</option></select></label><label>Công suất<select><option>Chọn công suất</option><option>Dưới 1000kVA</option><option>Trên 1000kVA</option></select></label><label>Khu vực<select><option>Đồng Nai</option><option>Biên Hòa</option><option>Long Thành</option></select></label><button className="button navy">⌕ Lọc dự án</button></section>
+    <section className="container project-filter">
+      <CustomSelect label="Ngành nghề" options={projectIndustryOptions} />
+      <CustomSelect label="Hạng mục" value={filter} onChange={setFilter} options={projectScopeOptions} />
+      <CustomSelect label="Công suất" options={projectPowerOptions} />
+      <CustomSelect label="Khu vực" options={projectLocationOptions} />
+      <button className="button navy">⌕ Lọc dự án</button>
+    </section>
     <section className="section container projects-page">
       <article className="featured-project"><div style={{backgroundImage:`url(${heroImg})`}}/><div><span>DỰ ÁN MẪU MINH HỌA</span><h2>Thi công trạm biến áp cho nhà máy tại Đồng Nai</h2><div className="project-meta"><b>⌖ Khu vực: Đồng Nai</b><b>▣ Hạng mục: Trạm biến áp</b><b>⚡ Công suất: Theo hồ sơ</b></div><p>Nội dung chi tiết sẽ sử dụng hồ sơ công trình và ảnh thực tế sau khi doanh nghiệp xác nhận quyền công bố.</p><LinkButton navigate={navigate} href="/du-an/tram-bien-ap-1000kva-bien-hoa" className="button outline">Xem cấu trúc chi tiết →</LinkButton></div></article>
       <CapabilityStrip items={[['10+','Năm kinh nghiệm','Theo nội dung công khai'],['22kV','Năng lực trung thế','Đường dây & trạm biến áp'],['24/7','Tiếp nhận sự cố','Theo thông tin dịch vụ'],['DOBICO','Năng lực pháp nhân','Hệ sinh thái xây lắp']]}/>

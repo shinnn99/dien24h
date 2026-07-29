@@ -213,18 +213,34 @@
   .hv2-bottom-row{margin-top:18px}
 }
 
+/* Card bodies grow with their copy and keep every action on the bottom edge */
+.hv2-services article,
+.hv2-project-grid article{
+  display:flex;
+  flex-direction:column;
+}
+.hv2-service-photo,
+.hv2-project-photo{flex-shrink:0}
+.hv2-service-body{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+.hv2-service-body>button,
+.hv2-project-grid article>button{
+  margin-top:auto;
+  align-self:flex-start;
+}
+
 /* Content cards grow with their copy; grid keeps every card in a row equal */
 @media(min-width:761px){
-  .hv2-services article{height:auto;min-height:224px;display:flex;flex-direction:column}
+  .hv2-services article{height:auto;min-height:224px}
   .hv2-service-photo{flex:0 0 99px}
-  .hv2-service-body{flex:1;display:flex;flex-direction:column}
   .hv2-service-body p{height:auto;min-height:48px;display:block;overflow:visible;-webkit-line-clamp:unset}
-  .hv2-service-body button{margin-top:auto;align-self:flex-start}
 
-  .hv2-project-grid article{height:auto;min-height:174px;display:flex;flex-direction:column}
+  .hv2-project-grid article{height:auto;min-height:174px}
   .hv2-project-photo{flex:0 0 91px}
   .hv2-project-grid p{height:auto;min-height:22px;overflow:visible}
-  .hv2-project-grid button{margin-top:auto;align-self:flex-start}
 
   .hv2-process article{height:auto;min-height:90px}
   .hv2-process p{display:block;overflow:visible;-webkit-line-clamp:unset}

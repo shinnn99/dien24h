@@ -86,3 +86,82 @@ footer{background:#041c43;color:#aebed5;padding:55px 0 20px}.footer-grid{display
 @media(max-width:980px){.ref-services{grid-template-columns:repeat(3,1fr)}.ref-duo{grid-template-columns:1fr}.ref-process{grid-template-columns:1fr 1fr}.ref-process article:after{display:none}.ref-why>div{grid-template-columns:repeat(3,1fr)}.ref-trust{grid-template-columns:1fr 1fr}.ref-testimonial{grid-column:1/-1}.ref-bottom{grid-template-columns:1fr 1fr}.ref-engineer{display:none}.ref-footer{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:680px){.ref-hero{height:540px;background-position:67% center}.ref-hero-shade{background:linear-gradient(90deg,rgba(5,38,87,.97),rgba(5,38,87,.75))}.ref-hero h1{font-size:39px}.ref-actions{flex-direction:column;align-items:flex-start}.ref-proofs{display:grid;grid-template-columns:1fr 1fr}.ref-stats{height:auto;grid-template-columns:1fr 1fr;padding:12px}.ref-stats>div{min-height:70px}.ref-stats>div:nth-child(2){border-right:0}.ref-services{grid-template-columns:1fr 1fr}.ref-project-grid{grid-template-columns:1fr 1fr}.ref-process{grid-template-columns:1fr}.ref-why>div{grid-template-columns:1fr 1fr}.ref-trust,.ref-bottom{grid-template-columns:1fr}.ref-footer{grid-template-columns:1fr 1fr}.desktop-only{display:none}}
 @media(max-width:430px){.ref-services,.ref-project-grid,.ref-why>div,.ref-footer{grid-template-columns:1fr}.ref-product-grid{grid-template-columns:1fr 1fr}.ref-hero h1{font-size:34px}}
+
+/* Readable 16px type scale */
+html{font-size:16px}
+body{font-size:1rem;line-height:1.6}
+.topbar{height:38px;font-size:13px}
+.nav-item>a,.nav-item>button{font-size:15px}
+.hotline{font-size:15px}
+.ref-hero{height:510px}
+.ref-hero-content{padding-top:58px}
+.ref-hero h1{font-size:clamp(48px,4vw,56px);line-height:1.08;font-weight:700}
+.ref-hero p{font-size:18px;line-height:1.6}
+.ref-btn{font-size:16px;font-weight:600;height:50px}
+.ref-proofs>div{font-size:14px}
+.ref-proofs small{font-size:13px}
+.ref-stats{height:130px}
+.ref-stats b{font-size:32px}
+.ref-stats strong{font-size:14px}
+.ref-stats small{font-size:13px}
+.ref-heading{font-size:32px!important;line-height:1.2;margin-bottom:24px!important}
+.ref-section{padding-top:46px}
+.ref-card-photo{height:150px}
+.ref-services h3{font-size:20px;line-height:1.3;margin:22px 14px 8px}
+.ref-services p{font-size:14px;line-height:1.6;min-height:112px;margin-inline:14px}
+.ref-services button{font-size:22px;padding-inline:14px}
+.ref-title-row h2,.ref-trust h2,.ref-faq h2,.ref-quote h2{font-size:28px!important;line-height:1.2}
+.ref-title-row button{font-size:14px}
+.ref-project-grid article>div{height:150px}
+.ref-project-grid h3{font-size:18px;line-height:1.3;margin:12px 12px 6px}
+.ref-project-grid p{font-size:13px;line-height:1.5;min-height:42px;margin-inline:12px}
+.ref-project-grid button{font-size:14px;margin:10px 12px;padding:7px}
+.ref-product-grid article>div{height:120px}
+.ref-product-grid b{font-size:17px}
+.ref-process article{grid-template-columns:52px 1fr;min-height:146px}
+.ref-process i{font-size:38px}
+.ref-process b{font-size:18px}
+.ref-process h3{font-size:18px;line-height:1.3}
+.ref-process p{font-size:13px;line-height:1.5}
+.ref-why article{padding:20px 14px 14px}
+.ref-why b{font-size:18px}
+.ref-why p{font-size:14px;line-height:1.55}
+.ref-trust>article{min-height:230px;padding:18px}
+.ref-trust>article:first-child b{font-size:15px}
+.ref-trust>article:first-child small{font-size:13px}
+.ref-brands b{font-size:15px;height:70px}
+.ref-testimonial blockquote{font-size:15px;line-height:1.6}
+.ref-testimonial>b{font-size:15px}
+.ref-testimonial>small{font-size:13px}
+.ref-faq{padding:20px}
+.ref-faq button{font-size:15px;padding:12px}
+.ref-faq button p{font-size:14px}
+.ref-quote{padding:20px 24px}
+.ref-quote>p{font-size:14px}
+.ref-quote input,.ref-quote select,.ref-quote textarea{font-size:16px;padding:11px}
+.ref-quote textarea{height:72px}
+.ref-quote>button{font-size:15px;height:46px}
+.ref-engineer span{font-size:13px}
+.ref-footer h4{font-size:16px}
+.ref-footer>div>p{font-size:14px;line-height:1.6}
+.ref-footer>div>a:not(.ref-footer-phone):not(.footer-brand){font-size:14px;line-height:1.5;padding:4px 0}
+.copyright{font-size:13px}
+
+@media(max-width:768px){
+  body{font-size:.9375rem}
+  .topbar{font-size:12px}
+  .nav-item>a,.nav-item>button{font-size:15px}
+  .ref-hero{height:590px}
+  .ref-hero h1{font-size:34px}
+  .ref-hero p{font-size:16px}
+  .ref-btn{font-size:16px}
+  .ref-heading{font-size:26px!important}
+  .ref-title-row h2,.ref-trust h2,.ref-faq h2,.ref-quote h2{font-size:24px!important}
+  .ref-services h3,.ref-process h3{font-size:18px}
+  .ref-services p{font-size:15px;min-height:0}
+  .ref-project-grid h3{font-size:17px}
+  .ref-stats b{font-size:28px}
+  .ref-stats strong{font-size:13px}
+  .ref-form-grid{grid-template-columns:1fr}
+  .ref-quote input,.ref-quote select,.ref-quote textarea{font-size:16px}
+}

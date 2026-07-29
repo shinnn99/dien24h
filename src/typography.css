@@ -446,3 +446,36 @@ body{font-size:var(--type-body);line-height:1.6}
   .hv2-section{padding-top:34px}
   .hv2-feature-row,.hv2-trust-row,.hv2-bottom-row{margin-top:30px}
 }
+
+/* Vertically centered process icons and cleaner card connectors */
+.hv2-process article{align-items:center}
+.hv2-process article>svg{
+  align-self:center;
+  justify-self:center;
+}
+.hv2-process article>div{align-self:center}
+.hv2-process article:not(:last-child)::after{
+  content:'';
+  position:absolute;
+  top:50%;
+  right:-19px;
+  width:14px;
+  height:2px;
+  background:repeating-linear-gradient(90deg,var(--hv2-blue) 0 3px,transparent 3px 6px);
+  transform:translateY(-50%);
+}
+.hv2-process article:not(:last-child)::before{
+  content:'';
+  position:absolute;
+  top:50%;
+  right:-22px;
+  width:7px;
+  height:7px;
+  border-top:2px solid var(--hv2-blue);
+  border-right:2px solid var(--hv2-blue);
+  transform:translateY(-50%) rotate(45deg);
+}
+
+@media(max-width:1100px){
+  .hv2-process article::before,.hv2-process article::after{display:none}
+}

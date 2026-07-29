@@ -28,7 +28,7 @@
 .chrome-menu{display:none;margin-left:auto;border:0;background:none;color:var(--hv2-blue)}
 
 /* hero */
-.hv2-hero{height:324px;position:relative;background-size:cover;background-position:center 48%;color:#fff}
+.hv2-hero{height:clamp(324px,calc(248px + 8vw),390px);position:relative;background-size:cover;background-position:center 48%;color:#fff}
 .hv2-hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,#062a62 0%,rgba(6,42,98,.96) 36%,rgba(6,42,98,.56) 59%,rgba(6,42,98,.05) 79%)}
 .hv2-hero-inner{position:relative;height:100%;padding-top:27px}
 .hv2-hero h1{max-width:610px;margin:0 0 13px;font-size:clamp(36px,3.8vw,50px);line-height:1.08;letter-spacing:-1.7px;font-weight:750}

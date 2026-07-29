@@ -183,3 +183,24 @@
   .chrome-footer h4{font-size:clamp(9px,.75vw,12px);white-space:nowrap}
   .chrome-footer-grid>div>a:not(.chrome-footer-phone):not(.footer-logo-v2){font-size:clamp(7px,.62vw,9.5px);white-space:nowrap}
 }
+
+/* Airier vertical rhythm without changing any desktop grid */
+@media(min-width:761px){
+  .hv2-hero{height:clamp(358px,calc(282px + 8vw),424px)}
+  .hv2-hero h1{line-height:1.12;margin-bottom:18px}
+  .hv2-hero-inner>p{line-height:1.65}
+  .hv2-hero-actions{margin-top:20px}
+  .hv2-proof-row{margin-top:20px}
+  .hv2-proof-row>div{height:58px;padding-top:11px;padding-bottom:11px}
+  .hv2-proof-row span{gap:2px}
+  .hv2-kpis{height:94px;padding-top:16px;padding-bottom:16px}
+  .hv2-kpis b{margin-top:5px}
+  .hv2-kpis small{margin-top:6px}
+  .hv2-section{padding-top:20px}
+  .hv2-section>h2,.hv2-why-section>h2{margin-bottom:12px}
+  .hv2-feature-row{margin-top:18px}
+  .hv2-process-section{padding-top:20px}
+  .hv2-why-section{padding-top:18px}
+  .hv2-trust-row{margin-top:18px}
+  .hv2-bottom-row{margin-top:18px}
+}

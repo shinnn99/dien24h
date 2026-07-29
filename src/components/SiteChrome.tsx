@@ -1,59 +1,31 @@
 import { useState } from 'react'
 import type { Navigate } from '../App'
-import { email, phoneDisplay, phoneHref } from '../data'
 import { SiteLink } from './SiteLink'
 
-type Props = { navigate: Navigate; path: string }
+const phone = '0888.979.111'
+const nav = [
+  ['Dịch vụ','/dich-vu/dien-cong-nghiep',true],['Sản phẩm','/san-pham',true],['Dự án','/du-an'],['Kiến thức','/kien-thuc'],['Về chúng tôi','/gioi-thieu'],['Liên hệ','/lien-he'],
+] as const
 
-const navItems = [
-  { label: 'Dịch vụ', href: '/dich-vu/sua-chua-dien-24h', children: [
-    ['Trạm biến áp 22kV', '/dich-vu/tram-bien-ap'],
-    ['Sửa chữa điện 24H', '/dich-vu/sua-chua-dien-24h'],
-    ['Điện công nghiệp', '/dich-vu/dien-cong-nghiep'],
-    ['Bảo trì – thí nghiệm', '/dich-vu/bao-tri-thi-nghiem-dien'],
-    ['Solar', '/dich-vu/solar'],
-  ] },
-  { label: 'Sản phẩm', href: '/san-pham', children: [
-    ['Máy biến áp', '/san-pham'],
-    ['Dây cáp điện', '/san-pham'],
-    ['Thiết bị đóng cắt', '/san-pham'],
-    ['Tủ điện & tủ tụ bù', '/san-pham'],
-  ] },
-  { label: 'Dự án', href: '/du-an' },
-  { label: 'Kiến thức', href: '/kien-thuc/chi-phi-lap-tram-bien-ap' },
-  { label: 'Về chúng tôi', href: '/gioi-thieu' },
-  { label: 'Liên hệ', href: '/lien-he' },
-]
-
-export function SiteHeader({ navigate, path }: Props) {
-  const [open, setOpen] = useState(false)
-  const [dropdown, setDropdown] = useState<string | null>(null)
+export function SiteHeader({ navigate }: { navigate: Navigate; path: string }) {
+  const [open,setOpen]=useState(false)
   return <>
-    <div className="topbar"><div className="container topbar-inner"><span>⌖ Trảng Dài, Biên Hòa, Đồng Nai</span><span>✉ {email}</span><span>◷ T2 – T7 (07:30 – 17:30)</span><b>● Hỗ trợ 24/7 kể cả ngày lễ</b></div></div>
-    <header>
-      <div className="container nav">
-        <SiteLink className="logo" href="/" navigate={navigate} onNavigate={() => setOpen(false)}><span>Điện</span> <em>24H</em><small>ĐỒNG NAI</small></SiteLink>
-        <button className="menu-button" onClick={() => setOpen(!open)} aria-label="Mở menu">☰</button>
-        <nav className={open ? 'open' : ''}>
-          {navItems.map(item => <div className={`nav-item ${path.startsWith(item.href.split('/').slice(0, 2).join('/')) ? 'current' : ''}`} key={item.label} onMouseEnter={() => setDropdown(item.label)} onMouseLeave={() => setDropdown(null)}>
-            {item.children && window.innerWidth < 900 ? <button onClick={() => setDropdown(dropdown === item.label ? null : item.label)}>{item.label}<span>⌄</span></button> : <SiteLink href={item.href} navigate={navigate} onNavigate={() => setOpen(false)}>{item.label}{item.children && <span>⌄</span>}</SiteLink>}
-            {item.children && dropdown === item.label && <div className="dropdown">{item.children.map(([label, href]) => <SiteLink key={label} href={href} navigate={navigate} onNavigate={() => { setOpen(false); setDropdown(null) }}>{label}<b>→</b></SiteLink>)}</div>}
-          </div>)}
-        </nav>
-        <a className="hotline nav-hotline" href={phoneHref}>☎ {phoneDisplay}</a>
-      </div>
-    </header>
+    <div className="topbar"><div className="container topbar-inner"><span>⌖ Trảng Dài, Biên Hòa, Đồng Nai</span><span>✉ contact@dien24h.vn</span><span>◷ Làm việc: T2 - T7 (07:30 - 17:30)</span><b>● Hỗ trợ 24/7 kể cả ngày lễ</b></div></div>
+    <header><div className="container nav">
+      <SiteLink className="brand-logo" href="/" navigate={navigate}><span>Điện</span> <em>24H</em><small>ĐỒNG NAI</small></SiteLink>
+      <button className="menu-button" onClick={()=>setOpen(!open)} aria-label="Mở menu">☰</button>
+      <nav className={open?'open':''}>{nav.map(([label,href,drop])=><div className="nav-item" key={label}><SiteLink href={href} navigate={navigate} onNavigate={()=>setOpen(false)}>{label}{drop&&<span>⌄</span>}</SiteLink></div>)}</nav>
+      <a className="hotline nav-hotline" href="tel:0888979111">☎ &nbsp;{phone}</a>
+    </div></header>
   </>
 }
 
 export function SiteFooter({ navigate }: { navigate: Navigate }) {
-  return <footer>
-    <div className="container footer-grid">
-      <div><SiteLink className="logo footer-logo" href="/" navigate={navigate}><span>Điện</span> <em>24H</em><small>ĐỒNG NAI</small></SiteLink><p>Thương hiệu dịch vụ điện công nghiệp trong hệ sinh thái Công ty Cổ phần Xây lắp DOBICO.</p></div>
-      <div><h4>Liên kết nhanh</h4><SiteLink href="/" navigate={navigate}>Trang chủ</SiteLink><SiteLink href="/gioi-thieu" navigate={navigate}>Về chúng tôi</SiteLink><SiteLink href="/du-an" navigate={navigate}>Dự án</SiteLink><SiteLink href="/kien-thuc" navigate={navigate}>Kiến thức</SiteLink></div>
-      <div><h4>Dịch vụ nổi bật</h4><SiteLink href="/dich-vu/tram-bien-ap" navigate={navigate}>Trạm biến áp</SiteLink><SiteLink href="/dich-vu/sua-chua-dien-24h" navigate={navigate}>Sửa chữa điện 24H</SiteLink><SiteLink href="/dich-vu/dien-cong-nghiep" navigate={navigate}>Điện nhà xưởng</SiteLink><SiteLink href="/san-pham" navigate={navigate}>Thiết bị điện</SiteLink></div>
-      <div><h4>Liên hệ</h4><p>H4 Thân Nhân Trung, KP4C, Trảng Dài<br />Biên Hòa, Đồng Nai<br />{email}</p><a className="hotline footer-hotline" href={phoneHref}>☎ {phoneDisplay}</a></div>
-    </div>
-    <div className="container copyright"><span>© {new Date().getFullYear()} Dien24h.vn. All rights reserved.</span><span><button>Chính sách bảo mật</button> · <button>Điều khoản sử dụng</button></span></div>
-  </footer>
+  return <footer><div className="container ref-footer">
+    <div><SiteLink className="brand-logo footer-brand" href="/" navigate={navigate}><span>Điện</span> <em>24H</em><small>ĐỒNG NAI</small></SiteLink><p>Giải pháp điện công nghiệp 24/7 cho nhà máy, khu công nghiệp tại Đồng Nai.</p><b>☎ &nbsp;0888.979.111</b><p>✉ contact@dien24h.vn<br />⌖ Trảng Dài, TP. Biên Hòa, Tỉnh Đồng Nai</p></div>
+    <div><h4>LIÊN KẾT NHANH</h4>{[['Trang chủ','/'],['Dịch vụ','/dich-vu/dien-cong-nghiep'],['Sản phẩm','/san-pham'],['Dự án','/du-an'],['Kiến thức','/kien-thuc'],['Về chúng tôi','/gioi-thieu'],['Liên hệ','/lien-he']].map(([t,h])=><SiteLink key={t} href={h} navigate={navigate}>› {t}</SiteLink>)}</div>
+    <div><h4>DỊCH VỤ NỔI BẬT</h4>{['Trạm biến áp','Sửa chữa điện 24H','Điện nhà xưởng','Thiết bị điện','Solar','Máy phát điện'].map(t=><SiteLink key={t} href="/dich-vu/dien-cong-nghiep" navigate={navigate}>› {t}</SiteLink>)}</div>
+    <div><h4>HỖ TRỢ</h4>{['Chính sách bảo hành','Hướng dẫn thanh toán','Tuyển dụng','Hồ sơ năng lực','Câu hỏi thường gặp'].map(t=><SiteLink key={t} href="/lien-he" navigate={navigate}>› {t}</SiteLink>)}</div>
+    <div><h4>KẾT NỐI VỚI CHÚNG TÔI</h4><div className="ref-social"><i>f</i><i>●</i><i>▶</i><i>in</i></div><a className="ref-footer-phone" href="tel:0888979111">☎ <span><b>0888.979.111</b><small>Hỗ trợ 24/7 - Gọi ngay!</small></span></a></div>
+  </div><div className="container copyright"><span>© 2026 Điện 24H Đồng Nai. All rights reserved.</span><span>Thiết kế bởi ❤</span></div></footer>
 }

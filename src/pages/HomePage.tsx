@@ -1,60 +1,125 @@
+import { useState } from 'react'
+import type { FormEvent } from 'react'
 import type { Navigate } from '../App'
-import { CapabilityStrip, DarkCta, Eyebrow, FaqBlock, LinkButton, QuoteForm } from '../components/Blocks'
 import heroImg from '../assets/dien24h-hero.png'
-import { phoneDisplay, phoneHref, products, projects, services } from '../data'
+
+const services = [
+  ['⚡', 'Trạm biến áp', 'Tư vấn, thiết kế, thi công trạm biến áp 22kV/0.4kV đạt chuẩn EVN.', '72% 44%'],
+  ['🛠', 'Sửa chữa điện 24H', 'Xử lý sự cố nhanh chóng, khắc phục mất điện, chập cháy, nhảy Aptomat...', '58% 47%'],
+  ['▦', 'Điện nhà xưởng', 'Thi công hệ thống điện nhà xưởng, chiếu sáng, MCC, tủ điện phân phối.', '86% 48%'],
+  ['▤', 'Thiết bị điện', 'Cung cấp thiết bị điện chính hãng, CO–CQ đầy đủ.', '91% 36%'],
+  ['☀', 'Solar', 'Giải pháp điện mặt trời cho nhà máy, doanh nghiệp.', '14% 48%'],
+  ['▣', 'Máy phát điện', 'Cung cấp, lắp đặt và bảo trì máy phát điện dự phòng.', '68% 54%'],
+]
+
+const projects = [
+  ['Nhà máy giày Dona Standard', 'Trạm biến áp 1600kVA · Biên Hòa', '73% 42%'],
+  ['Nhà máy AMATA', 'Thi công hệ thống điện nhà xưởng', '52% 52%'],
+  ['Nhà máy SLP Vietnam', 'Tủ điện MSB, DB & hệ thống MCC', '88% 51%'],
+  ['Kho lạnh CJ Logistics', 'Thi công trạm biến áp 1000kVA', '67% 56%'],
+]
+
+const products = [
+  ['Máy biến áp', '73% 42%'],
+  ['Dây cáp điện', '28% 45%'],
+  ['Thiết bị đóng cắt', '90% 39%'],
+  ['Tủ điện & tủ tụ bù', '84% 54%'],
+]
+
+const faqs = [
+  ['Thời gian có mặt khi sự cố là bao lâu?', 'Tại Biên Hòa, đội kỹ thuật có thể có mặt sau 30–60 phút tùy vị trí và tình trạng giao thông.'],
+  ['Điện 24H có làm việc vào ban đêm và ngày lễ không?', 'Có. Hotline kỹ thuật tiếp nhận yêu cầu 24/7, kể cả cuối tuần và ngày lễ.'],
+  ['Các khu vực phục vụ của Điện 24H?', 'Biên Hòa, các khu công nghiệp tại Đồng Nai và khu vực lân cận.'],
+  ['Chính sách bảo hành như thế nào?', 'Hạng mục thi công và thiết bị được bảo hành theo hợp đồng và chính sách của nhà sản xuất.'],
+  ['Có cung cấp thiết bị điện chính hãng không?', 'Có. Thiết bị có đầy đủ hồ sơ xuất xứ, CO–CQ theo phạm vi cung cấp.'],
+]
 
 export function HomePage({ navigate }: { navigate: Navigate }) {
+  const [faq, setFaq] = useState<number | null>(null)
+  const [sent, setSent] = useState(false)
+  const submit = (event: FormEvent) => { event.preventDefault(); setSent(true) }
+
   return <>
-    <section className="home-hero" style={{ backgroundImage: `url(${heroImg})` }}>
-      <div className="home-hero-overlay" />
-      <div className="container home-hero-inner">
-        <Eyebrow light>ĐIỆN 24H ĐỒNG NAI</Eyebrow>
-        <h1>Xây lắp điện công nghiệp<br />& xử lý sự cố <span>24/7</span></h1>
-        <p>Trạm biến áp · Điện nhà xưởng · Thiết bị điện · Solar · Chống sét · Máy phát điện</p>
-        <div className="hero-actions"><LinkButton navigate={navigate} href={phoneHref}>☎ Gọi kỹ sư {phoneDisplay}</LinkButton><LinkButton navigate={navigate} href="/lien-he" className="button secondary">Yêu cầu báo giá →</LinkButton></div>
-        <div className="hero-proof"><span>✓ Phản hồi nhanh</span><span>✓ Kỹ sư hiện trường</span><span>✓ Thiết bị chính hãng</span></div>
-        <div className="brand-parent">Trong hệ sinh thái <b>Công ty Cổ phần Xây lắp DOBICO</b> · Thông tin công khai: hơn 10 năm kinh nghiệm</div>
-      </div>
-    </section>
-    <CapabilityStrip />
-
-    <section className="section container">
-      <div className="section-title center"><Eyebrow>DỊCH VỤ CỦA CHÚNG TÔI</Eyebrow><h2>Một đầu mối cho toàn bộ<br />hệ thống điện doanh nghiệp</h2><p>Từ thiết kế, thi công đến vận hành và bảo trì.</p></div>
-      <div className="service-grid six">{services.map(item => <article className="service-card visual" key={item.title}><div className="service-card-image" style={{ backgroundImage: `url(${heroImg})` }}><span>{item.icon}</span></div><div><h3>{item.title}</h3><p>{item.text}</p><button onClick={() => navigate(item.href)}>Xem chi tiết <b>→</b></button></div></article>)}</div>
-    </section>
-
-    <section className="section surface">
-      <div className="container">
-        <div className="section-title row-title"><div><Eyebrow>DỰ ÁN TIÊU BIỂU</Eyebrow><h2>Công trình thực tế.<br />Năng lực có thể kiểm chứng.</h2></div><button className="text-link" onClick={() => navigate('/du-an')}>Xem tất cả dự án →</button></div>
-        <div className="project-grid home-projects">{projects.slice(0, 4).map((p, i) => <article className={`project-card ${i === 0 ? 'featured' : ''}`} key={p.title}><div className="project-image" style={{ backgroundImage: `url(${heroImg})`, backgroundPosition: p.pos }}><span>{p.tag}</span></div><div className="project-body"><h3>{p.title}</h3><p>⌖ {p.location}</p><b>⚡ {p.power}</b><button onClick={() => navigate(p.href)}>Xem công trình →</button></div></article>)}</div>
+    <section className="ref-hero" style={{ backgroundImage: `url(${heroImg})` }}>
+      <div className="ref-hero-shade" />
+      <div className="container ref-hero-content">
+        <h1>Giải pháp<br />điện công nghiệp <span>24/7</span></h1>
+        <p>Chuyên thi công trạm biến áp, điện nhà xưởng,<br className="desktop-only" /> sửa chữa sự cố 24/7 và cung cấp thiết bị điện<br className="desktop-only" /> cho nhà máy, khu công nghiệp tại Đồng Nai.</p>
+        <div className="ref-actions">
+          <a className="ref-btn orange" href="tel:0888979111">☎ &nbsp; Gọi kỹ sư 0888.979.111</a>
+          <button className="ref-btn white" onClick={() => navigate('/lien-he')}>✉ &nbsp; Yêu cầu báo giá</button>
+        </div>
+        <div className="ref-proofs">
+          <div><b>✓</b><span>Có mặt nhanh<br /><small>30 – 60 phút</small></span></div>
+          <div><b>♙</b><span>Kỹ sư<br /><small>kinh nghiệm</small></span></div>
+          <div><b>✦</b><span>An toàn tuyệt đối<br /><small>Đúng tiêu chuẩn</small></span></div>
+          <div><b>◇</b><span>Bảo hành<br /><small>Uy tín dài hạn</small></span></div>
+        </div>
       </div>
     </section>
 
-    <section className="section container">
-      <div className="section-title row-title"><div><Eyebrow>THIẾT BỊ ĐIỆN</Eyebrow><h2>Sản phẩm nổi bật</h2></div><button className="text-link" onClick={() => navigate('/san-pham')}>Xem danh mục →</button></div>
-      <div className="product-grid four">{products.slice(0, 4).map(p => <article className="product-card" key={p.title}><div className="product-visual" style={{ backgroundImage: `url(${heroImg})`, backgroundPosition: p.pos }} /><span>{p.category}</span><h3>{p.title}</h3><p>{p.detail}</p><button onClick={() => navigate(p.href)}>Xem chi tiết</button></article>)}</div>
-    </section>
+    <div className="container ref-stats">
+      {[['♕','10+','năm kinh nghiệm','Trong lĩnh vực điện công nghiệp'],['◴','24/7','hỗ trợ sự cố','Kể cả ngày lễ, cuối tuần'],['ϟ','22kV','năng lực thi công','Trạm biến áp & hệ thống điện'],['▱','300+','Dự án thực tế','Nhà máy, KCN tại Đồng Nai']].map(([icon,num,label,sub]) =>
+        <div key={num}><i>{icon}</i><span><b>{num}</b><strong>{label}</strong><small>{sub}</small></span></div>)}
+    </div>
 
-    <section className="section process-section">
-      <div className="container">
-        <div className="section-title center"><Eyebrow>QUY TRÌNH LÀM VIỆC</Eyebrow><h2>Nhanh chóng · Minh bạch · Trách nhiệm</h2></div>
-        <div className="process-steps">{['Tiếp nhận yêu cầu', 'Khảo sát hiện trường', 'Báo giá chi tiết', 'Thi công – lắp đặt', 'Bàn giao – bảo hành'].map((x, i) => <article key={x}><b>0{i + 1}</b><span>{['☎', '⌖', '▤', '⚙', '✓'][i]}</span><h3>{x}</h3><p>{['Hotline & online', 'Kỹ sư đánh giá', 'Phạm vi rõ ràng', 'An toàn đúng tiến độ', 'Hồ sơ đầy đủ'][i]}</p></article>)}</div>
+    <section className="ref-section container">
+      <h2 className="ref-heading">DỊCH VỤ CỦA CHÚNG TÔI</h2>
+      <div className="ref-services">
+        {services.map(([icon,title,text,pos]) => <article key={title}>
+          <div className="ref-card-photo" style={{ backgroundImage:`url(${heroImg})`, backgroundPosition:pos }}><i>{icon}</i></div>
+          <h3>{title}</h3><p>{text}</p><button onClick={() => navigate('/dich-vu/dien-cong-nghiep')}>››</button>
+        </article>)}
       </div>
     </section>
 
-    <section className="section container">
-      <div className="why-grid">
-        <div><Eyebrow>VÌ SAO CHỌN ĐIỆN 24H</Eyebrow><h2>Đội kỹ thuật hiểu<br />áp lực vận hành</h2><p>Chúng tôi đặt an toàn, tính liên tục và hiệu quả đầu tư của khách hàng làm thước đo cho mọi quyết định kỹ thuật.</p><LinkButton href="/gioi-thieu" navigate={navigate} className="button outline">Tìm hiểu về Điện 24H →</LinkButton></div>
-        <div className="value-grid">{[['⚡','Phản ứng nhanh 24/7'],['♙','Kỹ sư chuyên môn cao'],['◇','An toàn tuyệt đối'],['▣','Thiết bị chính hãng'],['₫','Giá cả minh bạch'],['↔','Bảo hành tại chỗ']].map(([icon, label]) => <div key={label}><span>{icon}</span><b>{label}</b></div>)}</div>
+    <section className="container ref-duo">
+      <div className="ref-projects">
+        <div className="ref-title-row"><h2>DỰ ÁN TIÊU BIỂU</h2><button onClick={() => navigate('/du-an')}>Xem tất cả dự án →</button></div>
+        <div className="ref-project-grid">{projects.map(([title,sub,pos]) => <article key={title}>
+          <div style={{ backgroundImage:`url(${heroImg})`, backgroundPosition:pos }} />
+          <h3>{title}</h3><p>{sub}</p><button onClick={() => navigate('/du-an')}>Xem chi tiết &nbsp;→</button>
+        </article>)}</div>
       </div>
-      <div className="trust-grid">
-        <article><Eyebrow>HỒ SƠ NĂNG LỰC</Eyebrow><h3>Năng lực & chứng chỉ</h3><p>Hồ sơ pháp lý, chứng nhận và tài liệu năng lực phục vụ đánh giá nhà thầu.</p><button onClick={() => navigate('/ho-so-nang-luc')}>Xem hồ sơ →</button></article>
-        <article className="partners"><Eyebrow>THƯƠNG HIỆU THAM KHẢO</Eyebrow><div><b>Schneider</b><b>ABB</b><b>SIEMENS</b><b>MITSUBISHI</b><b>LS</b></div><p>Hiển thị tham khảo cấu hình; không hàm ý quan hệ đại lý khi chưa xác minh.</p></article>
-        <article className="testimonial"><Eyebrow>KHÁCH HÀNG NÓI GÌ</Eyebrow><blockquote>“Đội kỹ thuật phản hồi nhanh, xử lý rõ nguyên nhân và bàn giao hồ sơ đầy đủ.”</blockquote><b>Đại diện nhà máy tại Biên Hòa</b></article>
+      <div className="ref-products">
+        <div className="ref-title-row"><h2>SẢN PHẨM NỔI BẬT</h2><button onClick={() => navigate('/san-pham')}>Xem tất cả →</button></div>
+        <div className="ref-product-grid">{products.map(([title,pos]) => <article key={title}><div style={{backgroundImage:`url(${heroImg})`,backgroundPosition:pos}} /><b>{title}</b></article>)}</div>
       </div>
     </section>
 
-    <section className="section surface"><div className="container home-bottom"><FaqBlock /><div className="home-form-wrap"><Eyebrow>NHẬN TƯ VẤN KỸ THUẬT</Eyebrow><h2>Yêu cầu báo giá nhanh</h2><QuoteForm compact /></div></div></section>
-    <div className="container cta-spacing"><DarkCta navigate={navigate} title="Sự cố điện? Gọi ngay hỗ trợ khẩn cấp 24/7" text="Tiếp nhận tình trạng, chẩn đoán từ xa và điều phối kỹ thuật theo khu vực." /></div>
+    <section className="ref-section container">
+      <h2 className="ref-heading">QUY TRÌNH LÀM VIỆC NHANH CHÓNG - MINH BẠCH</h2>
+      <div className="ref-process">{[
+        ['01','◉','Tiếp nhận yêu cầu','Tiếp nhận thông tin 24/7 qua hotline.'],
+        ['02','▧','Khảo sát hiện trường','Kỹ sư khảo sát, đánh giá hiện trạng.'],
+        ['03','▤','Báo giá chi tiết','Đề xuất giải pháp tối ưu, báo giá minh bạch.'],
+        ['04','♙','Thi công - Lắp đặt','Thi công an toàn, đúng tiến độ.'],
+        ['05','◇','Bàn giao - Bảo hành','Nghiệm thu, bàn giao và bảo hành uy tín.'],
+      ].map(([n,icon,title,text]) => <article key={n}><i>{icon}</i><div><b>{n}</b><h3>{title}</h3><p>{text}</p></div></article>)}</div>
+    </section>
+
+    <section className="container ref-why">
+      <h2 className="ref-heading">VÌ SAO CHỌN ĐIỆN 24H</h2>
+      <div>{[['ϟ','Phản ứng nhanh 24/7','Có mặt nhanh chóng 30 – 60 phút.'],['♧','Kỹ sư chuyên môn cao','Đội ngũ giàu kinh nghiệm, đào tạo bài bản.'],['◇','An toàn tuyệt đối','Thi công đúng tiêu chuẩn EVN & ISO.'],['◎','Thiết bị chính hãng','CO–CQ đầy đủ, nguồn gốc rõ ràng.'],['₫','Giá cả cạnh tranh','Giải pháp tối ưu chi phí hiệu quả lâu dài.'],['♢','Bảo hành uy tín','Hậu mãi chu đáo, hỗ trợ tận tâm.']].map(([icon,title,text]) =>
+        <article key={title}><i>{icon}</i><b>{title}</b><p>{text}</p></article>)}</div>
+    </section>
+
+    <section className="container ref-trust">
+      <article><h2>NĂNG LỰC & NIỀM TIN</h2>{[['▧','Hồ sơ năng lực'],['♙','Chứng chỉ & chứng nhận'],['▦','Dự án thực tế']].map(([i,t])=><div key={t}><i>{i}</i><span><b>{t}</b><small>Tài liệu minh chứng rõ ràng</small></span><em>⇩</em></div>)}</article>
+      <article className="ref-brands"><h2>ĐỐI TÁC - THƯƠNG HIỆU CHÚNG TÔI PHÂN PHỐI</h2><div><b>Schneider</b><b>ABB</b><b>SIEMENS</b><b>MITSUBISHI</b><b>LS Electric</b><b>HYUNDAI</b></div></article>
+      <article className="ref-testimonial"><h2>KHÁCH HÀNG NÓI VỀ CHÚNG TÔI</h2><blockquote>“<br />Điện 24H hỗ trợ rất nhanh khi nhà máy chúng tôi gặp sự cố mất điện. Đội ngũ kỹ sư chuyên nghiệp, xử lý triệt để vấn đề và tư vấn giải pháp rất hiệu quả.</blockquote><b>Ông Nguyễn Văn Hùng</b><small>Giám đốc kỹ thuật - Nhà máy AMATA</small></article>
+    </section>
+
+    <section className="container ref-bottom">
+      <div className="ref-faq"><h2>CÂU HỎI THƯỜNG GẶP</h2>{faqs.map(([q,a],i)=><button className={faq===i?'open':''} onClick={()=>setFaq(faq===i?null:i)} key={q}><span>{q}<b>{faq===i?'−':'+'}</b></span>{faq===i&&<p>{a}</p>}</button>)}</div>
+      <form className="ref-quote" onSubmit={submit}>
+        <h2>YÊU CẦU BÁO GIÁ NHANH</h2><p>Vui lòng để lại thông tin, chúng tôi sẽ liên hệ và báo giá trong thời gian sớm nhất!</p>
+        {sent ? <div className="ref-success">✓ Đã tiếp nhận yêu cầu. Kỹ sư Điện 24H sẽ liên hệ với bạn sớm nhất.</div> : <>
+          <div className="ref-form-grid"><input required placeholder="Họ tên *" /><input required type="tel" placeholder="Số điện thoại *" /><select required defaultValue=""><option value="" disabled>Nhu cầu *</option><option>Khảo sát & báo giá</option><option>Sửa chữa sự cố</option><option>Mua thiết bị điện</option></select><input placeholder="Địa điểm *" /></div>
+          <textarea placeholder="Ghi chú thêm (nếu có)" /><button>GỬI YÊU CẦU BÁO GIÁ &nbsp;➤</button>
+        </>}
+      </form>
+      <div className="ref-engineer" style={{backgroundImage:`url(${heroImg})`}}><span>Tư vấn miễn phí<br /><b>100%</b></span><span>Báo giá nhanh<br /><b>&lt; 2 giờ</b></span><span>Hỗ trợ 24/7<br /><b>0888.979.111</b></span></div>
+    </section>
   </>
 }

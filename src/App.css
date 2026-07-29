@@ -6,7 +6,7 @@
 }
 
 /* shared */
-.container{width:min(1500px,calc(100% - 64px));margin-inline:auto}
+.container{width:min(1180px,calc(100% - 40px));margin-inline:auto}
 .section{padding:82px 0}.surface{background:var(--surface)}
 .eyebrow{display:flex;align-items:center;gap:9px;color:var(--blue);font-size:11px;font-weight:800;letter-spacing:1.65px;text-transform:uppercase}
 .eyebrow i{display:inline-block;width:26px;height:2px;background:var(--orange)}

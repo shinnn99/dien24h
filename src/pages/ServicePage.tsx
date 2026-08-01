@@ -1,126 +1,407 @@
+import type { ReactNode } from 'react'
 import type { Navigate } from '../App'
-import { DarkCta, Eyebrow, FaqBlock, LinkButton, PageHero, QuoteForm } from '../components/Blocks'
-import heroImg from '../assets/dien24h-hero.png'
+import { Eyebrow, FaqBlock, LinkButton, PageHero, QuoteForm } from '../components/Blocks'
 import { phoneDisplay, phoneHref } from '../data'
+
+type ServiceInfo = {
+  eyebrow: string
+  title: ReactNode
+  text: string
+  heroCallLabel: string
+  stats: [string, string, string][]
+  section: string
+  scopeTitle: string
+  items: [string, string, string][]
+  audienceTitle: string
+  audienceText: string
+  audienceLabels: [string, string, string, string]
+  valueEyebrow: string
+  valueTitle: string
+  values: [string, string][]
+  faqs: string[][]
+  contactEyebrow: string
+  contactText: string
+  contactButton: string
+  formTitle: string
+  ctaTitle: string
+  ctaText: string
+  ctaButton: string
+}
 
 const variants = {
   repair: {
-    eyebrow: 'DỊCH VỤ SỬA CHỮA ĐIỆN 24H',
-    title: <>Xử lý sự cố<br />điện công nghiệp <span>24/7</span></>,
-    text: 'Chẩn đoán và xử lý mất điện, nhảy Aptomat, chập cháy, mất pha, quá tải và lỗi tủ điện cho nhà máy, kho, xưởng.',
-    stats: [['30–60 phút','Mục tiêu điều phối','Cần xác nhận theo khu vực'],['Trực 24/7','Tiếp nhận yêu cầu','Kể cả ngày lễ'],['Kỹ sư hiện trường','Chẩn đoán sự cố','Thiết bị đo phù hợp'],['Đồng Nai','Khu vực phục vụ','Theo khả năng điều phối']],
-    section: 'SỰ CỐ THƯỜNG GẶP',
-    items: [['ϟ','Mất điện đột ngột'],['▣','Nhảy Aptomat liên tục'],['♨','Chập cháy, mùi khét'],['⌁','Mất pha, lệch pha'],['◴','Quá tải, nóng thiết bị'],['▤','Lỗi tủ điện, MCCB/ACB']],
-    process: ['Tiếp nhận yêu cầu','Điều phối kỹ sư','Kiểm tra & chẩn đoán','Xử lý sự cố','Kiểm tra & bàn giao'],
-    packages: ['Xử lý sự cố khẩn cấp 24/7','Kiểm tra định kỳ','Bảo trì hệ thống điện','Thay thế thiết bị'],
-    evidence: 'Kỹ thuật tại Đồng Nai',
-    caseTitle: 'Sự cố nhảy ACB tổng nhà xưởng',
+    eyebrow: 'SỬA CHỮA ĐIỆN 24H',
+    title: <>Tiếp nhận sự cố điện<br /><span>cả ngày lẫn đêm</span></>,
+    text: 'Đội kỹ thuật phản ứng nhanh, tiếp nhận chập điện, cháy điện, mất pha, cân pha, đảo pha và các sự cố điện nhà xưởng, điện dân dụng.',
+    heroCallLabel: 'Gọi hỗ trợ',
+    stats: [
+      ['24/7', 'Tiếp nhận sự cố', '24 giờ mỗi ngày'],
+      ['Ngày & đêm', 'Túc trực hỗ trợ', 'Phục vụ cả ngày lẫn đêm'],
+      ['Phản ứng nhanh', 'Đội kỹ thuật', 'Hướng đến giảm gián đoạn'],
+      ['Biên Hòa', 'Khu vực trọng tâm', 'Đồng Nai'],
+    ],
+    section: 'SỰ CỐ ĐƯỢC TIẾP NHẬN',
+    scopeTitle: 'Hỗ trợ điện nhà xưởng và dân dụng',
+    items: [
+      ['ϟ', 'Chập điện', 'Tiếp nhận tình trạng chập điện tại công trình.'],
+      ['♨', 'Cháy điện', 'Hỗ trợ xử lý tình trạng cháy điện tại công trình.'],
+      ['⌁', 'Mất pha', 'Tiếp nhận sự cố mất pha của hệ thống điện.'],
+      ['◐', 'Cân pha', 'Hỗ trợ nhu cầu kiểm tra và cân pha.'],
+      ['↺', 'Đảo pha', 'Tiếp nhận tình trạng đảo pha cần xử lý.'],
+      ['⌂', 'Nhà xưởng & dân dụng', 'Phục vụ cả sự cố điện nhà xưởng và dân dụng.'],
+    ],
+    audienceTitle: 'Nhà xưởng và khách hàng dân dụng',
+    audienceText: 'Phục vụ nhà xưởng, doanh nghiệp, hộ kinh doanh, chủ nhà và khách hàng dân dụng tại Biên Hòa – Đồng Nai.',
+    audienceLabels: ['Nhà xưởng', 'Nhà ở', 'Biên Hòa', 'Đồng Nai'],
+    valueEyebrow: 'CÁCH THỨC PHỤC VỤ',
+    valueTitle: 'Luôn sẵn sàng khi có sự cố',
+    values: [
+      ['Tiếp nhận 24/7', 'Tiếp nhận sự cố 24 giờ mỗi ngày.'],
+      ['Túc trực ngày và đêm', 'Đội kỹ thuật túc trực để tiếp nhận tình trạng sự cố.'],
+      ['Phản ứng nhanh', 'Đội kỹ thuật phản ứng nhanh khi tiếp nhận sự cố.'],
+      ['Giảm thời gian gián đoạn', 'Dịch vụ hướng tới hạn chế gián đoạn hoạt động sản xuất.'],
+    ],
+    faqs: [
+      ['Điện 24H tiếp nhận sự cố vào thời gian nào?', 'Tiếp nhận sự cố 24 giờ mỗi ngày, cả ngày lẫn đêm.'],
+      ['Những sự cố nào được tiếp nhận?', 'Điện 24H tiếp nhận chập điện, cháy điện, mất pha, cân pha, đảo pha cùng các sự cố điện nhà xưởng và dân dụng.'],
+      ['Thời gian có mặt là bao lâu?', 'Thời gian có mặt được xác nhận qua hotline theo địa điểm và tình trạng sự cố.'],
+    ],
+    contactEyebrow: 'HỖ TRỢ SỰ CỐ 24/7',
+    contactText: 'Tiếp nhận tình trạng cả ngày lẫn đêm',
+    contactButton: 'Gọi đội kỹ thuật',
+    formTitle: 'Gửi tình trạng sự cố',
+    ctaTitle: 'Bạn đang gặp sự cố điện?',
+    ctaText: 'Gọi hotline để đội kỹ thuật tiếp nhận tình trạng và trao đổi khả năng hỗ trợ.',
+    ctaButton: 'Gửi yêu cầu hỗ trợ',
   },
   transformer: {
-    eyebrow: 'ĐƯỜNG DÂY & TRẠM BIẾN ÁP 22KV',
-    title: <>Thi công trạm biến áp<br />trọn gói tại <span>Đồng Nai</span></>,
-    text: 'Từ khảo sát, thiết kế, thi công, thí nghiệm đến nghiệm thu và đóng điện.',
-    stats: [['22kV','Đường dây trung thế','Theo năng lực công bố'],['Trọn gói','Phạm vi triển khai','Từ khảo sát đến bàn giao'],['Hồ sơ','Thiết kế & nghiệm thu','Theo yêu cầu dự án'],['Đồng Nai','Khu vực trọng tâm','Nhà máy & KCN']],
-    section: 'LOẠI CÔNG VIỆC TRIỂN KHAI',
-    items: [['▥','Trạm biến áp nền'],['▣','Trạm kiosk hợp bộ'],['⌁','Đường dây trung thế'],['⚡','Nâng công suất trạm'],['◎','Thí nghiệm điện'],['⚙','Bảo trì trạm biến áp']],
-    process: ['Khảo sát hiện trạng','Thiết kế & dự toán','Thống nhất hồ sơ','Thi công lắp đặt','Thí nghiệm & bàn giao'],
-    packages: ['Khảo sát & thiết kế','Đường dây trung thế 22kV','Thi công trạm biến áp','Thí nghiệm & đóng điện'],
-    evidence: 'Năng lực triển khai tại Đồng Nai',
-    caseTitle: 'Cấu trúc hồ sơ dự án trạm biến áp',
+    eyebrow: 'ĐƯỜNG DÂY TRUNG THẾ & TRẠM BIẾN ÁP',
+    title: <>Thi công đường dây<br />và <span>trạm biến áp</span></>,
+    text: 'Tư vấn thiết kế, thi công, lắp đặt, bảo trì và thí nghiệm đường dây trung thế, trạm biến áp cho khu công nghiệp, nhà máy và hộ kinh doanh.',
+    heroCallLabel: 'Gọi tư vấn',
+    stats: [
+      ['Trung thế', 'Đường dây', 'Thi công & thí nghiệm'],
+      ['Trạm biến áp', 'Thi công & lắp đặt', 'Có dịch vụ bảo trì'],
+      ['Tư vấn', 'Thiết kế', 'Theo nhu cầu công trình'],
+      ['Đồng Nai', 'Khu vực trọng tâm', 'Biên Hòa'],
+    ],
+    section: 'PHẠM VI DỊCH VỤ',
+    scopeTitle: 'Đường dây và trạm biến áp',
+    items: [
+      ['◇', 'Tư vấn thiết kế', 'Tư vấn và thiết kế giải pháp theo nhu cầu công trình.'],
+      ['⌁', 'Đường dây trung thế', 'Thi công đường dây trung thế.'],
+      ['▥', 'Thi công trạm biến áp', 'Triển khai hạng mục trạm biến áp.'],
+      ['▣', 'Lắp đặt trạm biến áp', 'Lắp đặt trạm biến áp tại công trình.'],
+      ['⚙', 'Bảo trì trạm biến áp', 'Cung cấp dịch vụ bảo trì trạm biến áp.'],
+      ['◎', 'Thí nghiệm điện', 'Thí nghiệm đường dây trung thế và trạm biến áp.'],
+    ],
+    audienceTitle: 'Khu công nghiệp, nhà máy và hộ kinh doanh',
+    audienceText: 'Phục vụ khu công nghiệp, nhà máy và hộ kinh doanh có nhu cầu về đường dây và trạm biến áp tại Đồng Nai.',
+    audienceLabels: ['Khu công nghiệp', 'Nhà máy', 'Hộ kinh doanh', 'Đồng Nai'],
+    valueEyebrow: 'GIÁ TRỊ CAM KẾT',
+    valueTitle: 'Ổn định, chất lượng và đúng tiến độ',
+    values: [
+      ['Nguồn điện ổn định', 'Giải pháp hướng tới khả năng cấp điện ổn định cho công trình.'],
+      ['Tối ưu chi phí', 'Chi phí được cân nhắc theo nhu cầu triển khai.'],
+      ['Bảo đảm chất lượng', 'Bảo đảm chất lượng trong quá trình thi công.'],
+      ['Đúng tiến độ', 'Đóng điện đúng tiến độ với giá thành hợp lý.'],
+    ],
+    faqs: [
+      ['Phạm vi dịch vụ trạm biến áp gồm những gì?', 'Gồm tư vấn thiết kế, thi công, lắp đặt, bảo trì và thí nghiệm đường dây trung thế, trạm biến áp.'],
+      ['Điện 24H thi công được công suất bao nhiêu?', 'Dải công suất và cấu hình cần được xác nhận theo nhu cầu thực tế.'],
+      ['Dịch vụ áp dụng cấp điện áp nào?', 'Điện 24H cung cấp dịch vụ đường dây trung thế; thông tin 22 kV thuộc danh mục sản phẩm máy biến áp.'],
+    ],
+    contactEyebrow: 'TƯ VẤN TRẠM BIẾN ÁP',
+    contactText: 'Trao đổi nhu cầu đường dây và trạm biến áp',
+    contactButton: 'Gọi tư vấn',
+    formTitle: 'Yêu cầu tư vấn trạm',
+    ctaTitle: 'Cần triển khai đường dây hoặc trạm biến áp?',
+    ctaText: 'Gửi nhu cầu công trình để trao đổi phạm vi tư vấn, thiết kế, thi công hoặc bảo trì phù hợp.',
+    ctaButton: 'Gửi nhu cầu công trình',
   },
   industrial: {
-    eyebrow: 'ĐIỆN CÔNG NGHIỆP',
-    title: <>Hệ thống điện nhà xưởng<br /><span>an toàn & ổn định</span></>,
-    text: 'Thiết kế và thi công điện động lực, chiếu sáng, tủ phân phối, cáp nguồn và hệ thống tiếp địa.',
-    stats: [['MSB/MCC','Tủ điện phân phối','Theo thiết kế'],['Động lực','Hệ thống cấp nguồn','Cho dây chuyền sản xuất'],['Chiếu sáng','Nhà xưởng & kho','Theo tiêu chuẩn'],['Đồng Nai','Khu vực trọng tâm','Nhà máy & KCN']],
-    section: 'HẠNG MỤC ĐIỆN NHÀ XƯỞNG',
-    items: [['▥','Tủ điện MSB/MCC'],['⌁','Cáp động lực'],['☀','Chiếu sáng nhà xưởng'],['⏚','Tiếp địa an toàn'],['▣','ATS & nguồn dự phòng'],['⚙','Điều khiển tự động']],
-    process: ['Khảo sát phụ tải','Thiết kế hệ thống','Bóc tách & báo giá','Thi công lắp đặt','Đo kiểm & bàn giao'],
-    packages: ['Thiết kế điện nhà xưởng','Thi công điện động lực','Tủ điện & điều khiển','Cải tạo & nâng cấp'],
-    evidence: 'Năng lực phục vụ nhà máy',
-    caseTitle: 'Cấu trúc hồ sơ hệ thống điện nhà xưởng',
+    eyebrow: 'THIẾT BỊ ĐIỆN 24H',
+    title: <>Cung cấp và lắp đặt<br /><span>thiết bị điện</span></>,
+    text: 'Cung cấp thiết bị đến công trình, lắp đặt trọn gói thiết bị chiếu sáng, thiết bị đóng cắt và tủ điện điều khiển.',
+    heroCallLabel: 'Gọi tư vấn',
+    stats: [
+      ['Tận nơi', 'Cung cấp thiết bị', 'Giao đến công trình'],
+      ['Trọn gói', 'Lắp đặt thiết bị', 'Theo nhu cầu khách hàng'],
+      ['Tại chỗ', 'Bảo hành', 'Tại địa điểm khách hàng'],
+      ['1 đổi 1', 'Bảo hành tận nơi', 'Xác nhận điều kiện áp dụng'],
+    ],
+    section: 'DỊCH VỤ THIẾT BỊ ĐIỆN',
+    scopeTitle: 'Từ cung cấp đến lắp đặt tại công trình',
+    items: [
+      ['▣', 'Cung cấp thiết bị', 'Cung cấp thiết bị điện theo nhu cầu công trình.'],
+      ['⌖', 'Giao đến công trình', 'Thiết bị được giao đến địa điểm của khách hàng.'],
+      ['⚙', 'Lắp đặt trọn gói', 'Cung cấp dịch vụ lắp đặt thiết bị điện trọn gói.'],
+      ['☀', 'Thiết bị chiếu sáng', 'Lắp đặt thiết bị chiếu sáng.'],
+      ['ϟ', 'Thiết bị đóng cắt', 'Lắp đặt thiết bị đóng cắt.'],
+      ['▤', 'Tủ điện điều khiển', 'Lắp đặt tủ điện điều khiển.'],
+    ],
+    audienceTitle: 'Khách hàng cần thiết bị và vật tư điện',
+    audienceText: 'Dịch vụ phù hợp với chủ công trình, nhà máy, nhà xưởng và các đơn vị cần mua, giao hoặc lắp đặt thiết bị điện tại Đồng Nai.',
+    audienceLabels: ['Công trình', 'Nhà máy', 'Nhà xưởng', 'Đồng Nai'],
+    valueEyebrow: 'CHÍNH SÁCH HỖ TRỢ',
+    valueTitle: 'Cung cấp và hỗ trợ tại nơi sử dụng',
+    values: [
+      ['Cung cấp tận nơi', 'Giao thiết bị đến công trình.'],
+      ['Lắp đặt trọn gói', 'Có dịch vụ lắp đặt thiết bị điện tại công trình.'],
+      ['Bảo hành tại chỗ', 'Hỗ trợ bảo hành tại địa điểm khách hàng.'],
+      ['Đổi mới một đổi một', 'Điều kiện, thời hạn và sản phẩm áp dụng cần được xác nhận khi tư vấn.'],
+    ],
+    faqs: [
+      ['Điện 24H cung cấp những dịch vụ thiết bị nào?', 'Cung cấp, giao đến công trình và lắp đặt trọn gói thiết bị chiếu sáng, thiết bị đóng cắt, tủ điện điều khiển.'],
+      ['Có hỗ trợ bảo hành tại công trình không?', 'Có chính sách bảo hành tại chỗ và đổi mới một đổi một tận nơi; điều kiện áp dụng được xác nhận khi tư vấn.'],
+      ['Thời hạn bảo hành là bao lâu?', 'Thời hạn, danh mục áp dụng và điều kiện bảo hành được xác nhận khi tư vấn.'],
+    ],
+    contactEyebrow: 'TƯ VẤN THIẾT BỊ',
+    contactText: 'Trao đổi nhu cầu cung cấp và lắp đặt',
+    contactButton: 'Gọi tư vấn',
+    formTitle: 'Yêu cầu báo giá thiết bị',
+    ctaTitle: 'Bạn cần thiết bị điện cho công trình?',
+    ctaText: 'Gửi nhóm thiết bị và nhu cầu lắp đặt để Điện 24H trao đổi phương án cung cấp phù hợp.',
+    ctaButton: 'Yêu cầu báo giá thiết bị',
   },
   maintenance: {
     eyebrow: 'BẢO TRÌ & THÍ NGHIỆM ĐIỆN',
-    title: <>Đánh giá tình trạng<br /><span>trước khi xảy ra sự cố</span></>,
-    text: 'Kiểm tra, đo lường, vệ sinh, hiệu chỉnh và lập báo cáo kỹ thuật cho hệ thống điện.',
-    stats: [['Định kỳ','Kế hoạch bảo trì','Theo điều kiện vận hành'],['Đo kiểm','Thiết bị chuyên dụng','Theo hạng mục'],['Báo cáo','Kết quả kỹ thuật','Có kiến nghị xử lý'],['An toàn','Quy trình cô lập','Theo phương án duyệt']],
-    section: 'HẠNG MỤC KIỂM TRA',
-    items: [['◎','Máy biến áp'],['▣','Tủ trung & hạ thế'],['⌁','Cáp và đầu cáp'],['⏚','Hệ thống tiếp địa'],['⚙','Thiết bị đóng cắt'],['◷','Chất lượng điện năng']],
-    process: ['Tiếp nhận hồ sơ','Lập phương án','Đo kiểm hiện trường','Phân tích kết quả','Báo cáo & kiến nghị'],
-    packages: ['Bảo trì trạm biến áp','Bảo trì tủ điện','Thí nghiệm thiết bị','Đo kiểm tiếp địa'],
-    evidence: 'Kế hoạch bảo trì theo hệ thống',
-    caseTitle: 'Cấu trúc báo cáo đo kiểm',
+    title: <>Bảo trì và thí nghiệm<br /><span>hệ thống điện</span></>,
+    text: 'Dịch vụ gồm bảo trì trạm biến áp, thí nghiệm đường dây trung thế và trạm biến áp, bảo trì máy phát điện, đo kiểm điện trở đất.',
+    heroCallLabel: 'Gọi tư vấn',
+    stats: [
+      ['Trạm biến áp', 'Bảo trì', 'Hạng mục dịch vụ'],
+      ['Trung thế', 'Thí nghiệm đường dây', 'Cùng trạm biến áp'],
+      ['Máy phát', 'Bảo trì định kỳ', 'Duy trì nguồn dự phòng'],
+      ['Tiếp địa', 'Đo điện trở đất', 'Có đo kiểm định kỳ'],
+    ],
+    section: 'HẠNG MỤC DỊCH VỤ',
+    scopeTitle: 'Bảo trì và đo kiểm theo hệ thống',
+    items: [
+      ['▥', 'Bảo trì trạm biến áp', 'Dịch vụ bảo trì trạm biến áp.'],
+      ['⌁', 'Thí nghiệm đường dây', 'Thí nghiệm đường dây trung thế.'],
+      ['◎', 'Thí nghiệm trạm biến áp', 'Thí nghiệm các hạng mục trạm biến áp.'],
+      ['⚙', 'Bảo trì máy phát', 'Bảo trì máy phát điện định kỳ.'],
+      ['⏚', 'Đo điện trở đất', 'Đo điện trở đất của hệ thống tiếp địa.'],
+      ['◷', 'Đo kiểm định kỳ', 'Đo kiểm điện trở đất định kỳ.'],
+    ],
+    audienceTitle: 'Hệ thống điện tại công trình',
+    audienceText: 'Các hạng mục bảo trì và thí nghiệm phục vụ nhà máy, nhà xưởng, doanh nghiệp và công trình tại Đồng Nai.',
+    audienceLabels: ['Nhà máy', 'Nhà xưởng', 'Công trình', 'Đồng Nai'],
+    valueEyebrow: 'PHẠM VI NĂNG LỰC',
+    valueTitle: 'Bảo trì, thí nghiệm và đo kiểm hệ thống điện',
+    values: [
+      ['Bảo trì hệ thống điện', 'Bảo trì hệ thống điện trong hệ sinh thái dịch vụ trọn gói.'],
+      ['Thí nghiệm điện', 'Thí nghiệm đường dây trung thế và trạm biến áp.'],
+      ['Bảo trì nguồn dự phòng', 'Máy phát điện có dịch vụ bảo trì định kỳ.'],
+      ['Đo kiểm tiếp địa', 'Có dịch vụ đo và đo kiểm điện trở đất định kỳ.'],
+    ],
+    faqs: [
+      ['Điện 24H nhận bảo trì những hạng mục nào?', 'Bảo trì trạm biến áp và bảo trì máy phát điện định kỳ.'],
+      ['Có dịch vụ thí nghiệm và đo kiểm không?', 'Có. Điện 24H nhận thí nghiệm đường dây trung thế, trạm biến áp và đo kiểm điện trở đất.'],
+      ['Chu kỳ bảo trì là bao lâu?', 'Tần suất bảo trì được xác nhận theo hạng mục và nhu cầu vận hành.'],
+    ],
+    contactEyebrow: 'TƯ VẤN BẢO TRÌ',
+    contactText: 'Trao đổi hạng mục bảo trì và thí nghiệm',
+    contactButton: 'Gọi tư vấn',
+    formTitle: 'Yêu cầu tư vấn bảo trì',
+    ctaTitle: 'Cần bảo trì hoặc thí nghiệm hệ thống điện?',
+    ctaText: 'Gửi loại hệ thống và hạng mục cần kiểm tra để trao đổi phạm vi dịch vụ.',
+    ctaButton: 'Gửi yêu cầu bảo trì',
   },
   solar: {
-    eyebrow: 'ĐIỆN MẶT TRỜI DOANH NGHIỆP',
-    title: <>Giải pháp solar<br /><span>cho mái nhà công nghiệp</span></>,
-    text: 'Khảo sát phụ tải, mặt bằng, thiết kế và triển khai hệ thống điện mặt trời theo hồ sơ được duyệt.',
-    stats: [['Khảo sát','Mái & phụ tải','Đánh giá trước thiết kế'],['Thiết kế','Sơ đồ & bố trí','Theo điều kiện thực tế'],['Thi công','Lắp đặt đồng bộ','An toàn trên cao'],['Bàn giao','Hồ sơ vận hành','Theo phạm vi hợp đồng']],
-    section: 'PHẠM VI TRIỂN KHAI',
-    items: [['☀','Khảo sát mái'],['⌁','Thiết kế điện'],['▣','Tấm pin & inverter'],['⏚','Tiếp địa & chống sét'],['◎','Giám sát hệ thống'],['⚙','Bảo trì định kỳ']],
-    process: ['Khảo sát hiện trạng','Phân tích phụ tải','Thiết kế giải pháp','Thi công lắp đặt','Kiểm tra & bàn giao'],
-    packages: ['Khảo sát & thiết kế','Solar mái nhà xưởng','Hệ thống giám sát','Vận hành & bảo trì'],
-    evidence: 'Giải pháp theo nhu cầu sử dụng điện',
-    caseTitle: 'Cấu trúc hồ sơ dự án solar',
+    eyebrow: 'SOLAR 24H',
+    title: <>Giải pháp điện mặt trời<br /><span>cho doanh nghiệp</span></>,
+    text: 'Tư vấn và thi công điện mặt trời hòa lưới, bám tải hoặc có lưu trữ cho doanh nghiệp và nhà xưởng.',
+    heroCallLabel: 'Gọi tư vấn',
+    stats: [
+      ['Hòa lưới', 'Giải pháp solar', 'Theo nhu cầu sử dụng'],
+      ['Bám tải', 'Giải pháp solar', 'Cho doanh nghiệp'],
+      ['Có lưu trữ', 'Giải pháp solar', 'Cho doanh nghiệp & nhà xưởng'],
+      ['Nhà xưởng', 'Nhóm khách hàng', 'Doanh nghiệp'],
+    ],
+    section: 'GIẢI PHÁP SOLAR',
+    scopeTitle: 'Ba cấu hình cho doanh nghiệp và nhà xưởng',
+    items: [
+      ['◇', 'Tư vấn điện mặt trời', 'Tư vấn giải pháp điện năng lượng mặt trời.'],
+      ['☀', 'Điện mặt trời hòa lưới', 'Thi công hệ thống điện mặt trời hòa lưới.'],
+      ['⌁', 'Điện mặt trời bám tải', 'Thi công hệ thống điện mặt trời bám tải.'],
+      ['▣', 'Giải pháp có lưu trữ', 'Cung cấp giải pháp điện mặt trời có lưu trữ.'],
+      ['♙', 'Cho doanh nghiệp', 'Giải pháp hướng tới nhu cầu của doanh nghiệp.'],
+      ['▥', 'Cho nhà xưởng', 'Giải pháp dành cho công trình nhà xưởng.'],
+    ],
+    audienceTitle: 'Doanh nghiệp và nhà xưởng',
+    audienceText: 'Giải pháp đầu tư dài hạn cho doanh nghiệp và nhà xưởng muốn giảm chi phí điện năng và chi phí vận hành.',
+    audienceLabels: ['Doanh nghiệp', 'Nhà xưởng', 'Biên Hòa', 'Đồng Nai'],
+    valueEyebrow: 'LỢI ÍCH GIẢI PHÁP',
+    valueTitle: 'Hướng tới hiệu quả vận hành dài hạn',
+    values: [
+      ['Giảm chi phí điện năng', 'Hướng tới giảm chi phí sử dụng điện.'],
+      ['Giảm chi phí vận hành', 'Giải pháp hướng tới hiệu quả vận hành của doanh nghiệp.'],
+      ['Hỗ trợ làm mát nhà xưởng', 'Hỗ trợ làm mát nhà xưởng.'],
+      ['Hướng đến chứng chỉ xanh', 'Hỗ trợ doanh nghiệp hướng đến chứng chỉ xanh.'],
+    ],
+    faqs: [
+      ['Điện 24H cung cấp những giải pháp solar nào?', 'Gồm hệ thống hòa lưới, bám tải và giải pháp có lưu trữ cho doanh nghiệp, nhà xưởng.'],
+      ['Có thông tin về thương hiệu tấm pin và inverter không?', 'Chưa có thông tin cụ thể về nhãn hiệu tấm pin, inverter hoặc pin lưu trữ.'],
+      ['Có thông tin thời gian hoàn vốn không?', 'Chưa có thông tin cụ thể về thời gian hoàn vốn hoặc chính sách bảo hành hệ thống.'],
+    ],
+    contactEyebrow: 'TƯ VẤN SOLAR',
+    contactText: 'Trao đổi nhu cầu điện của doanh nghiệp',
+    contactButton: 'Gọi tư vấn',
+    formTitle: 'Yêu cầu tư vấn solar',
+    ctaTitle: 'Bạn đang cân nhắc điện mặt trời?',
+    ctaText: 'Gửi nhu cầu sử dụng điện để trao đổi giải pháp hòa lưới, bám tải hoặc có lưu trữ.',
+    ctaButton: 'Gửi nhu cầu solar',
   },
   generator: {
-    eyebrow: 'MÁY PHÁT ĐIỆN & ATS',
-    title: <>Nguồn điện dự phòng<br /><span>sẵn sàng khi cần</span></>,
-    text: 'Tư vấn máy phát điện, ATS, hòa đồng bộ và bảo trì theo nhu cầu phụ tải doanh nghiệp.',
-    stats: [['Dự phòng','Theo phụ tải ưu tiên','Tính toán công suất'],['ATS','Chuyển nguồn','Theo cấu hình'],['Bảo trì','Theo lịch vận hành','Kiểm tra định kỳ'],['Hỗ trợ','Kỹ thuật hiện trường','Theo khu vực']],
-    section: 'HẠNG MỤC MÁY PHÁT ĐIỆN',
-    items: [['⚡','Tư vấn công suất'],['▣','Tủ ATS'],['⌁','Cáp & đấu nối'],['◎','Hòa đồng bộ'],['⚙','Bảo trì máy phát'],['◷','Chạy thử có tải']],
-    process: ['Khảo sát phụ tải','Chọn cấu hình','Cung cấp thiết bị','Lắp đặt & đấu nối','Chạy thử & bàn giao'],
-    packages: ['Cung cấp máy phát','Tủ ATS & chuyển nguồn','Lắp đặt đồng bộ','Bảo trì máy phát'],
-    evidence: 'Nguồn dự phòng theo tải ưu tiên',
-    caseTitle: 'Cấu trúc phương án nguồn dự phòng',
+    eyebrow: 'MÁY PHÁT ĐIỆN 24H',
+    title: <>Máy phát điện công nghiệp<br /><span>cho thuê và cung cấp</span></>,
+    text: 'Cho thuê máy phát điện công nghiệp ngắn hoặc dài hạn, cung cấp máy mới, máy đã qua sử dụng và bảo trì định kỳ.',
+    heroCallLabel: 'Gọi tư vấn',
+    stats: [
+      ['Ngắn hạn', 'Cho thuê máy phát', 'Theo nhu cầu sử dụng'],
+      ['Dài hạn', 'Cho thuê máy phát', 'Cho công trình & doanh nghiệp'],
+      ['Mới & đã dùng', 'Cung cấp máy phát', 'Lựa chọn mua máy'],
+      ['Định kỳ', 'Bảo trì máy phát', 'Hỗ trợ vận hành'],
+    ],
+    section: 'DỊCH VỤ MÁY PHÁT ĐIỆN',
+    scopeTitle: 'Thuê, mua và bảo trì nguồn dự phòng',
+    items: [
+      ['⚡', 'Cho thuê công nghiệp', 'Cho thuê máy phát điện phục vụ nhu cầu công nghiệp.'],
+      ['◷', 'Thuê ngắn hạn', 'Lựa chọn thuê máy phát trong thời gian ngắn.'],
+      ['▣', 'Thuê dài hạn', 'Lựa chọn thuê máy phát trong thời gian dài.'],
+      ['◇', 'Cung cấp máy mới', 'Cung cấp máy phát điện mới.'],
+      ['↺', 'Máy đã qua sử dụng', 'Cung cấp máy phát điện đã qua sử dụng.'],
+      ['⚙', 'Bảo trì định kỳ', 'Bảo trì máy phát điện theo định kỳ.'],
+    ],
+    audienceTitle: 'Doanh nghiệp cần nguồn điện dự phòng',
+    audienceText: 'Dịch vụ hướng tới doanh nghiệp, nhà máy và nhà xưởng cần duy trì nguồn điện liên tục cho hoạt động vận hành.',
+    audienceLabels: ['Doanh nghiệp', 'Nhà máy', 'Nhà xưởng', 'Đồng Nai'],
+    valueEyebrow: 'MỤC TIÊU SỬ DỤNG',
+    valueTitle: 'Duy trì nguồn điện cho vận hành',
+    values: [
+      ['Nguồn điện dự phòng', 'Máy phát hỗ trợ bảo đảm nguồn điện khi cần.'],
+      ['Duy trì điện liên tục', 'Dịch vụ hướng tới khả năng duy trì nguồn điện liên tục.'],
+      ['Vận hành ổn định', 'Nguồn dự phòng hỗ trợ hoạt động vận hành ổn định.'],
+      ['Linh hoạt hình thức', 'Có lựa chọn thuê ngắn hạn, dài hạn hoặc mua máy mới, máy đã qua sử dụng.'],
+    ],
+    faqs: [
+      ['Có những hình thức sử dụng máy phát nào?', 'Có thể thuê ngắn hạn, thuê dài hạn, mua máy mới hoặc máy đã qua sử dụng.'],
+      ['Dải công suất và thương hiệu máy là gì?', 'Dải công suất, thương hiệu, nhiên liệu và mức tiêu hao cần được xác nhận khi tư vấn.'],
+      ['Giá thuê đã bao gồm vận chuyển và vận hành chưa?', 'Giá thuê, chi phí vận chuyển và phương án nhân sự vận hành cần được xác nhận khi tư vấn.'],
+    ],
+    contactEyebrow: 'TƯ VẤN MÁY PHÁT',
+    contactText: 'Trao đổi nhu cầu thuê, mua hoặc bảo trì',
+    contactButton: 'Gọi tư vấn',
+    formTitle: 'Yêu cầu tư vấn máy phát',
+    ctaTitle: 'Bạn cần nguồn điện dự phòng?',
+    ctaText: 'Gửi nhu cầu thuê, mua hoặc bảo trì máy phát để trao đổi hình thức phù hợp.',
+    ctaButton: 'Gửi nhu cầu máy phát',
   },
   lightning: {
-    eyebrow: 'CHỐNG SÉT & TIẾP ĐỊA',
-    title: <>Bảo vệ công trình<br /><span>từ xung sét & quá áp</span></>,
-    text: 'Khảo sát, thiết kế, thi công và đo kiểm hệ thống chống sét trực tiếp, lan truyền và tiếp địa.',
-    stats: [['Trực tiếp','Kim & dây thoát sét','Theo thiết kế'],['Lan truyền','SPD bảo vệ thiết bị','Theo cấp bảo vệ'],['Tiếp địa','Đo điện trở đất','Theo yêu cầu'],['Hồ sơ','Kết quả đo kiểm','Theo phạm vi']],
+    eyebrow: 'CHỐNG SÉT 24H',
+    title: <>Chống sét và tiếp địa<br /><span>cho công trình</span></>,
+    text: 'Thi công chống sét trực tiếp, chống sét lan truyền, hệ thống tiếp địa và đo kiểm điện trở đất.',
+    heroCallLabel: 'Gọi tư vấn',
+    stats: [
+      ['Trực tiếp', 'Chống sét công trình', 'Có lắp đặt kim thu sét'],
+      ['Lan truyền', 'Bảo vệ thiết bị', 'Thiết bị điện tử nhạy cảm'],
+      ['Tiếp địa', 'Thi công hệ thống', 'Có đo điện trở đất'],
+      ['Định kỳ', 'Đo kiểm điện trở', 'Theo nhu cầu công trình'],
+    ],
     section: 'PHẠM VI CHỐNG SÉT',
-    items: [['ϟ','Chống sét trực tiếp'],['▣','Chống sét lan truyền'],['⏚','Hệ thống tiếp địa'],['⌁','Dây thoát sét'],['◎','Đo điện trở đất'],['⚙','Bảo trì định kỳ']],
-    process: ['Khảo sát công trình','Thiết kế bảo vệ','Bóc tách vật tư','Thi công lắp đặt','Đo kiểm & bàn giao'],
-    packages: ['Chống sét trực tiếp','SPD lan truyền','Hệ thống tiếp địa','Đo kiểm định kỳ'],
-    evidence: 'Giải pháp theo đặc điểm công trình',
-    caseTitle: 'Cấu trúc hồ sơ đo kiểm chống sét',
+    scopeTitle: 'Bảo vệ công trình và thiết bị',
+    items: [
+      ['ϟ', 'Chống sét trực tiếp', 'Thi công hệ thống chống sét trực tiếp.'],
+      ['▣', 'Chống sét lan truyền', 'Thi công chống sét lan truyền cho hệ thống điện.'],
+      ['⏚', 'Hệ thống tiếp địa', 'Thi công hệ thống tiếp địa cho công trình.'],
+      ['⌁', 'Lắp đặt kim thu sét', 'Lắp đặt kim thu sét theo nhu cầu công trình.'],
+      ['◎', 'Đo điện trở đất', 'Đo điện trở đất của hệ thống tiếp địa.'],
+      ['◷', 'Đo kiểm định kỳ', 'Đo kiểm điện trở đất định kỳ.'],
+    ],
+    audienceTitle: 'Nhà ở, nhà xưởng và thiết bị nhạy cảm',
+    audienceText: 'Phục vụ nhu cầu bảo vệ nhà ở, nhà xưởng và thiết bị điện tử nhạy cảm.',
+    audienceLabels: ['Nhà ở', 'Nhà xưởng', 'Thiết bị điện tử', 'Đồng Nai'],
+    valueEyebrow: 'LỢI ÍCH GIẢI PHÁP',
+    valueTitle: 'Hướng tới mức độ an toàn cao',
+    values: [
+      ['Bảo vệ công trình', 'Giải pháp hướng tới an toàn cho công trình trước ảnh hưởng của sét.'],
+      ['Bảo vệ thiết bị', 'Chống sét lan truyền hỗ trợ bảo vệ thiết bị điện tử nhạy cảm.'],
+      ['Kim thu sét hiện đại', 'Sử dụng kim thu sét hiện đại cho hệ thống.'],
+      ['Đo kiểm điện trở đất', 'Có dịch vụ đo và đo kiểm điện trở đất định kỳ.'],
+    ],
+    faqs: [
+      ['Phạm vi dịch vụ chống sét gồm những gì?', 'Gồm chống sét trực tiếp, chống sét lan truyền, tiếp địa, lắp đặt kim thu sét và đo điện trở đất.'],
+      ['Tiêu chuẩn và mức điện trở đất mục tiêu là bao nhiêu?', 'Tiêu chuẩn áp dụng và mức điện trở đất mục tiêu cần được xác nhận theo công trình.'],
+      ['Bao lâu cần đo kiểm định kỳ?', 'Chu kỳ đo kiểm điện trở đất cần được xác nhận theo công trình.'],
+    ],
+    contactEyebrow: 'TƯ VẤN CHỐNG SÉT',
+    contactText: 'Trao đổi nhu cầu chống sét và tiếp địa',
+    contactButton: 'Gọi tư vấn',
+    formTitle: 'Yêu cầu tư vấn chống sét',
+    ctaTitle: 'Cần bảo vệ công trình trước ảnh hưởng của sét?',
+    ctaText: 'Gửi loại công trình và nhu cầu chống sét, tiếp địa hoặc đo điện trở đất.',
+    ctaButton: 'Gửi yêu cầu chống sét',
   },
-}
+} satisfies Record<string, ServiceInfo>
 
 export type ServiceVariant = keyof typeof variants
 
 export function ServicePage({ navigate, variant }: { navigate: Navigate; variant: ServiceVariant }) {
   const info = variants[variant]
+
   return <>
     <PageHero navigate={navigate} eyebrow={info.eyebrow} title={info.title} text={info.text}>
-      <div className="hero-actions"><LinkButton href={phoneHref} navigate={navigate}>☎ Gọi khẩn cấp {phoneDisplay}</LinkButton><LinkButton href="/lien-he" navigate={navigate} className="button secondary">Gửi yêu cầu →</LinkButton></div>
+      <div className="hero-actions">
+        <LinkButton href={phoneHref} navigate={navigate}>☎ {info.heroCallLabel} {phoneDisplay}</LinkButton>
+        <LinkButton href="/lien-he" navigate={navigate} className="button secondary">Gửi yêu cầu tư vấn →</LinkButton>
+      </div>
     </PageHero>
-    <div className="container service-commitments">{info.stats.map(([n,t,s]) => <div key={t}><b>{n}</b><span><strong>{t}</strong><small>{s}</small></span></div>)}</div>
+
+    <div className="container service-commitments">
+      {info.stats.map(([number, title, detail]) => <div key={`${number}-${title}`}><b>{number}</b><span><strong>{title}</strong><small>{detail}</small></span></div>)}
+    </div>
 
     <section className="section container">
-      <div className="section-title center"><Eyebrow>{info.section}</Eyebrow><h2>Phạm vi công việc rõ ràng</h2></div>
-      <div className="issue-grid">{info.items.map(([i,t]) => <article key={t}><span>{i}</span><h3>{t}</h3><p>Phạm vi và tiêu chuẩn được xác nhận theo hồ sơ kỹ thuật của từng dự án.</p></article>)}</div>
-    </section>
-
-    <section className="section surface"><div className="container">
-      <div className="section-title center"><Eyebrow>QUY TRÌNH TIẾP NHẬN</Eyebrow><h2>Điều phối và xử lý nhanh</h2></div>
-      <div className="process-steps">{info.process.map((x,i)=><article key={x}><b>0{i+1}</b><span>{['☎','⌖','⌕','⚙','✓'][i]}</span><h3>{x}</h3><p>{['Ghi nhận đầu vào','Đánh giá thực tế','Phạm vi minh bạch','Theo phương án duyệt','Hồ sơ đầy đủ'][i]}</p></article>)}</div>
-    </div></section>
-
-    <section className="section container">
-      <div className="section-title center"><Eyebrow>GÓI DỊCH VỤ</Eyebrow><h2>Chọn đúng mức hỗ trợ</h2></div>
-      <div className="service-package-grid">{info.packages.map((x,i)=><article key={x}><div className="package-image" style={{backgroundImage:`url(${heroImg})`,backgroundPosition:`${55+i*8}% center`}}/><h3>{x}</h3><ul><li>Khảo sát và xác nhận phạm vi</li><li>Đề xuất phương án trước khi thực hiện</li><li>Hồ sơ kỹ thuật theo công việc</li></ul><button onClick={()=>navigate('/lien-he')}>{variant==='repair'&&i===0?'Gọi ngay '+phoneDisplay:'Nhận tư vấn'}</button></article>)}</div>
+      <div className="section-title center"><Eyebrow>{info.section}</Eyebrow><h2>{info.scopeTitle}</h2></div>
+      <div className="issue-grid">
+        {info.items.map(([icon, title, description]) => <article key={title}><span>{icon}</span><h3>{title}</h3><p>{description}</p></article>)}
+      </div>
     </section>
 
     <section className="section surface"><div className="container two-col evidence-grid">
-      <article className="service-area"><Eyebrow>KHU VỰC & NĂNG LỰC</Eyebrow><h2>{info.evidence}</h2><div className="map-visual"><span>24H</span><i>Biên Hòa</i><i>Long Thành</i><i>Nhơn Trạch</i><i>Trảng Bom</i></div><p>Khu vực và thời gian điều phối được xác nhận theo địa điểm, hiện trạng và năng lực vận hành tại thời điểm tiếp nhận.</p></article>
-      <article><Eyebrow>HỒ SƠ MINH HỌA</Eyebrow><h2>{info.caseTitle}</h2><div className="before-after"><div style={{backgroundImage:`url(${heroImg})`}}><span>HIỆN TRẠNG</span></div><div style={{backgroundImage:`url(${heroImg})`}}><span>GIẢI PHÁP</span></div></div><h3>Nội dung chờ hồ sơ thực tế</h3><p>Case study chính thức chỉ hiển thị sau khi có dữ liệu xác minh và quyền sử dụng hình ảnh.</p></article>
+      <article className="service-area">
+        <Eyebrow>ĐỐI TƯỢNG PHỤC VỤ</Eyebrow>
+        <h2>{info.audienceTitle}</h2>
+        <div className="map-visual"><span>24H</span>{info.audienceLabels.map(label => <i key={label}>{label}</i>)}</div>
+        <p>{info.audienceText}</p>
+      </article>
+      <article>
+        <Eyebrow>{info.valueEyebrow}</Eyebrow>
+        <h2>{info.valueTitle}</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: 12, marginTop: 18 }}>
+          {info.values.map(([title, description]) => <div key={title} style={{ border: '1px solid var(--line)', borderRadius: 10, padding: 16, background: 'var(--surface)' }}><h3 style={{ color: 'var(--navy)', margin: '0 0 8px', fontSize: 16 }}>✓ {title}</h3><p style={{ margin: 0 }}>{description}</p></div>)}
+        </div>
+      </article>
     </div></section>
 
-    <section className="section container three-col-bottom"><FaqBlock title="Câu hỏi về dịch vụ" /><div className="emergency-card"><Eyebrow light>HỖ TRỢ KHẨN CẤP</Eyebrow><h2>{phoneDisplay}</h2><p>Gọi ngay · Có mặt nhanh · Xử lý triệt để</p><a href={phoneHref} className="button primary">☎ Gọi kỹ sư</a></div><QuoteForm compact /></section>
-    <div className="container cta-spacing"><DarkCta navigate={navigate} title="Đừng để sự cố làm gián đoạn sản xuất" text="Gọi trực tiếp để kỹ sư tiếp nhận tình trạng và hướng dẫn bước an toàn đầu tiên." /></div>
+    <section className="section container three-col-bottom">
+      <FaqBlock questions={info.faqs} title="Câu hỏi về dịch vụ" />
+      <div className="emergency-card">
+        <Eyebrow light>{info.contactEyebrow}</Eyebrow>
+        <h2>{phoneDisplay}</h2>
+        <p>{info.contactText}</p>
+        <a href={phoneHref} className="button primary">☎ {info.contactButton}</a>
+      </div>
+      <QuoteForm title={info.formTitle} compact />
+    </section>
+
+    <div className="container cta-spacing">
+      <section className="dark-cta">
+        <div><h2>{info.ctaTitle}</h2><p>{info.ctaText}</p></div>
+        <div><LinkButton href="/lien-he" navigate={navigate}>{info.ctaButton}</LinkButton><a href={phoneHref}>Hoặc gọi <b>{phoneDisplay}</b></a></div>
+      </section>
+    </div>
   </>
 }

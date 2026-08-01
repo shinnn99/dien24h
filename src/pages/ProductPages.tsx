@@ -1,72 +1,252 @@
-import { useState } from 'react'
 import type { Navigate } from '../App'
 import { Breadcrumb, DarkCta, Eyebrow, FaqBlock, LinkButton, QuoteForm } from '../components/Blocks'
-import { CustomSelect } from '../components/CustomSelect'
 import heroImg from '../assets/dien24h-hero.png'
-import { phoneHref, products } from '../data'
+import { phoneHref } from '../data'
 
-const categories = [
-  ['Máy biến áp', 'Xem danh mục', '52% 44%'],
-  ['Dây cáp điện', 'Xem danh mục', '20% 62%'],
-  ['Thiết bị đóng cắt', 'Xem danh mục', '84% 36%'],
-  ['Tủ điện & tủ tụ bù', 'Xem danh mục', '91% 50%'],
-  ['Solar', 'Xem danh mục', '9% 54%'],
-  ['Chống sét', 'Xem danh mục', '72% 28%'],
+type ProductCategory = {
+  title: string
+  summary: string
+  detail: string
+  brands?: string
+  pos: string
+}
+
+const categories: ProductCategory[] = [
+  {
+    title: 'Máy biến áp',
+    summary: 'Các dòng máy biến áp 22 kV',
+    detail: 'Điện 24H cung cấp máy biến áp 22 kV của Thibidi, Shilin EMC và MBT. Liên hệ hotline để nhận thông tin và báo giá.',
+    brands: 'Thibidi · Shilin EMC · MBT',
+    pos: '52% 44%',
+  },
+  {
+    title: 'Dây cáp điện',
+    summary: 'Cáp hạ thế và cáp trung thế',
+    detail: 'Nhiều chủng loại dây và cáp điện phục vụ công trình, với chính sách chiết khấu dành cho công trình.',
+    brands: 'Cadivi · Daphaco · Thịnh Phát · Taya',
+    pos: '20% 62%',
+  },
+  {
+    title: 'Thiết bị đóng cắt',
+    summary: 'MCB, MCCB, ACB, contactor và relay',
+    detail: 'Danh mục thiết bị đóng cắt được tư vấn theo yêu cầu kỹ thuật của từng hệ thống điện.',
+    brands: 'Schneider · LS · Mitsubishi · Panasonic',
+    pos: '84% 36%',
+  },
+  {
+    title: 'Tủ điện & tủ tụ bù',
+    summary: 'Tủ MSB, tủ điều khiển và tủ tụ bù hạ thế',
+    detail: 'Thiết kế và lắp đặt tủ điện; giải pháp tủ tụ bù hỗ trợ bù công suất phản kháng cho hệ thống.',
+    pos: '91% 50%',
+  },
+  {
+    title: 'Solar',
+    summary: 'Thiết bị cho hệ thống điện mặt trời',
+    detail: 'Liên hệ Điện 24H để trao đổi giải pháp và sản phẩm Solar phù hợp với nhu cầu của công trình.',
+    pos: '9% 54%',
+  },
+  {
+    title: 'Thiết bị chống sét',
+    summary: 'Thiết bị cho hệ thống chống sét',
+    detail: 'Liên hệ Điện 24H để trao đổi thiết bị chống sét phù hợp với nhu cầu bảo vệ của công trình.',
+    pos: '72% 28%',
+  },
 ]
 
-const productCategoryOptions = ['Tất cả danh mục', 'Máy biến áp', 'Thiết bị đóng cắt']
-const productBrandOptions = ['Tất cả hãng', 'Schneider', 'THIBIDI']
-const productAvailabilityOptions = ['Tất cả', 'Sẵn hàng', 'Đặt hàng']
+const publishedBrands = [
+  'THIBIDI',
+  'Shilin EMC',
+  'MBT',
+  'CADIVI',
+  'Daphaco',
+  'Thịnh Phát',
+  'Taya',
+  'Schneider',
+  'LS',
+  'Mitsubishi',
+  'Panasonic',
+]
+
+const productQuestions = [
+  ['Điện 24H có những nhóm sản phẩm nào?', 'Danh mục gồm máy biến áp, dây cáp điện, thiết bị đóng cắt, tủ điện và tủ tụ bù, Solar và thiết bị chống sét.'],
+  ['Làm sao để nhận báo giá?', 'Hãy gửi nhu cầu hoặc gọi hotline 0888.979.111 để Điện 24H tư vấn và báo giá.'],
+  ['Cần cung cấp thông tin gì?', 'Bạn nên cho biết nhóm sản phẩm, công suất dự kiến, địa điểm công trình và yêu cầu kỹ thuật đang có.'],
+]
 
 export function ProductsPage({ navigate }: { navigate: Navigate }) {
-  const [query, setQuery] = useState('')
-  const visible = products.filter(p => p.title.toLowerCase().includes(query.toLowerCase()))
   return <>
-    <section className="listing-hero" style={{backgroundImage:`url(${heroImg})`}}><div className="listing-overlay"/><div className="container"><Breadcrumb navigate={navigate} light items={[['Trang chủ','/'],['Sản phẩm']]}/><Eyebrow light>DANH MỤC THIẾT BỊ</Eyebrow><h1>Thiết bị điện công nghiệp<br /><span>chính hãng</span></h1><p>Đầy đủ CO-CQ, hỗ trợ kỹ thuật và tư vấn lựa chọn cấu hình phù hợp.</p><div className="hero-actions"><LinkButton href="/lien-he" navigate={navigate}>Yêu cầu báo giá</LinkButton><LinkButton href={phoneHref} navigate={navigate} className="button secondary">Liên hệ kỹ thuật</LinkButton></div></div></section>
-    <div className="container product-promises">{[['◎','100% chính hãng','Cam kết từ nhà sản xuất'],['▤','Đầy đủ CO-CQ','Chứng từ rõ ràng'],['♙','Hỗ trợ kỹ thuật','Tư vấn đúng cấu hình'],['▣','Giao hàng nhanh','Kho hàng sẵn']].map(([i,t,s])=><div key={t}><span>{i}</span><b>{t}<small>{s}</small></b></div>)}</div>
-    <section className="section container products-main">
-      <div className="filter-bar">
-        <CustomSelect label="Danh mục" options={productCategoryOptions} />
-        <CustomSelect label="Hãng" options={productBrandOptions} />
-        <label className="grow">Công suất / Model<input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Nhập công suất hoặc model"/></label>
-        <CustomSelect label="Tình trạng" options={productAvailabilityOptions} />
-        <button className="button navy">⌕ Tìm kiếm</button>
+    <section className="listing-hero" style={{ backgroundImage: `url(${heroImg})` }}>
+      <div className="listing-overlay" />
+      <div className="container">
+        <Breadcrumb navigate={navigate} light items={[["Trang chủ", '/'], ['Sản phẩm']]} />
+        <Eyebrow light>DANH MỤC THIẾT BỊ</Eyebrow>
+        <h1>Vật tư & thiết bị điện<br /><span>cho công trình</span></h1>
+        <p>Máy biến áp, dây cáp điện, thiết bị đóng cắt, tủ điện, Solar và thiết bị chống sét cho nhu cầu công trình.</p>
+        <div className="hero-actions">
+          <LinkButton href="/lien-he" navigate={navigate}>Yêu cầu báo giá</LinkButton>
+          <LinkButton href={phoneHref} navigate={navigate} className="button secondary">Liên hệ kỹ thuật</LinkButton>
+        </div>
       </div>
-      <div className="category-grid">{categories.map(([t,n,pos])=><article key={t}><div style={{backgroundImage:`url(${heroImg})`,backgroundPosition:pos}}/><span>▣</span><h3>{t}</h3><p>{n}</p><button onClick={()=>setQuery(t==='Máy biến áp'?'máy biến áp':'')}>Xem danh mục →</button></article>)}</div>
-        <div className="section-title row-title product-title"><div><h2>Sản phẩm nổi bật</h2><small>Thông tin cấu hình đang chờ đối chiếu catalog chính thức.</small></div><button className="text-link">Xem tất cả sản phẩm →</button></div>
-      <div className="product-grid four">{visible.map(p=><article className="product-card" key={p.title}><div className="product-visual" style={{backgroundImage:`url(${heroImg})`,backgroundPosition:p.pos}}/><span>{p.category}</span><h3>{p.title}</h3><p>{p.detail}</p><button onClick={()=>navigate(p.href)}>Xem chi tiết</button></article>)}</div>
-      {visible.length===0&&<div className="empty-state">Không tìm thấy sản phẩm phù hợp. Hãy gửi BOM để được tư vấn cấu hình.</div>}
     </section>
-    <section className="section surface"><div className="container"><div className="section-title row-title"><div><Eyebrow>THƯƠNG HIỆU THAM KHẢO</Eyebrow><h2>Cấu hình theo yêu cầu dự án</h2><p>Việc sử dụng logo và quan hệ phân phối chỉ công bố sau khi có xác nhận chính thức.</p></div></div><div className="brand-strip">{['Schneider Electric','ABB','SIEMENS','MITSUBISHI','LS ELECTRIC','HYUNDAI','CADIVI','SMA'].map(x=><b key={x}>{x}</b>)}</div><FaqBlock title="Câu hỏi khi chọn thiết bị"/></div></section>
-    <div className="container cta-spacing"><DarkCta navigate={navigate} title="Gửi danh sách vật tư / BOM" text="Gửi file Excel, PDF hoặc ảnh để nhận cấu hình và báo giá chính xác." /></div>
+
+    <div className="container product-promises">
+      {[
+        ['▣', '6 nhóm sản phẩm', 'Cho hệ thống điện công trình'],
+        ['◎', 'Tư vấn lựa chọn', 'Theo yêu cầu kỹ thuật'],
+        ['⌖', 'Giao tận công trình', 'Hỗ trợ theo từng đơn hàng'],
+        ['◇', 'Bảo hành tại chỗ', 'Trao đổi điều kiện khi báo giá'],
+      ].map(([icon, title, text]) => <div key={title}><span>{icon}</span><b>{title}<small>{text}</small></b></div>)}
+    </div>
+
+    <section className="section container products-main">
+      <div className="section-title row-title product-title">
+        <div>
+          <Eyebrow>DANH MỤC SẢN PHẨM</Eyebrow>
+          <h2>Danh mục sản phẩm</h2>
+          <small>Chọn nhóm phù hợp hoặc gửi yêu cầu để được tư vấn thêm.</small>
+        </div>
+      </div>
+
+      <div className="category-grid">
+        {categories.map(category => <article key={category.title}>
+          <div style={{ backgroundImage: `url(${heroImg})`, backgroundPosition: category.pos }} />
+          <span>▣</span>
+          <h3>{category.title}</h3>
+          <p>{category.summary}</p>
+          <button type="button" onClick={() => navigate('/lien-he')}>Yêu cầu thông tin →</button>
+        </article>)}
+      </div>
+
+      <div className="section-title row-title product-title">
+        <div>
+          <h2>Thông tin theo từng nhóm</h2>
+          <small>Thông tin khái quát về từng nhóm vật tư và thiết bị.</small>
+        </div>
+      </div>
+      <div className="product-grid three">
+        {categories.map(category => <article className="product-card" key={category.title}>
+          <div className="product-visual" style={{ backgroundImage: `url(${heroImg})`, backgroundPosition: category.pos }} />
+          <span>{category.title}</span>
+          <h3>{category.summary}</h3>
+          <p>{category.detail}</p>
+          {category.brands && <p><strong>Thương hiệu trong danh mục:</strong> {category.brands}</p>}
+          <button type="button" onClick={() => navigate('/lien-he')}>Nhận tư vấn</button>
+        </article>)}
+      </div>
+    </section>
+
+    <section className="section surface">
+      <div className="container">
+        <div className="section-title row-title">
+          <div>
+            <Eyebrow>THƯƠNG HIỆU TRONG DANH MỤC</Eyebrow>
+            <h2>Các thương hiệu Điện 24H cung cấp</h2>
+            <p>Liên hệ để xác nhận sản phẩm phù hợp và nhận báo giá theo nhu cầu công trình.</p>
+          </div>
+        </div>
+        <div className="brand-strip">{publishedBrands.map(brand => <b key={brand}>{brand}</b>)}</div>
+        <FaqBlock title="Câu hỏi khi chọn thiết bị" questions={productQuestions} />
+      </div>
+    </section>
+
+    <div className="container cta-spacing">
+      <DarkCta navigate={navigate} title="Gửi nhu cầu vật tư & thiết bị" text="Cho biết nhóm sản phẩm, công suất hoặc yêu cầu kỹ thuật để Điện 24H tư vấn và báo giá phù hợp." />
+    </div>
   </>
 }
 
-const specs = [
-  ['Công suất','1000 kVA','Hiệu suất','≥ 98.2%'],['Điện áp sơ cấp','22 ± 2x2.5% kV','Cấp cách điện','22/0.4 kV'],['Điện áp thứ cấp','0.4 kV','Cấp chịu nhiệt','A'],['Tần số','50 Hz','Cấp bảo vệ','IP20'],['Kiểu đấu dây','Dyn11','Phương pháp làm mát','ONAN'],['Tổn hao không tải','1200 W','Dầu cách điện','Mineral Oil'],['Tổn hao có tải','11800 W','Kích thước','2050 × 1150 × 1850 mm'],['Điện áp ngắn mạch','6%','Khối lượng','~2550 kg'],
+const transformerQuestions = [
+  ['Điện 24H có máy biến áp nào?', 'Danh mục hiện có máy biến áp 22 kV của Thibidi, Shilin EMC và MBT.'],
+  ['Làm sao để nhận báo giá máy biến áp?', 'Gọi hotline 0888.979.111 hoặc gửi yêu cầu để nhận tư vấn và báo giá theo nhu cầu.'],
+  ['Cần chuẩn bị thông tin gì?', 'Bạn nên cho biết công suất dự kiến, địa điểm lắp đặt, yêu cầu kỹ thuật và tiến độ mong muốn.'],
 ]
 
 export function ProductDetailPage({ navigate }: { navigate: Navigate }) {
-  const [tab, setTab] = useState('Mô tả')
-  const [thumb, setThumb] = useState(0)
   return <>
     <section className="section product-detail container">
-      <Breadcrumb navigate={navigate} items={[['Trang chủ','/'],['Sản phẩm','/san-pham'],['Máy biến áp'],['Máy biến áp 1000kVA']]}/>
+      <Breadcrumb navigate={navigate} items={[["Trang chủ", '/'], ['Sản phẩm', '/san-pham'], ['Máy biến áp']]} />
       <div className="product-top">
-        <div className="gallery"><div className="gallery-main" style={{backgroundImage:`url(${heroImg})`,backgroundPosition:['70% 48%','78% 38%','61% 57%','84% 52%'][thumb]}}><span>Ảnh minh họa</span><button className="prev" onClick={()=>setThumb((thumb+3)%4)}>‹</button><button className="next" onClick={()=>setThumb((thumb+1)%4)}>›</button></div><div className="thumbs">{[0,1,2,3].map(i=><button className={thumb===i?'active':''} onClick={()=>setThumb(i)} key={i} style={{backgroundImage:`url(${heroImg})`,backgroundPosition:['70% 48%','78% 38%','61% 57%','84% 52%'][i]}}/>)}</div></div>
-        <div className="product-summary"><span className="verified">✓ Sản phẩm chính hãng</span><h1>Máy biến áp dầu 1000kVA</h1><div className="spec-badges">{[['▣','Công suất','1000 kVA'],['ϟ','Điện áp','22/0.4 kV'],['△','Hãng','THIBIDI'],['◇','Tiêu chuẩn','IEC 60076'],['⌾','Bảo hành','36 tháng']].map(([i,t,v])=><div key={t}><span>{i}</span><small>{t}</small><b>{v}</b></div>)}</div><p>Máy biến áp dầu 1000kVA 22/0.4kV được thiết kế vận hành ổn định, hiệu suất cao và phù hợp cho trạm biến áp khu công nghiệp, tòa nhà, nhà máy.</p><div className="benefit-row">{['Hiệu suất cao','Vận hành ổn định','Tiết kiệm điện','Dễ bảo trì'].map(x=><span key={x}>✓ {x}</span>)}</div><div className="hero-actions"><LinkButton href="/lien-he" navigate={navigate}>Yêu cầu báo giá</LinkButton><LinkButton href={phoneHref} navigate={navigate} className="button outline">☎ Gọi tư vấn</LinkButton></div></div>
+        <div className="gallery">
+          <div className="gallery-main" style={{ backgroundImage: `url(${heroImg})`, backgroundPosition: '70% 48%' }}>
+            <span>Hình minh họa nhóm sản phẩm</span>
+          </div>
+        </div>
+        <div className="product-summary">
+          <span className="verified">Danh mục máy biến áp</span>
+          <h1>Máy biến áp 22 kV</h1>
+          <div className="spec-badges verified-spec-badges">
+            {[
+              ['▣', 'Nhóm sản phẩm', 'Máy biến áp'],
+              ['ϟ', 'Cấp điện áp', '22 kV'],
+              ['◇', 'Thương hiệu', 'Thibidi'],
+              ['◇', 'Thương hiệu khác', 'Shilin EMC · MBT'],
+            ].map(([icon, title, value]) => <div key={title}><span>{icon}</span><small>{title}</small><b>{value}</b></div>)}
+          </div>
+          <p>Điện 24H cung cấp máy biến áp 22 kV của Thibidi, Shilin EMC và MBT. Gọi hotline hoặc gửi nhu cầu để nhận tư vấn và báo giá.</p>
+          <div className="benefit-row verified-benefits">
+            {['Tư vấn theo nhu cầu', 'Báo giá qua hotline', 'Ba thương hiệu lựa chọn'].map(item => <span key={item}>✓ {item}</span>)}
+          </div>
+          <div className="hero-actions">
+            <LinkButton href="/lien-he" navigate={navigate}>Yêu cầu báo giá</LinkButton>
+            <LinkButton href={phoneHref} navigate={navigate} className="button outline">☎ Gọi tư vấn</LinkButton>
+          </div>
+        </div>
       </div>
+
       <div className="product-content-grid">
         <div>
-          <div className="tabs">{['Mô tả','Ứng dụng','Thông số kỹ thuật','Hồ sơ / CO-CQ'].map(x=><button className={tab===x?'active':''} onClick={()=>setTab(x)} key={x}>{x}</button>)}</div>
-          <article className="tab-content"><p>{tab==='Mô tả'?'Máy biến áp sử dụng dầu cách điện và làm mát tự nhiên, cuộn dây bằng đồng hoặc nhôm chất lượng cao. Sản phẩm được sản xuất và thử nghiệm theo tiêu chuẩn IEC 60076.':tab==='Ứng dụng'?'Phù hợp trạm phân phối cho nhà máy, khu công nghiệp, kho vận, trung tâm thương mại và công trình có phụ tải liên tục.':tab==='Hồ sơ / CO-CQ'?'Hồ sơ có thể bao gồm catalogue, bản vẽ kích thước, CO, CQ, biên bản thí nghiệm xuất xưởng và hướng dẫn vận hành.':'Bảng dữ liệu dưới đây là cấu hình tham khảo; thông số cuối cùng xác nhận theo báo giá kỹ thuật.'}</p><h2>Thông số kỹ thuật</h2><div className="spec-table">{specs.map((r,i)=><div key={i}>{r.map((c,j)=><span className={j%2===0?'label':''} key={j}>{c}</span>)}</div>)}</div></article>
-          <section className="related-products"><div className="section-title row-title"><h2>Sản phẩm liên quan</h2><button className="text-link" onClick={()=>navigate('/san-pham')}>Xem tất cả →</button></div><div className="product-grid three">{products.slice(1,4).map(p=><article className="product-card" key={p.title}><div className="product-visual" style={{backgroundImage:`url(${heroImg})`,backgroundPosition:p.pos}}/><h3>{p.title}</h3><p>{p.detail}</p><button onClick={()=>navigate(p.href)}>Xem chi tiết</button></article>)}</div></section>
+          <article className="tab-content product-info-card">
+            <Eyebrow>MÁY BIẾN ÁP 22 KV</Eyebrow>
+            <h2>Thương hiệu trong danh mục</h2>
+            <p>Điện 24H cung cấp máy biến áp 22 kV của Thibidi, Shilin EMC và MBT cho nhu cầu công trình.</p>
+            <h2>Thông tin nên chuẩn bị khi liên hệ</h2>
+            <p>Cho biết công suất dự kiến, địa điểm lắp đặt, yêu cầu kỹ thuật và tiến độ mong muốn để việc trao đổi được nhanh chóng hơn.</p>
+            <div className="spec-table">
+              {[
+                ['Bạn nên cung cấp', 'Công suất dự kiến', 'Bạn nên cung cấp', 'Địa điểm công trình'],
+                ['Bạn nên cung cấp', 'Yêu cầu kỹ thuật', 'Bạn nên cung cấp', 'Tiến độ mong muốn'],
+                ['Thương hiệu', 'Thibidi · Shilin EMC · MBT', 'Cấp điện áp', '22 kV'],
+                ['Giá bán', 'Liên hệ hotline', 'Hotline', '0888.979.111'],
+              ].map((row, index) => <div key={index}>{row.map((cell, cellIndex) => <span className={cellIndex % 2 === 0 ? 'label' : ''} key={cellIndex}>{cell}</span>)}</div>)}
+            </div>
+          </article>
+
+          <section className="related-products">
+            <div className="section-title row-title">
+              <h2>Danh mục liên quan</h2>
+              <button className="text-link" type="button" onClick={() => navigate('/san-pham')}>Xem tất cả →</button>
+            </div>
+            <div className="product-grid three">
+              {categories.slice(1, 4).map(category => <article className="product-card" key={category.title}>
+                <div className="product-visual" style={{ backgroundImage: `url(${heroImg})`, backgroundPosition: category.pos }} />
+                <h3>{category.title}</h3>
+                <p>{category.summary}</p>
+                <button type="button" onClick={() => navigate('/lien-he')}>Nhận tư vấn</button>
+              </article>)}
+            </div>
+          </section>
         </div>
-        <aside><QuoteForm title="Yêu cầu báo giá nhanh" compact/><div className="aside-benefits">{['Phản hồi trong giờ trực','Tư vấn kỹ thuật miễn phí','Báo giá theo cấu hình','Hỗ trợ sau bán hàng'].map(x=><span key={x}>✓ {x}</span>)}</div></aside>
+
+        <aside>
+          <QuoteForm title="Yêu cầu báo giá máy biến áp" compact />
+          <div className="aside-benefits">
+            {['Tiếp nhận nhu cầu kỹ thuật', 'Tư vấn theo công trình', 'Báo giá qua hotline', 'Trao đổi thông tin sản phẩm'].map(item => <span key={item}>✓ {item}</span>)}
+          </div>
+        </aside>
       </div>
-      <section className="selection-advice"><h2>Tư vấn lựa chọn máy biến áp</h2>{[['♙','Đúng nhu cầu'],['☀','Hiệu suất cao'],['◇','Vận hành ổn định'],['⚙','Hỗ trợ kỹ thuật']].map(([i,t])=><div key={t}><span>{i}</span><b>{t}</b></div>)}<LinkButton navigate={navigate} href="/lien-he" className="button outline">Gọi tư vấn miễn phí</LinkButton></section>
-      <section className="documents"><h2>Tài liệu & chứng chỉ</h2><div>{['Catalogue máy biến áp dầu','Bản vẽ kích thước 1000kVA','CO – Certificate of Origin','CQ – Certificate of Quality'].map(x=><article key={x}><span>PDF</span><b>{x}</b><button>Tải xuống</button></article>)}</div></section>
-      <FaqBlock title="Câu hỏi về máy biến áp 1000kVA"/>
+
+      <section className="selection-advice">
+        <h2>Thông tin nên chuẩn bị khi yêu cầu báo giá</h2>
+        {[
+          ['ϟ', 'Công suất dự kiến'],
+          ['⌖', 'Địa điểm lắp đặt'],
+          ['▣', 'Yêu cầu kỹ thuật'],
+          ['◷', 'Tiến độ mong muốn'],
+        ].map(([icon, title]) => <div key={title}><span>{icon}</span><b>{title}</b></div>)}
+        <LinkButton navigate={navigate} href="/lien-he" className="button outline">Gửi yêu cầu tư vấn</LinkButton>
+      </section>
+
+      <FaqBlock title="Câu hỏi về máy biến áp" questions={transformerQuestions} />
     </section>
   </>
 }

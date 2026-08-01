@@ -1,49 +1,138 @@
-import { useState } from 'react'
 import type { Navigate } from '../App'
 import { Breadcrumb, CapabilityStrip, DarkCta, Eyebrow, LinkButton } from '../components/Blocks'
-import { CustomSelect } from '../components/CustomSelect'
 import heroImg from '../assets/dien24h-hero.png'
-import { phoneHref, projects } from '../data'
 
-const projectIndustryOptions = ['Tất cả ngành nghề', 'Nhà máy', 'Kho vận']
-const projectScopeOptions = ['Tất cả', 'TRẠM BIẾN ÁP', 'ĐIỆN MẶT TRỜI', 'HỆ THỐNG ĐIỆN']
-const projectPowerOptions = ['Chọn công suất', 'Dưới 1000kVA', 'Trên 1000kVA']
-const projectLocationOptions = ['Đồng Nai', 'Biên Hòa', 'Long Thành']
+type WorkGroup = {
+  tag: string
+  title: string
+  description: string
+  href: string
+  pos: string
+}
+
+const publishedWorkGroups: WorkGroup[] = [
+  {
+    tag: 'ĐƯỜNG DÂY & TRẠM BIẾN ÁP',
+    title: 'Xây lắp và bảo trì trạm biến áp',
+    description: 'Tư vấn thiết kế, thi công đường dây trung thế, lắp đặt, bảo trì và thí nghiệm trạm biến áp.',
+    href: '/dich-vu/tram-bien-ap',
+    pos: '70% 40%',
+  },
+  {
+    tag: 'SỬA CHỮA ĐIỆN 24H',
+    title: 'Xử lý sự cố điện ngày và đêm',
+    description: 'Tiếp nhận sự cố chập cháy, mất pha, cân pha, đảo pha cho nhà xưởng và điện dân dụng.',
+    href: '/dich-vu/sua-chua-dien-24h',
+    pos: '86% 48%',
+  },
+  {
+    tag: 'THIẾT BỊ ĐIỆN 24H',
+    title: 'Cung cấp và lắp đặt thiết bị điện',
+    description: 'Thiết bị chiếu sáng, thiết bị đóng cắt và tủ điện điều khiển; giao hàng và bảo hành tại công trình.',
+    href: '/san-pham',
+    pos: '91% 55%',
+  },
+  {
+    tag: 'SOLAR 24H',
+    title: 'Giải pháp điện mặt trời cho doanh nghiệp',
+    description: 'Tư vấn và thi công hệ thống điện mặt trời hòa lưới, bám tải và giải pháp có lưu trữ.',
+    href: '/dich-vu/solar',
+    pos: '14% 58%',
+  },
+  {
+    tag: 'CHỐNG SÉT 24H',
+    title: 'Chống sét và hệ thống tiếp địa',
+    description: 'Thi công chống sét trực tiếp, chống sét lan truyền, tiếp địa và đo kiểm điện trở đất.',
+    href: '/dich-vu/chong-set',
+    pos: '72% 28%',
+  },
+  {
+    tag: 'MÁY PHÁT ĐIỆN 24H',
+    title: 'Nguồn điện dự phòng cho công trình',
+    description: 'Cho thuê máy phát điện công nghiệp ngắn hoặc dài hạn, cung cấp máy mới hoặc đã qua sử dụng và bảo trì định kỳ.',
+    href: '/dich-vu/may-phat-dien',
+    pos: '80% 58%',
+  },
+]
 
 export function ProjectsPage({ navigate }: { navigate: Navigate }) {
-  const [filter, setFilter] = useState('Tất cả')
-  const filtered = filter === 'Tất cả' ? projects : projects.filter(p => p.tag.includes(filter))
   return <>
-    <section className="projects-head"><div className="projects-head-bg" style={{backgroundImage:`url(${heroImg})`}}/><div className="container"><Breadcrumb navigate={navigate} items={[['Trang chủ','/'],['Dự án']]}/><Eyebrow>DỰ ÁN ĐIỆN CÔNG NGHIỆP</Eyebrow><h1>Dự án tiêu biểu</h1><p>Các nhóm công trình Điện 24H có năng lực triển khai; hồ sơ dự án chi tiết được cập nhật khi được khách hàng cho phép công bố.</p></div></section>
-    <section className="container project-filter">
-      <CustomSelect label="Ngành nghề" options={projectIndustryOptions} />
-      <CustomSelect label="Hạng mục" value={filter} onChange={setFilter} options={projectScopeOptions} />
-      <CustomSelect label="Công suất" options={projectPowerOptions} />
-      <CustomSelect label="Khu vực" options={projectLocationOptions} />
-      <button className="button navy">⌕ Lọc dự án</button>
+    <section className="projects-head">
+      <div className="projects-head-bg" style={{ backgroundImage: `url(${heroImg})` }} />
+      <div className="container">
+        <Breadcrumb navigate={navigate} items={[["Trang chủ", '/'], ['Hồ sơ công trình']]} />
+        <Eyebrow>HỒ SƠ CÔNG TRÌNH</Eyebrow>
+        <h1>Hồ sơ công trình đang cập nhật</h1>
+        <p>Điện 24H chưa công bố tên khách hàng, địa điểm, quy mô hoặc hình ảnh của dự án cụ thể. Nội dung sẽ được cập nhật khi có hồ sơ xác minh và quyền sử dụng.</p>
+      </div>
     </section>
+
     <section className="section container projects-page">
-      <article className="featured-project"><div style={{backgroundImage:`url(${heroImg})`}}/><div><span>DỰ ÁN MẪU MINH HỌA</span><h2>Thi công trạm biến áp cho nhà máy tại Đồng Nai</h2><div className="project-meta"><b>⌖ Khu vực: Đồng Nai</b><b>▣ Hạng mục: Trạm biến áp</b><b>⚡ Công suất: Theo hồ sơ</b></div><p>Nội dung chi tiết sẽ sử dụng hồ sơ công trình và ảnh thực tế sau khi doanh nghiệp xác nhận quyền công bố.</p><LinkButton navigate={navigate} href="/du-an/tram-bien-ap-1000kva-bien-hoa" className="button outline">Xem cấu trúc chi tiết →</LinkButton></div></article>
-      <CapabilityStrip items={[['10+','Năm kinh nghiệm','Theo nội dung công khai'],['22kV','Năng lực trung thế','Đường dây & trạm biến áp'],['24/7','Tiếp nhận sự cố','Theo thông tin dịch vụ'],['DOBICO','Năng lực pháp nhân','Hệ sinh thái xây lắp']]}/>
-      <div className="project-grid listing">{filtered.map(p=><article className="project-card" key={p.title}><div className="project-image" style={{backgroundImage:`url(${heroImg})`,backgroundPosition:p.pos}}><span>{p.tag}</span><i>ẢNH MINH HỌA</i></div><div className="project-body"><h3>{p.title}</h3><p>⌖ {p.location}</p><b>⚡ {p.power}</b><button onClick={()=>navigate(p.href)}>Xem chi tiết →</button></div></article>)}</div>
-      <div className="pagination"><button>‹</button><button className="active">1</button><button>2</button><button>3</button><button>›</button></div>
-      <DarkCta navigate={navigate} />
+      <article className="featured-project">
+        <div style={{ backgroundImage: `url(${heroImg})` }} />
+        <div>
+          <span>NGUYÊN TẮC CÔNG BỐ</span>
+          <h2>Chỉ đăng hồ sơ công trình có thông tin được xác nhận</h2>
+          <div className="project-meta">
+            <b>Hình ảnh có quyền sử dụng</b>
+            <b>Phạm vi công việc rõ ràng</b>
+            <b>Kết quả có căn cứ</b>
+          </div>
+          <p>Trong thời gian chờ dữ liệu thực tế, trang này chỉ trình bày các nhóm công việc Điện 24H đang giới thiệu trên website, không gán tên khách hàng, công suất hoặc địa điểm cho dự án mẫu.</p>
+          <LinkButton navigate={navigate} href="/lien-he" className="button outline">Trao đổi nhu cầu công trình →</LinkButton>
+        </div>
+      </article>
+
+      <CapabilityStrip items={[
+        ['10+', 'Năm kinh nghiệm', 'Theo nội dung đang công bố'],
+        ['24/7', 'Tiếp nhận sự cố', 'Phục vụ ngày và đêm'],
+        ['6', 'Nhóm dịch vụ', 'Hệ sinh thái điện trọn gói'],
+        ['Đồng Nai', 'Khu vực được nhắc đến', 'Biên Hòa và khu công nghiệp'],
+      ]} />
+
+      <div className="section-title row-title">
+        <div>
+          <Eyebrow>PHẠM VI ĐANG GIỚI THIỆU</Eyebrow>
+          <h2>Các nhóm công việc có thể trao đổi</h2>
+          <p>Đây là phạm vi dịch vụ được công bố, không phải danh sách dự án đã nghiệm thu.</p>
+        </div>
+      </div>
+
+      <div className="project-grid listing">
+        {publishedWorkGroups.map(group => <article className="project-card" key={group.title}>
+          <div className="project-image" style={{ backgroundImage: `url(${heroImg})`, backgroundPosition: group.pos }}>
+            <span>{group.tag}</span>
+            <i>HÌNH MINH HỌA</i>
+          </div>
+          <div className="project-body">
+            <h3>{group.title}</h3>
+            <p>{group.description}</p>
+            <button type="button" onClick={() => navigate(group.href)}>Xem phạm vi dịch vụ →</button>
+          </div>
+        </article>)}
+      </div>
+
+      <section className="project-story">
+        <div className="overview">
+          <div>
+            <Eyebrow>HỒ SƠ SẼ ĐƯỢC BỔ SUNG</Eyebrow>
+            <h2>Mỗi công trình cần có dữ liệu kiểm chứng</h2>
+            <p>Khi được phép công bố, mỗi hồ sơ sẽ nêu rõ hạng mục, địa điểm, quy mô, thời gian triển khai, hình ảnh thực tế và kết quả đạt được.</p>
+          </div>
+          <ul>
+            <li>✓ Tên hoặc nhóm khách hàng được phép công bố</li>
+            <li>✓ Phạm vi thi công và thiết bị sử dụng</li>
+            <li>✓ Hình ảnh thực tế có nguồn rõ ràng</li>
+            <li>✓ Kết quả nghiệm thu hoặc bàn giao có căn cứ</li>
+          </ul>
+        </div>
+      </section>
+
+      <DarkCta navigate={navigate} title="Bạn đang có công trình cần tư vấn?" text="Chia sẻ nhu cầu, địa điểm và thông tin hiện có để Điện 24H trao đổi phạm vi phù hợp." />
     </section>
   </>
 }
 
 export function ProjectDetailPage({ navigate }: { navigate: Navigate }) {
-  return <>
-    <section className="project-detail-hero" style={{backgroundImage:`url(${heroImg})`}}><div className="project-detail-overlay"/><div className="container"><Breadcrumb navigate={navigate} items={[['Trang chủ','/'],['Dự án','/du-an'],['Chi tiết dự án']]}/><span className="tag">CẤU TRÚC CASE STUDY</span><h1>Thi công trạm biến áp<br />cho nhà máy tại Biên Hòa</h1><p>Trang mẫu thể hiện cách trình bày hồ sơ dự án: bài toán, giải pháp, phạm vi và kết quả. Dữ liệu chính thức sẽ được thay bằng hồ sơ đã xác minh.</p><div className="hero-actions"><LinkButton href="/lien-he" navigate={navigate}>Yêu cầu báo giá tương tự</LinkButton><LinkButton href={phoneHref} navigate={navigate} className="button secondary">Gọi kỹ sư</LinkButton></div></div></section>
-    <div className="container project-facts">{[['Khách hàng','Chờ quyền công bố'],['Địa điểm','Biên Hòa, Đồng Nai'],['Hạng mục','Trạm biến áp & hệ thống điện'],['Công suất','Theo hồ sơ kỹ thuật'],['Thời gian','Chờ xác minh']].map(([t,v])=><div key={t}><small>{t}</small><b>{v}</b></div>)}</div>
-    <section className="section container project-story">
-      <div className="overview"><div><Eyebrow>TỔNG QUAN DỰ ÁN</Eyebrow><h2>Một hồ sơ dự án cần nói rõ điều gì?</h2><p>Mỗi case study chính thức sẽ mô tả bối cảnh phụ tải, phạm vi công việc, thiết bị, tiêu chuẩn, thời gian và kết quả nghiệm thu — không chỉ là một bộ ảnh đẹp.</p></div><ul><li>✓ Phạm vi và mục tiêu kỹ thuật rõ ràng</li><li>✓ Tiêu chuẩn áp dụng được dẫn chiếu</li><li>✓ Thiết bị và cấu hình theo hồ sơ</li><li>✓ Kết quả nghiệm thu có căn cứ</li></ul></div>
-      <div className="challenge-solution"><article><Eyebrow>BÀI TOÁN KHÁCH HÀNG</Eyebrow><h2>Nhu cầu vận hành</h2><ul><li>Phụ tải sản xuất tăng và cần nguồn điện ổn định.</li><li>Yêu cầu an toàn, tiến độ và khả năng bảo trì.</li><li>Hạn chế tối đa gián đoạn trong quá trình triển khai.</li><li>Hồ sơ hoàn công và hướng dẫn vận hành đầy đủ.</li></ul></article><article><Eyebrow>GIẢI PHÁP TRIỂN KHAI</Eyebrow><div className="solution-steps">{['Khảo sát & thiết kế','Cung cấp thiết bị','Thi công lắp đặt','Thí nghiệm & bàn giao'].map((x,i)=><div key={x}><b>0{i+1}</b><h3>{x}</h3><p>{['Ghi nhận hiện trạng','Theo cấu hình duyệt','An toàn và kiểm soát','Nghiệm thu hồ sơ'][i]}</p></div>)}</div></article></div>
-      <div className="section-title row-title"><div><Eyebrow>HÌNH ẢNH THI CÔNG</Eyebrow><h2>Trước · Trong · Sau</h2></div><small>Ảnh hiện tại chỉ là minh họa bố cục</small></div>
-      <div className="project-gallery">{[42,57,68,76,88,33].map((x,i)=><div key={i} style={{backgroundImage:`url(${heroImg})`,backgroundPosition:`${x}% ${40+i*5}%`}}><span>Ảnh {i+1}</span></div>)}</div>
-      <div className="results-grid"><article><Eyebrow>KẾT QUẢ ĐẠT ĐƯỢC</Eyebrow><div>{[['✓','Nghiệm thu','Theo hồ sơ'],['⌁','Vận hành','Theo kết quả đo'],['◇','An toàn','Theo biên bản'],['◷','Tiến độ','Theo hợp đồng']].map(([i,t,s])=><span key={t}><b>{i}</b><strong>{t}</strong><small>{s}</small></span>)}</div></article><article><Eyebrow>THIẾT BỊ SỬ DỤNG</Eyebrow><ul><li>Máy biến áp — theo cấu hình được duyệt</li><li>Tủ trung thế — theo hồ sơ kỹ thuật</li><li>Tủ hạ thế — theo sơ đồ nguyên lý</li><li>Cáp, tiếp địa và phụ kiện đồng bộ</li></ul></article><article className="quote-proof"><b>“</b><p>Testimonial chỉ hiển thị sau khi có nội dung thật và quyền sử dụng từ khách hàng.</p><span>Đại diện khách hàng</span></article></div>
-      <section className="related-projects"><div className="section-title row-title"><h2>Dự án liên quan</h2><button onClick={()=>navigate('/du-an')} className="text-link">Xem tất cả →</button></div><div className="project-grid three">{projects.slice(1,4).map(p=><article className="project-card" key={p.title}><div className="project-image" style={{backgroundImage:`url(${heroImg})`,backgroundPosition:p.pos}}/><div className="project-body"><h3>{p.title}</h3><p>{p.location}</p><button onClick={()=>navigate(p.href)}>Xem chi tiết →</button></div></article>)}</div></section>
-      <DarkCta navigate={navigate} title="Bạn cần triển khai trạm biến áp tương tự?" text="Gửi công suất dự kiến, địa điểm và bản vẽ nếu có để kỹ sư tư vấn phạm vi phù hợp."/>
-    </section>
-  </>
+  return <ProjectsPage navigate={navigate} />
 }

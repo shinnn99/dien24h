@@ -1,0 +1,22 @@
+{
+  "redirects": [
+    { "source": "/dich-vu/bao-tri-thi-nghiem-dien", "destination": "/dich-vu/tram-bien-ap", "permanent": true },
+    { "source": "/san-pham/may-bien-ap-dau-1000kva", "destination": "/san-pham/may-bien-ap", "permanent": true },
+    { "source": "/du-an", "destination": "/lien-he", "permanent": true },
+    { "source": "/du-an/tram-bien-ap-1000kva-bien-hoa", "destination": "/lien-he", "permanent": true },
+    { "source": "/ho-so-nang-luc", "destination": "/gioi-thieu", "permanent": true },
+    { "source": "/yeu-cau-bao-gia", "destination": "/lien-he", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/dich-vu/sua-chua-dien-24h", "destination": "/index.html" },
+    { "source": "/dich-vu/tram-bien-ap", "destination": "/index.html" },
+    { "source": "/dich-vu/dien-cong-nghiep", "destination": "/index.html" },
+    { "source": "/dich-vu/solar", "destination": "/index.html" },
+    { "source": "/dich-vu/chong-set", "destination": "/index.html" },
+    { "source": "/dich-vu/may-phat-dien", "destination": "/index.html" },
+    { "source": "/san-pham", "destination": "/index.html" },
+    { "source": "/san-pham/may-bien-ap", "destination": "/index.html" },
+    { "source": "/gioi-thieu", "destination": "/index.html" },
+    { "source": "/lien-he", "destination": "/index.html" }
+  ]
+}

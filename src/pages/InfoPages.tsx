@@ -1,58 +1,127 @@
 import type { Navigate } from '../App'
 import { Breadcrumb, CapabilityStrip, DarkCta, Eyebrow, FaqBlock, LinkButton, QuoteForm } from '../components/Blocks'
 import heroImg from '../assets/dien24h-hero.png'
-import { email, phoneDisplay, phoneHref, services } from '../data'
-
-export function ArticlePage({ navigate, index = false }: { navigate: Navigate; index?: boolean }) {
-  if (index) return <KnowledgeIndex navigate={navigate} />
-  return <>
-    <section className="article-head container"><Breadcrumb navigate={navigate} items={[['Trang chủ','/'],['Kiến thức','/kien-thuc'],['Chi phí lắp trạm biến áp']]}/><span className="tag">KIẾN THỨC KỸ THUẬT</span><small>Cập nhật: 20/05/2024</small><h1>Chi phí lắp trạm biến áp gồm những gì?</h1><p>Tổng hợp các nhóm chi phí từ thiết bị, vật tư, xây dựng đến thí nghiệm để doanh nghiệp chuẩn bị ngân sách và hồ sơ báo giá.</p><div className="author-line"><span>KỸ SƯ</span><div><b>Ban kỹ thuật Điện 24H</b><small>Nội dung cần được chuyên gia doanh nghiệp duyệt trước khi công bố</small></div></div></section>
-    <section className="container article-layout">
-      <aside className="article-sidebar"><div className="toc"><b>MỤC LỤC</b>{['Tổng quan về chi phí','Các khoản chi phí chính','Chi phí theo công suất','Yếu tố ảnh hưởng','Quy trình và thời gian','Câu hỏi thường gặp'].map((x,i)=><a key={x} href={`#muc-${i+1}`}>{i+1}. {x}</a>)}</div><div className="consult-card"><Eyebrow light>TƯ VẤN KỸ THUẬT</Eyebrow><h3>Đội ngũ sẵn sàng hỗ trợ</h3><p>Khảo sát nhu cầu và bóc tách phạm vi trước khi báo giá.</p><a className="button primary" href={phoneHref}>☎ {phoneDisplay}</a></div><div className="related-docs"><b>TÀI LIỆU LIÊN QUAN</b><span>PDF · Checklist khảo sát</span><span>PDF · Hồ sơ nghiệm thu mẫu</span><span>PDF · Danh mục tài liệu kỹ thuật</span></div></aside>
-      <article className="article-content"><div className="article-cover" style={{backgroundImage:`url(${heroImg})`}}><span>ẢNH MINH HỌA</span></div><div className="article-note">ⓘ Chi phí phụ thuộc công suất, chủng loại thiết bị, vị trí lắp đặt và yêu cầu đấu nối. Cần khảo sát để lập báo giá chính xác.</div>
-        <h2 id="muc-1">1. Tổng quan về chi phí lắp trạm biến áp</h2><p>Chi phí không chỉ gồm máy biến áp. Một dự toán đầy đủ thường bao gồm thiết bị chính, vật tư phụ, xây dựng, nhân công, thí nghiệm và hồ sơ nghiệm thu.</p>
-        <h2 id="muc-2">2. Các khoản chi phí chính</h2><div className="cost-groups">{[['▥','Thiết bị chính'],['⌁','Vật tư phụ'],['△','Xây dựng'],['♙','Nhân công'],['⚙','Thí nghiệm']].map(([i,t])=><div key={t}><span>{i}</span><b>{t}</b></div>)}</div>
-        <h3>2.1. Chi phí thiết bị</h3><ul><li>Máy biến áp theo công suất và cấu hình kỹ thuật.</li><li>Tủ điện trung thế, hạ thế, dao cách ly và bảo vệ.</li><li>Thiết bị đo đếm và hệ thống điều khiển.</li></ul>
-        <div className="article-image-right" style={{backgroundImage:`url(${heroImg})`}}/>
-        <h3>2.2. Chi phí xây dựng</h3><ul><li>Móng trạm, nhà trạm hoặc kết cấu đỡ.</li><li>Hệ thống tiếp địa, thoát nước và hàng rào.</li><li>Hạ tầng kéo cáp và đấu nối.</li></ul>
-        <div className="article-image-right second" style={{backgroundImage:`url(${heroImg})`}}/>
-        <h3>2.3. Chi phí nhân công & thí nghiệm</h3><ul><li>Lắp đặt, đấu nối và kiểm tra thiết bị.</li><li>Thí nghiệm, hiệu chỉnh và nghiệm thu.</li><li>Hồ sơ hoàn công và hướng dẫn vận hành.</li></ul>
-        <div className="article-inline-cta"><div><b>Bạn cần dự toán chi tiết cho dự án?</b><span>Gửi công suất, địa điểm và bản vẽ hiện có.</span></div><LinkButton navigate={navigate} href="/lien-he">Yêu cầu báo giá →</LinkButton></div>
-        <h2 id="muc-3">3. Chi phí theo công suất</h2><p>Không nên dùng một đơn giá chung cho mọi công suất. Cấu hình bảo vệ, phương án xây dựng, chiều dài tuyến cáp và yêu cầu đấu nối có thể làm thay đổi đáng kể tổng chi phí.</p>
-        <h2 id="muc-4">4. Yếu tố ảnh hưởng đến chi phí</h2><p>Công suất, loại máy biến áp, mặt bằng, khoảng cách đấu nối, tiêu chuẩn của chủ đầu tư và tiến độ là các yếu tố cần xác nhận trong bước khảo sát.</p>
-        <section className="related-articles"><h2>Bài viết liên quan</h2><div>{['Trạm biến áp là gì? Cấu tạo và nguyên lý','Quy trình lắp đặt trạm biến áp chuẩn kỹ thuật','Kinh nghiệm nghiệm thu trạm biến áp','Hướng dẫn bảo trì trạm biến áp định kỳ'].map(x=><button key={x} onClick={()=>navigate('/kien-thuc/chi-phi-lap-tram-bien-ap')}><span style={{backgroundImage:`url(${heroImg})`}}/><b>{x}</b><small>Kiến thức kỹ thuật</small></button>)}</div></section>
-        <div className="author-card"><span>KỸ SƯ</span><div><b>Ban kỹ thuật Điện 24H</b><p>Nội dung chuyên môn cần được rà soát bởi người phụ trách kỹ thuật trước khi xuất bản chính thức.</p></div></div>
-      </article>
-    </section>
-    <div className="container cta-spacing"><DarkCta navigate={navigate} title="Cần khảo sát và báo giá?" text="Liên hệ Điện 24H để trao đổi nhu cầu kỹ thuật và phạm vi dự án." /></div>
-  </>
-}
-
-function KnowledgeIndex({ navigate }: { navigate: Navigate }) {
-  const articles = ['Chi phí lắp trạm biến áp gồm những gì?','Nhà xưởng nên dùng máy biến áp bao nhiêu kVA?','MCCB tổng nhảy liên tục do đâu?','ACB và MCCB khác nhau như thế nào?','Bao lâu phải bảo trì trạm biến áp?','Chọn tiết diện cáp cho nhà xưởng']
-  return <><section className="projects-head"><div className="projects-head-bg" style={{backgroundImage:`url(${heroImg})`}}/><div className="container"><Breadcrumb navigate={navigate} items={[['Trang chủ','/'],['Kiến thức']]}/><Eyebrow>THƯ VIỆN KỸ THUẬT</Eyebrow><h1>Kiến thức điện công nghiệp</h1><p>Nội dung thực tiễn dành cho người phụ trách kỹ thuật, mua hàng và vận hành nhà máy.</p></div></section><section className="section container"><div className="article-card-grid">{articles.map((x,i)=><article key={x}><div style={{backgroundImage:`url(${heroImg})`,backgroundPosition:`${45+i*8}% center`}}/><span>{i%2?'HƯỚNG DẪN':'KỸ THUẬT'}</span><h2>{x}</h2><p>Góc nhìn thực tế để chuẩn bị yêu cầu, đánh giá giải pháp và làm việc với nhà thầu.</p><button onClick={()=>navigate('/kien-thuc/chi-phi-lap-tram-bien-ap')}>Đọc bài viết →</button></article>)}</div></section></>
-}
+import { address, email, phoneDisplay, phoneHref, services, zaloHref } from '../data'
 
 export function AboutPage({ navigate }: { navigate: Navigate }) {
+  const customerGroups = [
+    ['KCN', 'Khu công nghiệp', 'Đường dây và trạm biến áp'],
+    ['NM', 'Nhà máy, nhà xưởng', 'Điện sản xuất và nguồn dự phòng'],
+    ['DN', 'Doanh nghiệp', 'Thiết bị điện và Solar'],
+    ['24H', 'Hộ kinh doanh, nhà ở', 'Sửa chữa điện và chống sét'],
+  ]
+
   return <>
-    <section className="about-hero" style={{backgroundImage:`url(${heroImg})`}}><div className="about-overlay"/><div className="container"><Breadcrumb navigate={navigate} light items={[['Trang chủ','/'],['Về chúng tôi']]}/><h1>Về Điện <span>24H</span></h1><h3>Chuyên nghiệp · Nhanh chóng · An toàn · Hiệu quả</h3><p>Thương hiệu dịch vụ điện công nghiệp trong hệ sinh thái Công ty Cổ phần Xây lắp DOBICO.</p><div className="hero-actions"><LinkButton href={phoneHref} navigate={navigate}>☎ Gọi ngay {phoneDisplay}</LinkButton><LinkButton href="/ho-so-nang-luc" navigate={navigate} className="button secondary">Hồ sơ năng lực →</LinkButton></div></div></section>
-    <CapabilityStrip items={[['10+','Năm kinh nghiệm','Theo thông tin công khai'],['24/7','Hỗ trợ kỹ thuật','Theo dịch vụ công bố'],['22kV','Năng lực trung thế','Đường dây & trạm biến áp'],['DOBICO','Hệ sinh thái','Năng lực xây lắp']]}/>
-    <section className="section container about-overview"><div><Eyebrow>TỔNG QUAN</Eyebrow><h2>Hiểu hệ thống.<br />Hiểu áp lực vận hành.</h2><p>Điện 24H tập trung vào khách hàng doanh nghiệp, nhà máy và công trình có yêu cầu cao về an toàn, tiến độ và tính liên tục.</p><ul><li>✓ Đội ngũ kỹ sư và kỹ thuật viên theo năng lực thực tế</li><li>✓ Thiết bị và cấu hình theo hồ sơ được duyệt</li><li>✓ Quy trình quản lý chất lượng xuyên suốt</li><li>✓ Hỗ trợ sau bàn giao theo hợp đồng</li></ul></div><div className="about-collage"><div style={{backgroundImage:`url(${heroImg})`}}/><div style={{backgroundImage:`url(${heroImg})`}}/><div style={{backgroundImage:`url(${heroImg})`}}/></div></section>
-    <section className="section surface"><div className="container"><div className="section-title center"><Eyebrow>LĨNH VỰC HOẠT ĐỘNG</Eyebrow><h2>Năng lực phục vụ doanh nghiệp</h2></div><div className="service-grid six">{services.map(x=><article className="service-card visual" key={x.title}><div className="service-card-image" style={{backgroundImage:`url(${heroImg})`}}><span>{x.icon}</span></div><div><h3>{x.title}</h3><p>{x.text}</p><button onClick={()=>navigate(x.href)}>Xem chi tiết →</button></div></article>)}</div></div></section>
-    <section className="section container about-values"><article><Eyebrow>GIÁ TRỊ CỐT LÕI</Eyebrow><h2>Nguyên tắc làm việc</h2><div>{[['◇','An toàn'],['◎','Chất lượng'],['◷','Tiến độ'],['♙','Tận tâm'],['☀','Hiệu quả']].map(([i,t])=><span key={t}><b>{i}</b><strong>{t}</strong></span>)}</div><p>An toàn, chất lượng và sự minh bạch là tiêu chuẩn cho mọi quyết định kỹ thuật.</p></article><article><Eyebrow>ĐỘI NGŨ KỸ SƯ</Eyebrow><h2>Hồ sơ nhân sự thực tế</h2><div className="team-placeholder">{[1,2,3,4].map(i=><div key={i}><span>ẢNH</span><b>Kỹ sư #{i}</b><small>Thông tin chờ doanh nghiệp cung cấp</small></div>)}</div></article></section>
-    <section className="section surface"><div className="container about-docs"><article><Eyebrow>CHỨNG CHỈ / HỒ SƠ</Eyebrow><h2>Tài liệu năng lực</h2><div>{['Hồ sơ năng lực pháp nhân','Chứng chỉ năng lực hoạt động','Chứng chỉ ISO / quản lý chất lượng','Hồ sơ an toàn lao động'].map(x=><span key={x}><b>PDF</b>{x}<small>Chờ tài liệu thật</small></span>)}</div></article><article><Eyebrow>HÀNH TRÌNH PHÁT TRIỂN</Eyebrow><h2>Các dấu mốc</h2><div className="timeline">{['Khởi đầu','Mở rộng dịch vụ','Phát triển khách hàng B2B','Tăng năng lực kỹ thuật'].map((x,i)=><span key={x}><b>{i+1}</b>{x}<small>Chờ xác minh năm</small></span>)}</div></article></div></section>
-    <section className="section container"><div className="section-title center"><Eyebrow>ĐỐI TÁC & KHÁCH HÀNG</Eyebrow><h2>Logo hiển thị khi có quyền sử dụng</h2></div><div className="brand-strip muted">{['KHÁCH HÀNG A','ĐỐI TÁC B','NHÀ MÁY C','KHU CÔNG NGHIỆP D','ĐƠN VỊ E'].map(x=><b key={x}>{x}</b>)}</div><DarkCta navigate={navigate} title="Cần tư vấn giải pháp điện công nghiệp?" /></section>
+    <section className="about-hero" style={{ backgroundImage: `url(${heroImg})` }}>
+      <div className="about-overlay" />
+      <div className="container">
+        <Breadcrumb navigate={navigate} light items={[["Trang chủ", "/"], ["Về chúng tôi"]]} />
+        <h1>Về Điện <span>24H</span></h1>
+        <p className="about-tagline">Điện 24H – Luôn sẵn sàng</p>
+        <p>Giải pháp điện công nghiệp và dân dụng tại Biên Hòa – Đồng Nai.</p>
+        <div className="hero-actions">
+          <LinkButton href={phoneHref} navigate={navigate}>☎ Gọi ngay {phoneDisplay}</LinkButton>
+          <LinkButton href="/lien-he" navigate={navigate} className="button secondary">Đăng ký tư vấn →</LinkButton>
+        </div>
+      </div>
+    </section>
+
+    <CapabilityStrip items={[
+      ['10+', 'Năm kinh nghiệm', 'Kinh nghiệm thực tế'],
+      ['24/7', 'Sửa chữa điện', 'Phục vụ ngày và đêm'],
+      ['6', 'Nhóm dịch vụ', 'Giải pháp điện toàn diện'],
+      ['Đồng Nai', 'Khu vực trọng tâm', 'Biên Hòa – Đồng Nai'],
+    ]} />
+
+    <section className="section container about-overview">
+      <div>
+        <Eyebrow>TỔNG QUAN</Eyebrow>
+        <h2>Giải pháp điện toàn diện,<br />an toàn và hiệu quả.</h2>
+        <p>Điện 24H có hơn 10 năm kinh nghiệm thực tế cùng đội ngũ kỹ thuật viên lành nghề, phục vụ nhà máy, nhà xưởng, doanh nghiệp, hộ kinh doanh và khách hàng dân dụng.</p>
+        <ul>
+          <li>✓ Tư vấn và thiết kế giải pháp điện</li>
+          <li>✓ Thi công và lắp đặt tại công trình</li>
+          <li>✓ Sửa chữa, bảo trì và thí nghiệm</li>
+          <li>✓ Cung cấp vật tư, thiết bị điện</li>
+        </ul>
+      </div>
+      <div className="about-collage" role="img" aria-label="Hình minh họa hoạt động kỹ thuật điện của Điện 24H">
+        <div style={{ backgroundImage: `url(${heroImg})` }} />
+        <div style={{ backgroundImage: `url(${heroImg})` }} />
+        <div style={{ backgroundImage: `url(${heroImg})` }} />
+      </div>
+    </section>
+
+    <section className="section surface">
+      <div className="container">
+        <div className="section-title center"><Eyebrow>LĨNH VỰC HOẠT ĐỘNG</Eyebrow><h2>Hệ sinh thái 6 nhóm dịch vụ</h2></div>
+        <div className="service-grid six">{services.map(service => <article className="service-card visual" key={service.title}>
+          <div className="service-card-image" style={{ backgroundImage: `url(${heroImg})` }}><span>{service.icon}</span></div>
+          <div><h3>{service.title}</h3><p>{service.text}</p><button onClick={() => navigate(service.href)}>Xem chi tiết →</button></div>
+        </article>)}</div>
+      </div>
+    </section>
+
+    <section className="section container about-values">
+      <article>
+        <Eyebrow>PHƯƠNG CHÂM</Eyebrow>
+        <h2>Trao gửi sự an tâm</h2>
+        <div>{[['24', 'Luôn sẵn sàng'], ['◇', 'An toàn'], ['◎', 'Hiệu quả']].map(([icon, title]) => <span key={title}><b>{icon}</b><strong>{title}</strong></span>)}</div>
+        <p>Điện 24H hướng đến giải pháp phù hợp, nguồn điện ổn định và giảm thời gian gián đoạn vận hành.</p>
+      </article>
+      <article>
+        <Eyebrow>KHÁCH HÀNG PHỤC VỤ</Eyebrow>
+        <h2>Từ nhà máy đến nhà ở</h2>
+        <div className="team-placeholder">{customerGroups.map(([icon, title, detail]) => <div key={title}>
+          <span>{icon}</span><b>{title}</b><small>{detail}</small>
+        </div>)}</div>
+      </article>
+    </section>
+
+    <section className="section surface"><div className="container"><DarkCta navigate={navigate} title="Cần tư vấn giải pháp điện?" text="Liên hệ Điện 24H để trao đổi nhu cầu sửa chữa, thi công hoặc cung cấp thiết bị tại Đồng Nai." /></div></section>
   </>
 }
 
 export function ContactPage({ navigate }: { navigate: Navigate }) {
+  const quickNeeds = [
+    ['⚠', 'Sự cố điện 24H', 'Chập cháy, mất pha, đảo pha', '/dich-vu/sua-chua-dien-24h'],
+    ['▤', 'Trạm biến áp', 'Thi công, bảo trì, thí nghiệm', '/dich-vu/tram-bien-ap'],
+    ['▣', 'Mua thiết bị', 'Máy biến áp, tủ điện, cáp', '/san-pham'],
+    ['☀', 'Điện mặt trời', 'Hòa lưới, bám tải, lưu trữ', '/dich-vu/solar'],
+  ]
+  const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`
+
   return <>
-    <section className="contact-hero" style={{backgroundImage:`url(${heroImg})`}}><div/><div className="container"><Breadcrumb navigate={navigate} light items={[['Trang chủ','/'],['Liên hệ']]}/><h1>Liên hệ & yêu cầu báo giá</h1><p>Gửi yêu cầu để đội kỹ thuật tiếp nhận và phản hồi trong giờ trực.</p></div></section>
-    <section className="section container contact-main"><aside><h2>Thông tin liên hệ</h2>{[['☎','Hotline 24/7',phoneDisplay],['✉','Email',email],['⌖','Địa chỉ','H4 Thân Nhân Trung, KP4C, Trảng Dài, Biên Hòa, Đồng Nai'],['◷','Giờ làm việc','T2 – T7: 07:30 – 17:30; tiếp nhận hotline 24/7'],['Z','Zalo OA','Điện 24H Đồng Nai']].map(([i,t,v])=><div key={t}><span>{i}</span><p><b>{t}</b>{v}</p></div>)}</aside><QuoteForm title="Gửi yêu cầu báo giá" /></section>
-    <section className="container quick-needs"><h2>Chọn nhanh loại yêu cầu</h2><div>{[['⚠','Sự cố khẩn cấp','Mất điện, chập cháy, quá tải'],['▤','Khảo sát công trình','Tư vấn giải pháp, thiết kế'],['▣','Mua thiết bị','Máy biến áp, tủ điện, cáp'],['⚙','Bảo trì định kỳ','Trạm, tủ điện, máy phát']].map(([i,t,s])=><button key={t}><span>{i}</span><b>{t}</b><small>{s}</small><em>→</em></button>)}</div></section>
-    <section className="section container contact-lower"><article><Eyebrow>VỊ TRÍ CỦA CHÚNG TÔI</Eyebrow><div className="map-box"><span>Điện 24H Đồng Nai</span><b>⌖</b><p>Bản đồ chính thức sẽ được nhúng sau khi thống nhất NAP và Google Business Profile.</p></div></article><article><FaqBlock title="Câu hỏi liên hệ"/></article></section>
-    <section className="container response-process"><article><h2>Thời gian phản hồi cam kết</h2><div>{[['≤ 15 phút','Tiếp nhận thông tin'],['Trong giờ trực','Phản hồi kỹ thuật'],['Theo khu vực','Điều phối hiện trường']].map(([n,t])=><span key={t}><b>{n}</b>{t}</span>)}</div><small>Các mốc thời gian cần được doanh nghiệp xác nhận theo năng lực vận hành.</small></article><article><h2>Quy trình sau khi gửi yêu cầu</h2><div>{['Tiếp nhận','Khảo sát & tư vấn','Gửi báo giá','Triển khai & hỗ trợ'].map((x,i)=><span key={x}><b>{i+1}</b>{x}</span>)}</div></article></section>
-    <div className="container cta-spacing"><DarkCta navigate={navigate} title="Sự cố điện? Gọi ngay hỗ trợ 24/7" text="Để đảm bảo an toàn, mô tả tình trạng và làm theo hướng dẫn của kỹ sư tiếp nhận." /></div>
+    <section className="contact-hero" style={{ backgroundImage: `url(${heroImg})` }}>
+      <div />
+      <div className="container"><Breadcrumb navigate={navigate} light items={[["Trang chủ", "/"], ["Liên hệ"]]} /><h1>Liên hệ & yêu cầu báo giá</h1><p>Gọi hotline, chat Zalo hoặc gửi nội dung qua email chính thức của Điện 24H.</p></div>
+    </section>
+
+    <section className="section container contact-main">
+      <aside>
+        <h2>Thông tin liên hệ</h2>
+        <div><span>☎</span><p><b>Hotline sự cố 24/7</b><a href={phoneHref}>{phoneDisplay}</a></p></div>
+        <div><span>✉</span><p><b>Email</b><a href={`mailto:${email}`}>{email}</a></p></div>
+        <div><span>⌖</span><p><b>Địa chỉ</b>{address}</p></div>
+        <div><span>◷</span><p><b>Tiếp nhận sửa chữa</b>24/7, phục vụ cả ngày lẫn đêm</p></div>
+        <div><span>Z</span><p><b>Chat Zalo</b><a href={zaloHref} target="_blank" rel="noreferrer">Chat qua Zalo</a></p></div>
+      </aside>
+      <QuoteForm title="Đăng ký tư vấn" />
+    </section>
+
+    <section className="container quick-needs"><h2>Chọn nhanh loại yêu cầu</h2><div>{quickNeeds.map(([icon, title, detail, href]) => <button key={title} onClick={() => navigate(href)}><span>{icon}</span><b>{title}</b><small>{detail}</small><em>→</em></button>)}</div></section>
+
+    <section className="section container contact-lower">
+      <article><Eyebrow>VỊ TRÍ CỦA CHÚNG TÔI</Eyebrow><div className="map-box"><span>Điện 24H Đồng Nai</span><b>⌖</b><p>{address}<br /><a href={mapHref} target="_blank" rel="noreferrer">Mở chỉ đường trên Google Maps →</a></p></div></article>
+      <article><FaqBlock title="Câu hỏi liên hệ" /></article>
+    </section>
+
+    <section className="container response-process">
+      <article><h2>Phản hồi sau khi đăng ký</h2><div>{[['15 phút', 'Kỹ sư liên hệ lại'], ['24/7', 'Tiếp nhận sự cố'], ['0888', 'Hotline trực tiếp']].map(([number, title]) => <span key={title}><b>{number}</b>{title}</span>)}</div><small>Sau khi nhận yêu cầu, kỹ sư sẽ liên hệ lại sau khoảng 15 phút.</small></article>
+      <article><h2>Kênh liên hệ đang hoạt động</h2><div>{[['1', 'Hotline'], ['2', 'Zalo'], ['3', 'Email']].map(([number, title]) => <span key={title}><b>{number}</b>{title}</span>)}</div></article>
+    </section>
+
+    <div className="container cta-spacing"><DarkCta navigate={navigate} title="Sự cố điện? Gọi ngay hỗ trợ 24/7" text="Mô tả tình trạng để kỹ thuật viên tiếp nhận và trao đổi hướng xử lý phù hợp." /></div>
   </>
 }
 

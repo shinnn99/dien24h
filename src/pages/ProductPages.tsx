@@ -1,9 +1,31 @@
+import {
+  ArrowRight,
+  Boxes,
+  Cable,
+  Check,
+  CircuitBoard,
+  ClipboardList,
+  Clock3,
+  MapPin,
+  Package,
+  PhoneCall,
+  SearchCheck,
+  ShieldCheck,
+  SolarPanel,
+  Tags,
+  ToggleRight,
+  Truck,
+  UtilityPole,
+  Zap,
+  type LucideIcon,
+} from 'lucide-react'
 import type { Navigate } from '../App'
 import { Breadcrumb, DarkCta, Eyebrow, FaqBlock, LinkButton, QuoteForm } from '../components/Blocks'
 import heroImg from '../assets/dien24h-hero.png'
 import { phoneHref } from '../data'
 
 type ProductCategory = {
+  icon: LucideIcon
   title: string
   summary: string
   detail: string
@@ -13,6 +35,7 @@ type ProductCategory = {
 
 const categories: ProductCategory[] = [
   {
+    icon: UtilityPole,
     title: 'Máy biến áp',
     summary: 'Các dòng máy biến áp 22 kV',
     detail: 'Điện 24H cung cấp máy biến áp 22 kV của Thibidi, Shilin EMC và MBT. Liên hệ hotline để nhận thông tin và báo giá.',
@@ -20,6 +43,7 @@ const categories: ProductCategory[] = [
     pos: '52% 44%',
   },
   {
+    icon: Cable,
     title: 'Dây cáp điện',
     summary: 'Cáp hạ thế và cáp trung thế',
     detail: 'Nhiều chủng loại dây và cáp điện phục vụ công trình, với chính sách chiết khấu dành cho công trình.',
@@ -27,6 +51,7 @@ const categories: ProductCategory[] = [
     pos: '20% 62%',
   },
   {
+    icon: ToggleRight,
     title: 'Thiết bị đóng cắt',
     summary: 'MCB, MCCB, ACB, contactor và relay',
     detail: 'Danh mục thiết bị đóng cắt được tư vấn theo yêu cầu kỹ thuật của từng hệ thống điện.',
@@ -34,18 +59,21 @@ const categories: ProductCategory[] = [
     pos: '84% 36%',
   },
   {
+    icon: CircuitBoard,
     title: 'Tủ điện & tủ tụ bù',
     summary: 'Tủ MSB, tủ điều khiển và tủ tụ bù hạ thế',
     detail: 'Thiết kế và lắp đặt tủ điện; giải pháp tủ tụ bù hỗ trợ bù công suất phản kháng cho hệ thống.',
     pos: '91% 50%',
   },
   {
+    icon: SolarPanel,
     title: 'Solar',
     summary: 'Thiết bị cho hệ thống điện mặt trời',
     detail: 'Liên hệ Điện 24H để trao đổi giải pháp và sản phẩm Solar phù hợp với nhu cầu của công trình.',
     pos: '9% 54%',
   },
   {
+    icon: ShieldCheck,
     title: 'Thiết bị chống sét',
     summary: 'Thiết bị cho hệ thống chống sét',
     detail: 'Liên hệ Điện 24H để trao đổi thiết bị chống sét phù hợp với nhu cầu bảo vệ của công trình.',
@@ -73,6 +101,27 @@ const productQuestions = [
   ['Cần cung cấp thông tin gì?', 'Bạn nên cho biết nhóm sản phẩm, công suất dự kiến, địa điểm công trình và yêu cầu kỹ thuật đang có.'],
 ]
 
+const productPromises: [LucideIcon, string, string][] = [
+  [Boxes, '6 nhóm sản phẩm', 'Cho hệ thống điện công trình'],
+  [SearchCheck, 'Tư vấn lựa chọn', 'Theo yêu cầu kỹ thuật'],
+  [Truck, 'Giao tận công trình', 'Hỗ trợ theo từng đơn hàng'],
+  [ShieldCheck, 'Bảo hành tại chỗ', 'Trao đổi điều kiện khi báo giá'],
+]
+
+const transformerSpecs: [LucideIcon, string, string][] = [
+  [Package, 'Nhóm sản phẩm', 'Máy biến áp'],
+  [Zap, 'Cấp điện áp', '22 kV'],
+  [Tags, 'Thương hiệu', 'Thibidi'],
+  [Tags, 'Thương hiệu khác', 'Shilin EMC · MBT'],
+]
+
+const selectionAdvice: [LucideIcon, string][] = [
+  [Zap, 'Công suất dự kiến'],
+  [MapPin, 'Địa điểm lắp đặt'],
+  [ClipboardList, 'Yêu cầu kỹ thuật'],
+  [Clock3, 'Tiến độ mong muốn'],
+]
+
 export function ProductsPage({ navigate }: { navigate: Navigate }) {
   return <>
     <section className="listing-hero" style={{ backgroundImage: `url(${heroImg})` }}>
@@ -90,12 +139,7 @@ export function ProductsPage({ navigate }: { navigate: Navigate }) {
     </section>
 
     <div className="container product-promises">
-      {[
-        ['▣', '6 nhóm sản phẩm', 'Cho hệ thống điện công trình'],
-        ['◎', 'Tư vấn lựa chọn', 'Theo yêu cầu kỹ thuật'],
-        ['⌖', 'Giao tận công trình', 'Hỗ trợ theo từng đơn hàng'],
-        ['◇', 'Bảo hành tại chỗ', 'Trao đổi điều kiện khi báo giá'],
-      ].map(([icon, title, text]) => <div key={title}><span>{icon}</span><b>{title}<small>{text}</small></b></div>)}
+      {productPromises.map(([Icon, title, text]) => <div key={title}><span><Icon size={26} strokeWidth={1.8} aria-hidden="true" /></span><b>{title}<small>{text}</small></b></div>)}
     </div>
 
     <section className="section container products-main">
@@ -108,13 +152,16 @@ export function ProductsPage({ navigate }: { navigate: Navigate }) {
       </div>
 
       <div className="category-grid">
-        {categories.map(category => <article key={category.title}>
-          <div style={{ backgroundImage: `url(${heroImg})`, backgroundPosition: category.pos }} />
-          <span>▣</span>
-          <h3>{category.title}</h3>
-          <p>{category.summary}</p>
-          <button type="button" onClick={() => navigate('/lien-he')}>Yêu cầu thông tin →</button>
-        </article>)}
+        {categories.map(category => {
+          const CategoryIcon = category.icon
+          return <article key={category.title}>
+            <div style={{ backgroundImage: `url(${heroImg})`, backgroundPosition: category.pos }} />
+            <span><CategoryIcon size={21} aria-hidden="true" /></span>
+            <h3>{category.title}</h3>
+            <p>{category.summary}</p>
+            <button type="button" onClick={() => navigate('/lien-he')}>Yêu cầu thông tin <ArrowRight size={17} aria-hidden="true" /></button>
+          </article>
+        })}
       </div>
 
       <div className="section-title row-title product-title">
@@ -175,20 +222,15 @@ export function ProductDetailPage({ navigate }: { navigate: Navigate }) {
           <span className="verified">Danh mục máy biến áp</span>
           <h1>Máy biến áp 22 kV</h1>
           <div className="spec-badges verified-spec-badges">
-            {[
-              ['▣', 'Nhóm sản phẩm', 'Máy biến áp'],
-              ['ϟ', 'Cấp điện áp', '22 kV'],
-              ['◇', 'Thương hiệu', 'Thibidi'],
-              ['◇', 'Thương hiệu khác', 'Shilin EMC · MBT'],
-            ].map(([icon, title, value]) => <div key={title}><span>{icon}</span><small>{title}</small><b>{value}</b></div>)}
+            {transformerSpecs.map(([Icon, title, value]) => <div key={title}><span><Icon size={22} aria-hidden="true" /></span><small>{title}</small><b>{value}</b></div>)}
           </div>
           <p>Điện 24H cung cấp máy biến áp 22 kV của Thibidi, Shilin EMC và MBT. Gọi hotline hoặc gửi nhu cầu để nhận tư vấn và báo giá.</p>
           <div className="benefit-row verified-benefits">
-            {['Tư vấn theo nhu cầu', 'Báo giá qua hotline', 'Ba thương hiệu lựa chọn'].map(item => <span key={item}>✓ {item}</span>)}
+            {['Tư vấn theo nhu cầu', 'Báo giá qua hotline', 'Ba thương hiệu lựa chọn'].map(item => <span key={item}><Check size={17} aria-hidden="true" />{item}</span>)}
           </div>
           <div className="hero-actions">
             <LinkButton href="/lien-he" navigate={navigate}>Yêu cầu báo giá</LinkButton>
-            <LinkButton href={phoneHref} navigate={navigate} className="button outline">☎ Gọi tư vấn</LinkButton>
+            <LinkButton href={phoneHref} navigate={navigate} className="button outline"><PhoneCall size={18} aria-hidden="true" /> Gọi tư vấn</LinkButton>
           </div>
         </div>
       </div>
@@ -214,7 +256,7 @@ export function ProductDetailPage({ navigate }: { navigate: Navigate }) {
           <section className="related-products">
             <div className="section-title row-title">
               <h2>Danh mục liên quan</h2>
-              <button className="text-link" type="button" onClick={() => navigate('/san-pham')}>Xem tất cả →</button>
+              <button className="text-link" type="button" onClick={() => navigate('/san-pham')}>Xem tất cả <ArrowRight size={17} aria-hidden="true" /></button>
             </div>
             <div className="product-grid three">
               {categories.slice(1, 4).map(category => <article className="product-card" key={category.title}>
@@ -230,19 +272,14 @@ export function ProductDetailPage({ navigate }: { navigate: Navigate }) {
         <aside>
           <QuoteForm title="Yêu cầu báo giá máy biến áp" compact />
           <div className="aside-benefits">
-            {['Tiếp nhận nhu cầu kỹ thuật', 'Tư vấn theo công trình', 'Báo giá qua hotline', 'Trao đổi thông tin sản phẩm'].map(item => <span key={item}>✓ {item}</span>)}
+            {['Tiếp nhận nhu cầu kỹ thuật', 'Tư vấn theo công trình', 'Báo giá qua hotline', 'Trao đổi thông tin sản phẩm'].map(item => <span key={item}><Check size={17} aria-hidden="true" />{item}</span>)}
           </div>
         </aside>
       </div>
 
       <section className="selection-advice">
         <h2>Thông tin nên chuẩn bị khi yêu cầu báo giá</h2>
-        {[
-          ['ϟ', 'Công suất dự kiến'],
-          ['⌖', 'Địa điểm lắp đặt'],
-          ['▣', 'Yêu cầu kỹ thuật'],
-          ['◷', 'Tiến độ mong muốn'],
-        ].map(([icon, title]) => <div key={title}><span>{icon}</span><b>{title}</b></div>)}
+        {selectionAdvice.map(([Icon, title]) => <div key={title}><span><Icon size={20} aria-hidden="true" /></span><b>{title}</b></div>)}
         <LinkButton navigate={navigate} href="/lien-he" className="button outline">Gửi yêu cầu tư vấn</LinkButton>
       </section>
 

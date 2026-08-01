@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { SiteHeader, SiteFooter } from './components/SiteChrome'
 import { FloatingContact } from './components/FloatingContact'
+import { BackToTop } from './components/BackToTop'
 import {
   AboutPage,
+  ArticlePage,
   ContactPage,
   HomePage,
   NotFoundPage,
@@ -69,6 +71,8 @@ function App() {
       '/dich-vu/chong-set': 'Thi công chống sét & tiếp địa | Điện 24H',
       '/san-pham': 'Vật tư & thiết bị điện cho công trình | Điện 24H',
       '/san-pham/may-bien-ap': 'Máy biến áp 22 kV Thibidi, Shilin EMC, MBT | Điện 24H',
+      '/kien-thuc': 'Kiến thức điện công nghiệp | Điện 24H',
+      '/kien-thuc/chi-phi-lap-tram-bien-ap': 'Chi phí lắp trạm biến áp gồm những gì? | Điện 24H',
       '/gioi-thieu': 'Về Điện 24H Đồng Nai | Hơn 10 năm kinh nghiệm',
       '/lien-he': 'Liên hệ & yêu cầu báo giá | Điện 24H Đồng Nai',
     }
@@ -82,6 +86,8 @@ function App() {
       '/dich-vu/chong-set': 'Thi công chống sét trực tiếp, chống sét lan truyền, tiếp địa và đo điện trở đất.',
       '/san-pham': 'Máy biến áp, dây cáp điện, thiết bị đóng cắt, tủ điện, Solar và thiết bị chống sét cho nhu cầu công trình.',
       '/san-pham/may-bien-ap': 'Máy biến áp 22 kV của Thibidi, Shilin EMC và MBT; liên hệ Điện 24H để nhận tư vấn và báo giá.',
+      '/kien-thuc': 'Thư viện kiến thức điện công nghiệp dành cho người phụ trách kỹ thuật, mua hàng và vận hành nhà máy.',
+      '/kien-thuc/chi-phi-lap-tram-bien-ap': 'Tổng hợp các nhóm chi phí thiết bị, vật tư, xây dựng, nhân công và thí nghiệm khi lắp trạm biến áp.',
       '/gioi-thieu': 'Điện 24H Đồng Nai giới thiệu hơn 10 năm kinh nghiệm cùng sáu nhóm dịch vụ điện công nghiệp và dân dụng.',
       '/lien-he': 'Hotline 0888.979.111, email contact@dien24h.vn và địa chỉ Điện 24H tại Trảng Dài, Biên Hòa, Đồng Nai.',
     }
@@ -133,6 +139,8 @@ function App() {
     if (path === '/dich-vu/chong-set') return <ServicePage navigate={navigate} variant="lightning" />
     if (path === '/san-pham') return <ProductsPage navigate={navigate} />
     if (path === '/san-pham/may-bien-ap') return <ProductDetailPage navigate={navigate} />
+    if (path === '/kien-thuc') return <ArticlePage navigate={navigate} index />
+    if (path === '/kien-thuc/chi-phi-lap-tram-bien-ap') return <ArticlePage navigate={navigate} />
     if (path === '/gioi-thieu') return <AboutPage navigate={navigate} />
     if (path === '/lien-he') return <ContactPage navigate={navigate} />
     return <NotFoundPage navigate={navigate} />
@@ -144,6 +152,7 @@ function App() {
       {renderPage()}
       <SiteFooter navigate={navigate} />
       <FloatingContact />
+      <BackToTop />
     </main>
   )
 }

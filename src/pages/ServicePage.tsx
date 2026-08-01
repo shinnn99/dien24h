@@ -1,4 +1,43 @@
 import type { ReactNode } from 'react'
+import {
+  Antenna,
+  ArrowRight,
+  BatteryCharging,
+  BriefcaseBusiness,
+  Building2,
+  Cable,
+  CalendarCheck2,
+  CalendarClock,
+  CircuitBoard,
+  CircleCheck,
+  ClipboardCheck,
+  Cog,
+  Construction,
+  DraftingCompass,
+  Earth,
+  Factory,
+  Flame,
+  Gauge,
+  Handshake,
+  Lightbulb,
+  Package,
+  PackageCheck,
+  PhoneCall,
+  PlugZap,
+  RefreshCw,
+  RotateCcw,
+  Scale,
+  ShieldCheck,
+  SolarPanel,
+  Timer,
+  ToggleRight,
+  Truck,
+  Unplug,
+  UtilityPole,
+  Wrench,
+  Zap,
+  type LucideIcon,
+} from 'lucide-react'
 import type { Navigate } from '../App'
 import { Eyebrow, FaqBlock, LinkButton, PageHero, QuoteForm } from '../components/Blocks'
 import { phoneDisplay, phoneHref } from '../data'
@@ -11,7 +50,7 @@ type ServiceInfo = {
   stats: [string, string, string][]
   section: string
   scopeTitle: string
-  items: [string, string, string][]
+  items: [LucideIcon, string, string][]
   audienceTitle: string
   audienceText: string
   audienceLabels: [string, string, string, string]
@@ -43,12 +82,12 @@ const variants = {
     section: 'SỰ CỐ ĐƯỢC TIẾP NHẬN',
     scopeTitle: 'Hỗ trợ điện nhà xưởng và dân dụng',
     items: [
-      ['ϟ', 'Chập điện', 'Tiếp nhận tình trạng chập điện tại công trình.'],
-      ['♨', 'Cháy điện', 'Hỗ trợ xử lý tình trạng cháy điện tại công trình.'],
-      ['⌁', 'Mất pha', 'Tiếp nhận sự cố mất pha của hệ thống điện.'],
-      ['◐', 'Cân pha', 'Hỗ trợ nhu cầu kiểm tra và cân pha.'],
-      ['↺', 'Đảo pha', 'Tiếp nhận tình trạng đảo pha cần xử lý.'],
-      ['⌂', 'Nhà xưởng & dân dụng', 'Phục vụ cả sự cố điện nhà xưởng và dân dụng.'],
+      [Zap, 'Chập điện', 'Tiếp nhận tình trạng chập điện tại công trình.'],
+      [Flame, 'Cháy điện', 'Hỗ trợ xử lý tình trạng cháy điện tại công trình.'],
+      [Unplug, 'Mất pha', 'Tiếp nhận sự cố mất pha của hệ thống điện.'],
+      [Scale, 'Cân pha', 'Hỗ trợ nhu cầu kiểm tra và cân pha.'],
+      [RefreshCw, 'Đảo pha', 'Tiếp nhận tình trạng đảo pha cần xử lý.'],
+      [Building2, 'Nhà xưởng & dân dụng', 'Phục vụ cả sự cố điện nhà xưởng và dân dụng.'],
     ],
     audienceTitle: 'Nhà xưởng và khách hàng dân dụng',
     audienceText: 'Phục vụ nhà xưởng, doanh nghiệp, hộ kinh doanh, chủ nhà và khách hàng dân dụng tại Biên Hòa – Đồng Nai.',
@@ -88,12 +127,12 @@ const variants = {
     section: 'PHẠM VI DỊCH VỤ',
     scopeTitle: 'Đường dây và trạm biến áp',
     items: [
-      ['◇', 'Tư vấn thiết kế', 'Tư vấn và thiết kế giải pháp theo nhu cầu công trình.'],
-      ['⌁', 'Đường dây trung thế', 'Thi công đường dây trung thế.'],
-      ['▥', 'Thi công trạm biến áp', 'Triển khai hạng mục trạm biến áp.'],
-      ['▣', 'Lắp đặt trạm biến áp', 'Lắp đặt trạm biến áp tại công trình.'],
-      ['⚙', 'Bảo trì trạm biến áp', 'Cung cấp dịch vụ bảo trì trạm biến áp.'],
-      ['◎', 'Thí nghiệm điện', 'Thí nghiệm đường dây trung thế và trạm biến áp.'],
+      [DraftingCompass, 'Tư vấn thiết kế', 'Tư vấn và thiết kế giải pháp theo nhu cầu công trình.'],
+      [UtilityPole, 'Đường dây trung thế', 'Thi công đường dây trung thế.'],
+      [Construction, 'Thi công trạm biến áp', 'Triển khai hạng mục trạm biến áp.'],
+      [PlugZap, 'Lắp đặt trạm biến áp', 'Lắp đặt trạm biến áp tại công trình.'],
+      [Wrench, 'Bảo trì trạm biến áp', 'Cung cấp dịch vụ bảo trì trạm biến áp.'],
+      [ClipboardCheck, 'Thí nghiệm điện', 'Thí nghiệm đường dây trung thế và trạm biến áp.'],
     ],
     audienceTitle: 'Khu công nghiệp, nhà máy và hộ kinh doanh',
     audienceText: 'Phục vụ khu công nghiệp, nhà máy và hộ kinh doanh có nhu cầu về đường dây và trạm biến áp tại Đồng Nai.',
@@ -133,12 +172,12 @@ const variants = {
     section: 'DỊCH VỤ THIẾT BỊ ĐIỆN',
     scopeTitle: 'Từ cung cấp đến lắp đặt tại công trình',
     items: [
-      ['▣', 'Cung cấp thiết bị', 'Cung cấp thiết bị điện theo nhu cầu công trình.'],
-      ['⌖', 'Giao đến công trình', 'Thiết bị được giao đến địa điểm của khách hàng.'],
-      ['⚙', 'Lắp đặt trọn gói', 'Cung cấp dịch vụ lắp đặt thiết bị điện trọn gói.'],
-      ['☀', 'Thiết bị chiếu sáng', 'Lắp đặt thiết bị chiếu sáng.'],
-      ['ϟ', 'Thiết bị đóng cắt', 'Lắp đặt thiết bị đóng cắt.'],
-      ['▤', 'Tủ điện điều khiển', 'Lắp đặt tủ điện điều khiển.'],
+      [Package, 'Cung cấp thiết bị', 'Cung cấp thiết bị điện theo nhu cầu công trình.'],
+      [Truck, 'Giao đến công trình', 'Thiết bị được giao đến địa điểm của khách hàng.'],
+      [Wrench, 'Lắp đặt trọn gói', 'Cung cấp dịch vụ lắp đặt thiết bị điện trọn gói.'],
+      [Lightbulb, 'Thiết bị chiếu sáng', 'Lắp đặt thiết bị chiếu sáng.'],
+      [ToggleRight, 'Thiết bị đóng cắt', 'Lắp đặt thiết bị đóng cắt.'],
+      [CircuitBoard, 'Tủ điện điều khiển', 'Lắp đặt tủ điện điều khiển.'],
     ],
     audienceTitle: 'Khách hàng cần thiết bị và vật tư điện',
     audienceText: 'Dịch vụ phù hợp với chủ công trình, nhà máy, nhà xưởng và các đơn vị cần mua, giao hoặc lắp đặt thiết bị điện tại Đồng Nai.',
@@ -178,12 +217,12 @@ const variants = {
     section: 'HẠNG MỤC DỊCH VỤ',
     scopeTitle: 'Bảo trì và đo kiểm theo hệ thống',
     items: [
-      ['▥', 'Bảo trì trạm biến áp', 'Dịch vụ bảo trì trạm biến áp.'],
-      ['⌁', 'Thí nghiệm đường dây', 'Thí nghiệm đường dây trung thế.'],
-      ['◎', 'Thí nghiệm trạm biến áp', 'Thí nghiệm các hạng mục trạm biến áp.'],
-      ['⚙', 'Bảo trì máy phát', 'Bảo trì máy phát điện định kỳ.'],
-      ['⏚', 'Đo điện trở đất', 'Đo điện trở đất của hệ thống tiếp địa.'],
-      ['◷', 'Đo kiểm định kỳ', 'Đo kiểm điện trở đất định kỳ.'],
+      [Wrench, 'Bảo trì trạm biến áp', 'Dịch vụ bảo trì trạm biến áp.'],
+      [Cable, 'Thí nghiệm đường dây', 'Thí nghiệm đường dây trung thế.'],
+      [ClipboardCheck, 'Thí nghiệm trạm biến áp', 'Thí nghiệm các hạng mục trạm biến áp.'],
+      [Cog, 'Bảo trì máy phát', 'Bảo trì máy phát điện định kỳ.'],
+      [Gauge, 'Đo điện trở đất', 'Đo điện trở đất của hệ thống tiếp địa.'],
+      [CalendarCheck2, 'Đo kiểm định kỳ', 'Đo kiểm điện trở đất định kỳ.'],
     ],
     audienceTitle: 'Hệ thống điện tại công trình',
     audienceText: 'Các hạng mục bảo trì và thí nghiệm phục vụ nhà máy, nhà xưởng, doanh nghiệp và công trình tại Đồng Nai.',
@@ -223,12 +262,12 @@ const variants = {
     section: 'GIẢI PHÁP SOLAR',
     scopeTitle: 'Ba cấu hình cho doanh nghiệp và nhà xưởng',
     items: [
-      ['◇', 'Tư vấn điện mặt trời', 'Tư vấn giải pháp điện năng lượng mặt trời.'],
-      ['☀', 'Điện mặt trời hòa lưới', 'Thi công hệ thống điện mặt trời hòa lưới.'],
-      ['⌁', 'Điện mặt trời bám tải', 'Thi công hệ thống điện mặt trời bám tải.'],
-      ['▣', 'Giải pháp có lưu trữ', 'Cung cấp giải pháp điện mặt trời có lưu trữ.'],
-      ['♙', 'Cho doanh nghiệp', 'Giải pháp hướng tới nhu cầu của doanh nghiệp.'],
-      ['▥', 'Cho nhà xưởng', 'Giải pháp dành cho công trình nhà xưởng.'],
+      [DraftingCompass, 'Tư vấn điện mặt trời', 'Tư vấn giải pháp điện năng lượng mặt trời.'],
+      [SolarPanel, 'Điện mặt trời hòa lưới', 'Thi công hệ thống điện mặt trời hòa lưới.'],
+      [Gauge, 'Điện mặt trời bám tải', 'Thi công hệ thống điện mặt trời bám tải.'],
+      [BatteryCharging, 'Giải pháp có lưu trữ', 'Cung cấp giải pháp điện mặt trời có lưu trữ.'],
+      [BriefcaseBusiness, 'Cho doanh nghiệp', 'Giải pháp hướng tới nhu cầu của doanh nghiệp.'],
+      [Factory, 'Cho nhà xưởng', 'Giải pháp dành cho công trình nhà xưởng.'],
     ],
     audienceTitle: 'Doanh nghiệp và nhà xưởng',
     audienceText: 'Giải pháp đầu tư dài hạn cho doanh nghiệp và nhà xưởng muốn giảm chi phí điện năng và chi phí vận hành.',
@@ -268,12 +307,12 @@ const variants = {
     section: 'DỊCH VỤ MÁY PHÁT ĐIỆN',
     scopeTitle: 'Thuê, mua và bảo trì nguồn dự phòng',
     items: [
-      ['⚡', 'Cho thuê công nghiệp', 'Cho thuê máy phát điện phục vụ nhu cầu công nghiệp.'],
-      ['◷', 'Thuê ngắn hạn', 'Lựa chọn thuê máy phát trong thời gian ngắn.'],
-      ['▣', 'Thuê dài hạn', 'Lựa chọn thuê máy phát trong thời gian dài.'],
-      ['◇', 'Cung cấp máy mới', 'Cung cấp máy phát điện mới.'],
-      ['↺', 'Máy đã qua sử dụng', 'Cung cấp máy phát điện đã qua sử dụng.'],
-      ['⚙', 'Bảo trì định kỳ', 'Bảo trì máy phát điện theo định kỳ.'],
+      [Handshake, 'Cho thuê công nghiệp', 'Cho thuê máy phát điện phục vụ nhu cầu công nghiệp.'],
+      [Timer, 'Thuê ngắn hạn', 'Lựa chọn thuê máy phát trong thời gian ngắn.'],
+      [CalendarClock, 'Thuê dài hạn', 'Lựa chọn thuê máy phát trong thời gian dài.'],
+      [PackageCheck, 'Cung cấp máy mới', 'Cung cấp máy phát điện mới.'],
+      [RotateCcw, 'Máy đã qua sử dụng', 'Cung cấp máy phát điện đã qua sử dụng.'],
+      [Wrench, 'Bảo trì định kỳ', 'Bảo trì máy phát điện theo định kỳ.'],
     ],
     audienceTitle: 'Doanh nghiệp cần nguồn điện dự phòng',
     audienceText: 'Dịch vụ hướng tới doanh nghiệp, nhà máy và nhà xưởng cần duy trì nguồn điện liên tục cho hoạt động vận hành.',
@@ -313,12 +352,12 @@ const variants = {
     section: 'PHẠM VI CHỐNG SÉT',
     scopeTitle: 'Bảo vệ công trình và thiết bị',
     items: [
-      ['ϟ', 'Chống sét trực tiếp', 'Thi công hệ thống chống sét trực tiếp.'],
-      ['▣', 'Chống sét lan truyền', 'Thi công chống sét lan truyền cho hệ thống điện.'],
-      ['⏚', 'Hệ thống tiếp địa', 'Thi công hệ thống tiếp địa cho công trình.'],
-      ['⌁', 'Lắp đặt kim thu sét', 'Lắp đặt kim thu sét theo nhu cầu công trình.'],
-      ['◎', 'Đo điện trở đất', 'Đo điện trở đất của hệ thống tiếp địa.'],
-      ['◷', 'Đo kiểm định kỳ', 'Đo kiểm điện trở đất định kỳ.'],
+      [Zap, 'Chống sét trực tiếp', 'Thi công hệ thống chống sét trực tiếp.'],
+      [ShieldCheck, 'Chống sét lan truyền', 'Thi công chống sét lan truyền cho hệ thống điện.'],
+      [Earth, 'Hệ thống tiếp địa', 'Thi công hệ thống tiếp địa cho công trình.'],
+      [Antenna, 'Lắp đặt kim thu sét', 'Lắp đặt kim thu sét theo nhu cầu công trình.'],
+      [Gauge, 'Đo điện trở đất', 'Đo điện trở đất của hệ thống tiếp địa.'],
+      [CalendarCheck2, 'Đo kiểm định kỳ', 'Đo kiểm điện trở đất định kỳ.'],
     ],
     audienceTitle: 'Nhà ở, nhà xưởng và thiết bị nhạy cảm',
     audienceText: 'Phục vụ nhu cầu bảo vệ nhà ở, nhà xưởng và thiết bị điện tử nhạy cảm.',
@@ -354,8 +393,8 @@ export function ServicePage({ navigate, variant }: { navigate: Navigate; variant
   return <>
     <PageHero navigate={navigate} eyebrow={info.eyebrow} title={info.title} text={info.text}>
       <div className="hero-actions">
-        <LinkButton href={phoneHref} navigate={navigate}>☎ {info.heroCallLabel} {phoneDisplay}</LinkButton>
-        <LinkButton href="/lien-he" navigate={navigate} className="button secondary">Gửi yêu cầu tư vấn →</LinkButton>
+        <LinkButton href={phoneHref} navigate={navigate}><PhoneCall size={18} aria-hidden="true" /> {info.heroCallLabel} {phoneDisplay}</LinkButton>
+        <LinkButton href="/lien-he" navigate={navigate} className="button secondary">Gửi yêu cầu tư vấn <ArrowRight size={18} aria-hidden="true" /></LinkButton>
       </div>
     </PageHero>
 
@@ -366,7 +405,10 @@ export function ServicePage({ navigate, variant }: { navigate: Navigate; variant
     <section className="section container">
       <div className="section-title center"><Eyebrow>{info.section}</Eyebrow><h2>{info.scopeTitle}</h2></div>
       <div className="issue-grid">
-        {info.items.map(([icon, title, description]) => <article key={title}><span>{icon}</span><h3>{title}</h3><p>{description}</p></article>)}
+        {info.items.map(([Icon, title, description]) => <article key={title}>
+          <span className="issue-icon" aria-hidden="true"><Icon size={28} strokeWidth={1.75} /></span>
+          <div className="issue-copy"><h3>{title}</h3><p>{description}</p></div>
+        </article>)}
       </div>
     </section>
 
@@ -374,34 +416,22 @@ export function ServicePage({ navigate, variant }: { navigate: Navigate; variant
       <article className="service-area">
         <Eyebrow>ĐỐI TƯỢNG PHỤC VỤ</Eyebrow>
         <h2>{info.audienceTitle}</h2>
-        <div className="map-visual"><span>24H</span>{info.audienceLabels.map(label => <i key={label}>{label}</i>)}</div>
+        <div className="map-visual"><span className="map-visual-logo"><img src="/logo-dien24h.png" alt="Logo Điện 24H" /></span>{info.audienceLabels.map(label => <i key={label}>{label}</i>)}</div>
         <p>{info.audienceText}</p>
       </article>
-      <article>
+      <article className="service-values">
         <Eyebrow>{info.valueEyebrow}</Eyebrow>
         <h2>{info.valueTitle}</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: 12, marginTop: 18 }}>
-          {info.values.map(([title, description]) => <div key={title} style={{ border: '1px solid var(--line)', borderRadius: 10, padding: 16, background: 'var(--surface)' }}><h3 style={{ color: 'var(--navy)', margin: '0 0 8px', fontSize: 16 }}>✓ {title}</h3><p style={{ margin: 0 }}>{description}</p></div>)}
+        <div className="service-value-grid">
+          {info.values.map(([title, description]) => <div className="service-value-card" key={title}><h3><CircleCheck size={20} aria-hidden="true" /><span>{title}</span></h3><p>{description}</p></div>)}
         </div>
       </article>
     </div></section>
 
     <section className="section container three-col-bottom">
-      <FaqBlock questions={info.faqs} title="Câu hỏi về dịch vụ" />
-      <div className="emergency-card">
-        <Eyebrow light>{info.contactEyebrow}</Eyebrow>
-        <h2>{phoneDisplay}</h2>
-        <p>{info.contactText}</p>
-        <a href={phoneHref} className="button primary">☎ {info.contactButton}</a>
-      </div>
+      <FaqBlock questions={info.faqs} title="Câu hỏi về dịch vụ" alwaysOpen />
       <QuoteForm title={info.formTitle} compact />
     </section>
 
-    <div className="container cta-spacing">
-      <section className="dark-cta">
-        <div><h2>{info.ctaTitle}</h2><p>{info.ctaText}</p></div>
-        <div><LinkButton href="/lien-he" navigate={navigate}>{info.ctaButton}</LinkButton><a href={phoneHref}>Hoặc gọi <b>{phoneDisplay}</b></a></div>
-      </section>
-    </div>
   </>
 }

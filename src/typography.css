@@ -86,7 +86,7 @@ body{font-size:var(--type-body);line-height:1.6}
 .hv2-project-grid p{height:auto;min-height:0;font-size:13px;line-height:1.5;overflow:visible}
 .hv2-project-grid button{font-size:15px;line-height:1.4;white-space:normal}
 .hv2-product-grid article{height:auto;min-height:112px;padding-bottom:9px}
-.hv2-product-photo{height:76px}
+.hv2-product-photo{height:auto}
 .hv2-product-grid b{
   padding-inline:6px;
   font-size:var(--type-item-title);
@@ -254,6 +254,47 @@ body{font-size:var(--type-body);line-height:1.6}
 }
 .project-facts b,.results-grid strong,.quote-proof span{font-size:14px;line-height:1.45}
 
+/* Knowledge pages use the same typeface and scale as the rest of the site. */
+.knowledge-page{
+  font-family:'Be Vietnam Pro',Arial,sans-serif;
+  font-size:var(--type-body);
+  line-height:1.6;
+}
+.knowledge-page .projects-head h1,
+.knowledge-page .article-head h1{
+  font-weight:700;
+  letter-spacing:-1.5px;
+}
+.knowledge-page .article-content h2{
+  font-weight:700;
+  letter-spacing:-.75px;
+}
+.knowledge-page .article-content h3,
+.knowledge-page .article-card-grid article>h2{
+  font-weight:700;
+  letter-spacing:-.25px;
+}
+.knowledge-page .article-card-grid article>span{
+  font-size:13px;
+  line-height:1.4;
+}
+.knowledge-page .author-line>span,
+.knowledge-page .author-card>span{
+  font-size:10px;
+  font-weight:700;
+  line-height:1.2;
+}
+.knowledge-page .cost-groups b,
+.knowledge-page .author-card b{
+  font-size:var(--type-caption);
+  line-height:1.45;
+}
+.knowledge-page .consult-card .button{
+  font-size:var(--type-button);
+  line-height:1.35;
+}
+.knowledge-page .article-layout{padding-bottom:72px}
+
 .projects-head{height:auto;min-height:280px;padding-block:42px}
 .contact-hero{min-height:260px}
 .article-sidebar{max-height:calc(100vh - 110px);overflow:auto}
@@ -383,6 +424,9 @@ body{font-size:var(--type-body);line-height:1.6}
   .project-body h3,.product-card h3,.article-card-grid article>h2{font-size:17px}
   .section p,.section li,.page-hero p,.listing-hero p,.projects-head p,
   .project-detail-hero p,.article-head>p,.about-hero p,.contact-hero p,.product-summary>p{font-size:15px}
+  .knowledge-page .article-content>p,
+  .knowledge-page .article-content li{font-size:15px}
+  .knowledge-page .article-layout{padding-bottom:56px}
   .service-grid.six,.category-grid,.issue-grid,.service-package-grid{grid-template-columns:1fr 1fr}
   .process-steps{grid-template-columns:1fr 1fr}
   .quote-form input,.quote-form select,.quote-form textarea,

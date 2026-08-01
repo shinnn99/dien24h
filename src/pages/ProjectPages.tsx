@@ -1,3 +1,4 @@
+import { ArrowRight, Check } from 'lucide-react'
 import type { Navigate } from '../App'
 import { Breadcrumb, CapabilityStrip, DarkCta, Eyebrow, LinkButton } from '../components/Blocks'
 import heroImg from '../assets/dien24h-hero.png'
@@ -79,7 +80,7 @@ export function ProjectsPage({ navigate }: { navigate: Navigate }) {
             <b>Kết quả có căn cứ</b>
           </div>
           <p>Trong thời gian chờ dữ liệu thực tế, trang này chỉ trình bày các nhóm công việc Điện 24H đang giới thiệu trên website, không gán tên khách hàng, công suất hoặc địa điểm cho dự án mẫu.</p>
-          <LinkButton navigate={navigate} href="/lien-he" className="button outline">Trao đổi nhu cầu công trình →</LinkButton>
+          <LinkButton navigate={navigate} href="/lien-he" className="button outline">Trao đổi nhu cầu công trình <ArrowRight size={18} aria-hidden="true" /></LinkButton>
         </div>
       </article>
 
@@ -107,7 +108,7 @@ export function ProjectsPage({ navigate }: { navigate: Navigate }) {
           <div className="project-body">
             <h3>{group.title}</h3>
             <p>{group.description}</p>
-            <button type="button" onClick={() => navigate(group.href)}>Xem phạm vi dịch vụ →</button>
+            <button type="button" onClick={() => navigate(group.href)}>Xem phạm vi dịch vụ <ArrowRight size={17} aria-hidden="true" /></button>
           </div>
         </article>)}
       </div>
@@ -120,10 +121,10 @@ export function ProjectsPage({ navigate }: { navigate: Navigate }) {
             <p>Khi được phép công bố, mỗi hồ sơ sẽ nêu rõ hạng mục, địa điểm, quy mô, thời gian triển khai, hình ảnh thực tế và kết quả đạt được.</p>
           </div>
           <ul>
-            <li>✓ Tên hoặc nhóm khách hàng được phép công bố</li>
-            <li>✓ Phạm vi thi công và thiết bị sử dụng</li>
-            <li>✓ Hình ảnh thực tế có nguồn rõ ràng</li>
-            <li>✓ Kết quả nghiệm thu hoặc bàn giao có căn cứ</li>
+            <li><Check size={18} aria-hidden="true" /><span>Tên hoặc nhóm khách hàng được phép công bố</span></li>
+            <li><Check size={18} aria-hidden="true" /><span>Phạm vi thi công và thiết bị sử dụng</span></li>
+            <li><Check size={18} aria-hidden="true" /><span>Hình ảnh thực tế có nguồn rõ ràng</span></li>
+            <li><Check size={18} aria-hidden="true" /><span>Kết quả nghiệm thu hoặc bàn giao có căn cứ</span></li>
           </ul>
         </div>
       </section>

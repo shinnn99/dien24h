@@ -20,6 +20,7 @@ export default {
         '/dich-vu/dien-cong-nghiep',
         '/dich-vu/solar', '/dich-vu/chong-set', '/dich-vu/may-phat-dien',
         '/san-pham', '/san-pham/may-bien-ap',
+        '/kien-thuc', '/kien-thuc/chi-phi-lap-tram-bien-ap',
         '/gioi-thieu', '/lien-he',
       ])
       if (!routes.has(path)) return new Response('Không tìm thấy trang', { status: 404 })

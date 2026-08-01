@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
-import { ChevronDown, Headset, Mail, MapPin, Menu, PhoneCall, X } from 'lucide-react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { AtSign, ChevronDown, ChevronRight, Headset, Mail, MapPin, Menu, PhoneCall, X } from 'lucide-react'
 import type { Navigate } from '../App'
-import { address, email, phoneDisplay, phoneHref } from '../data'
+import { address, email, phoneDisplay, phoneHref, zaloHref } from '../data'
 import { SiteLink } from './SiteLink'
 
 type DropdownKey = 'services' | 'products'
@@ -10,6 +10,7 @@ const nav = [
   { label: 'Trang chủ', href: '/' },
   { label: 'Dịch vụ', dropdown: 'services' },
   { label: 'Sản phẩm', dropdown: 'products' },
+  { label: 'Kiến thức', href: '/kien-thuc' },
   { label: 'Giới thiệu', href: '/gioi-thieu' },
   { label: 'Liên hệ', href: '/lien-he' },
 ] as const
@@ -38,6 +39,8 @@ export function SiteHeader({ navigate, path }: { navigate: Navigate; path: strin
   const [open, setOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<DropdownKey | null>(null)
   const headerRef = useRef<HTMLElement>(null)
+  const navRef = useRef<HTMLElement>(null)
+  const indicatorRef = useRef<HTMLSpanElement>(null)
   const triggerRefs = useRef<Partial<Record<DropdownKey, HTMLButtonElement | null>>>({})
 
   const closeNavigation = () => {
@@ -45,7 +48,55 @@ export function SiteHeader({ navigate, path }: { navigate: Navigate; path: strin
     setActiveDropdown(null)
   }
 
+  const isRouteActive = (href: string) => href === '/'
+    ? path === '/'
+    : path === href || path.startsWith(`${href}/`)
+
   useEffect(() => closeNavigation(), [path])
+
+  useLayoutEffect(() => {
+    let cancelled = false
+
+    const syncIndicator = () => {
+      const navElement = navRef.current
+      const indicator = indicatorRef.current
+      if (!navElement || !indicator || window.matchMedia('(max-width:1100px)').matches) {
+        indicator?.classList.remove('is-visible')
+        return
+      }
+
+      const activeItem = Array.from(navElement.children).find(element =>
+        element.matches('a.is-active, .chrome-nav-item.is-active'),
+      )
+      const target = activeItem instanceof HTMLAnchorElement
+        ? activeItem
+        : activeItem?.querySelector<HTMLElement>('.chrome-nav-trigger')
+
+      if (!target) {
+        indicator.classList.remove('is-visible')
+        return
+      }
+
+      const navRect = navElement.getBoundingClientRect()
+      const targetRect = target.getBoundingClientRect()
+      indicator.style.width = `${Math.round(targetRect.width)}px`
+      indicator.style.transform = `translate3d(${Math.round(targetRect.left - navRect.left)}px,0,0)`
+      indicator.classList.add('is-visible')
+    }
+
+    syncIndicator()
+    const frame = window.requestAnimationFrame(syncIndicator)
+    window.addEventListener('resize', syncIndicator)
+    void document.fonts.ready.then(() => {
+      if (!cancelled) syncIndicator()
+    })
+
+    return () => {
+      cancelled = true
+      window.cancelAnimationFrame(frame)
+      window.removeEventListener('resize', syncIndicator)
+    }
+  }, [path])
 
   useEffect(() => {
     const closeOnOutsideClick = (event: PointerEvent) => {
@@ -85,16 +136,27 @@ export function SiteHeader({ navigate, path }: { navigate: Navigate; path: strin
         aria-controls="chrome-primary-navigation"
         aria-label={open ? 'Đóng menu' : 'Mở menu'}
       >{open ? <X /> : <Menu />}</button>
-      <nav id="chrome-primary-navigation" className={open ? 'open' : ''} aria-label="Điều hướng chính">
+      <nav ref={navRef} id="chrome-primary-navigation" className={open ? 'open' : ''} aria-label="Điều hướng chính">
         {nav.map(item => {
           if (!('dropdown' in item)) {
-            return <SiteLink key={item.label} href={item.href} navigate={navigate} onNavigate={closeNavigation}>{item.label}</SiteLink>
+            const routeActive = isRouteActive(item.href)
+            return <SiteLink
+              key={item.label}
+              href={item.href}
+              navigate={navigate}
+              onNavigate={closeNavigation}
+              className={routeActive ? 'is-active' : undefined}
+              active={routeActive}
+            >{item.label}</SiteLink>
           }
 
           const dropdown = item.dropdown as DropdownKey
           const isOpen = activeDropdown === dropdown
+          const routeActive = dropdown === 'services'
+            ? path.startsWith('/dich-vu/')
+            : path === '/san-pham' || path.startsWith('/san-pham/')
           return <div
-            className={`chrome-nav-item ${isOpen ? 'is-open' : ''}`}
+            className={`chrome-nav-item ${isOpen ? 'is-open' : ''} ${routeActive ? 'is-active' : ''}`.trim()}
             key={item.label}
             onPointerEnter={event => {
               if (event.pointerType === 'mouse') setActiveDropdown(dropdown)
@@ -112,6 +174,7 @@ export function SiteHeader({ navigate, path }: { navigate: Navigate; path: strin
               type="button"
               aria-haspopup="true"
               aria-expanded={isOpen}
+              aria-current={routeActive ? 'page' : undefined}
               aria-controls={`chrome-dropdown-${dropdown}`}
               onClick={() => setActiveDropdown(isOpen ? null : dropdown)}
               onKeyDown={event => {
@@ -132,6 +195,7 @@ export function SiteHeader({ navigate, path }: { navigate: Navigate; path: strin
             </div>
           </div>
         })}
+        <span ref={indicatorRef} className="chrome-nav-indicator" aria-hidden="true" />
       </nav>
       <a className="chrome-phone" href={phoneHref}><PhoneCall size={18} /> Gọi xử lý sự cố</a>
     </div></header>
@@ -139,9 +203,11 @@ export function SiteHeader({ navigate, path }: { navigate: Navigate; path: strin
 }
 
 export function SiteFooter({ navigate }: { navigate: Navigate }) {
+  const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`
   const primaryLinks = [
     ['Trang chủ', '/'],
     ['Sản phẩm', '/san-pham'],
+    ['Kiến thức', '/kien-thuc'],
     ['Giới thiệu', '/gioi-thieu'],
     ['Liên hệ', '/lien-he'],
   ]
@@ -159,20 +225,25 @@ export function SiteFooter({ navigate }: { navigate: Navigate }) {
 
       <nav className="chrome-footer-nav chrome-footer-links" aria-label="Liên kết cuối trang">
         <h4>LIÊN KẾT</h4>
-        {primaryLinks.map(([title, href]) => <SiteLink key={title} href={href} navigate={navigate}>{title}</SiteLink>)}
+        {primaryLinks.map(([title, href]) => <SiteLink key={title} href={href} navigate={navigate}><ChevronRight size={14} aria-hidden="true" /><span>{title}</span></SiteLink>)}
       </nav>
 
       <nav className="chrome-footer-nav chrome-footer-services" aria-label="Dịch vụ nổi bật">
         <h4>DỊCH VỤ</h4>
-        {dropdownLinks.services.map(link => <SiteLink key={link.label} href={link.href} navigate={navigate}>{link.label}</SiteLink>)}
+        {dropdownLinks.services.map(link => <SiteLink key={link.label} href={link.href} navigate={navigate}><ChevronRight size={14} aria-hidden="true" /><span>{link.label}</span></SiteLink>)}
       </nav>
 
       <div className="chrome-footer-support">
-        <h4>HỖ TRỢ KỸ THUẬT</h4>
-        <p>Tiếp nhận sự cố điện 24/7 tại Đồng Nai.</p>
+        <h4>KẾT NỐI VỚI CHÚNG TÔI</h4>
+        <div className="chrome-footer-social" aria-label="Các kênh liên hệ">
+          <a href={zaloHref} target="_blank" rel="noreferrer" aria-label="Chat qua Zalo" title="Zalo"><span className="chrome-footer-zalo" aria-hidden="true">Zalo</span></a>
+          <a href={`mailto:${email}`} aria-label={`Gửi email đến ${email}`} title="Email"><AtSign size={18} /></a>
+          <a href={mapsHref} target="_blank" rel="noreferrer" aria-label="Mở vị trí Điện 24H trên Google Maps" title="Bản đồ"><MapPin size={18} /></a>
+          <a href={phoneHref} aria-label={`Gọi hotline ${phoneDisplay}`} title="Điện thoại"><PhoneCall size={18} /></a>
+        </div>
         <a className="chrome-footer-phone" href={phoneHref}>
-          <PhoneCall size={28} />
-          <span><small>Gọi kỹ thuật ngay</small><b>{phoneDisplay}</b></span>
+          <PhoneCall size={36} strokeWidth={1.9} />
+          <span><b>{phoneDisplay}</b><small>Hỗ trợ 24/7 – Gọi ngay!</small></span>
         </a>
       </div>
     </div>

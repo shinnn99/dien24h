@@ -2,35 +2,45 @@ import type { ReactNode } from 'react'
 import {
   ArrowRight,
   ArrowUpRight,
+  BadgeCheck,
   ClipboardCheck,
+  ClipboardList,
   Clock3,
   Factory,
   FileText,
+  HardHat,
+  Headphones,
   MapPinned,
+  Medal,
   PackageCheck,
   PhoneCall,
   Power,
+  ScanSearch,
   ShieldCheck,
+  Siren,
   Sun,
-  UserCog,
+  Truck,
   UtilityPole,
   Wrench,
 } from 'lucide-react'
 import type { Navigate } from '../App'
+import { FaqBlock, QuoteForm } from '../components/Blocks'
 import heroImg from '../assets/dien24h-hero.png'
 import serviceSheet from '../assets/service-grid-v2.png'
 import projectSheet from '../assets/project-grid-v2.png'
 import productSheet from '../assets/product-grid-v2.png'
 import engineerImg from '../assets/engineer-form-v2.png'
+import lightningProtectionImg from '../assets/service-chong-set.webp'
 
 type IconType = (props: { size?: number; strokeWidth?: number; className?: string }) => ReactNode
+type ServiceItem = [IconType, string, string, string, string, string?]
 
-const services: [IconType, string, string, string, string][] = [
+const services: ServiceItem[] = [
   [UtilityPole, 'Đường dây & trạm biến áp', 'Tư vấn thiết kế, thi công, lắp đặt, bảo trì và thí nghiệm đường dây trung thế, trạm biến áp.', 'sg-1', '/dich-vu/tram-bien-ap'],
   [Wrench, 'Sửa chữa điện 24H', 'Xử lý chập điện, cháy điện, mất pha, cân pha, đảo pha và sự cố điện nhà xưởng, dân dụng.', 'sg-2', '/dich-vu/sua-chua-dien-24h'],
   [PackageCheck, 'Thiết bị điện 24H', 'Cung cấp tận nơi và lắp đặt thiết bị chiếu sáng, đóng cắt, tủ điện điều khiển.', 'sg-3', '/dich-vu/dien-cong-nghiep'],
-  [Sun, 'Solar 24H', 'Tư vấn và thi công điện mặt trời hòa lưới, bám tải hoặc có lưu trữ.', 'sg-4', '/dich-vu/solar'],
-  [ShieldCheck, 'Chống sét 24H', 'Thi công chống sét trực tiếp, lan truyền, tiếp địa và đo điện trở đất.', 'sg-5', '/dich-vu/chong-set'],
+  [Sun, 'Solar 24H', 'Tư vấn và thi công điện mặt trời hòa lưới, bám tải hoặc có lưu trữ.', 'sg-5', '/dich-vu/solar'],
+  [ShieldCheck, 'Chống sét 24H', 'Thi công chống sét trực tiếp, lan truyền, tiếp địa và đo điện trở đất.', 'sg-cover sg-lightning', '/dich-vu/chong-set', lightningProtectionImg],
   [Power, 'Máy phát điện 24H', 'Cho thuê, cung cấp máy mới hoặc đã qua sử dụng và bảo trì định kỳ.', 'sg-6', '/dich-vu/may-phat-dien'],
 ]
 
@@ -47,11 +57,19 @@ const products = [
   ['Tủ điện & tủ tụ bù', 'pd-4'],
 ]
 
-const assurances: [IconType, string, string][] = [
-  [UserCog, 'Hơn 10 năm kinh nghiệm', 'Đội ngũ kỹ thuật viên lành nghề.'],
-  [Clock3, 'Luôn sẵn sàng 24/7', 'Túc trực xử lý sự cố cả ngày lẫn đêm.'],
-  [PackageCheck, 'Cung cấp tận công trình', 'Giao thiết bị và lắp đặt trọn gói.'],
-  [ShieldCheck, 'Bảo hành tại chỗ', 'Hỗ trợ trực tiếp tại địa điểm khách hàng.'],
+const workflowSteps: [IconType, string, string][] = [
+  [Headphones, 'Tiếp nhận yêu cầu', 'Ghi nhận nhu cầu qua hotline hoặc biểu mẫu tư vấn.'],
+  [ScanSearch, 'Khảo sát hiện trường', 'Kỹ thuật viên kiểm tra và đánh giá hiện trạng công trình.'],
+  [ClipboardList, 'Đề xuất & báo giá', 'Thống nhất giải pháp, phạm vi triển khai và chi phí.'],
+  [HardHat, 'Thi công & lắp đặt', 'Triển khai theo phương án và yêu cầu kỹ thuật đã thống nhất.'],
+  [BadgeCheck, 'Bàn giao & bảo hành', 'Nghiệm thu, hướng dẫn vận hành và hỗ trợ sau bàn giao.'],
+]
+
+const assurances: [IconType, string, string, string][] = [
+  [Medal, 'Hơn 10 năm kinh nghiệm', 'Đội ngũ kỹ thuật viên lành nghề.', 'Kinh nghiệm'],
+  [Siren, 'Luôn sẵn sàng 24/7', 'Túc trực xử lý sự cố cả ngày lẫn đêm.', 'Phản ứng nhanh'],
+  [Truck, 'Cung cấp tận công trình', 'Giao thiết bị và lắp đặt trọn gói.', 'Triển khai tận nơi'],
+  [ShieldCheck, 'Bảo hành tại chỗ', 'Hỗ trợ trực tiếp tại địa điểm khách hàng.', 'Hỗ trợ sau bàn giao'],
 ]
 
 export function HomePage({ navigate }: { navigate: Navigate }) {
@@ -101,8 +119,8 @@ export function HomePage({ navigate }: { navigate: Navigate }) {
           <p>Từ nguồn trung thế đến hệ thống phân phối, bảo trì và xử lý sự cố tại công trình.</p>
         </div>
         <div className="hv2-services">
-          {services.map(([Icon, title, text, crop, href]) => <article key={title}>
-            <div className={`hv2-photo hv2-service-photo ${crop}`} style={{ backgroundImage: `url(${serviceSheet})` }} aria-hidden="true">
+          {services.map(([Icon, title, text, crop, href, image]) => <article key={title}>
+            <div className={`hv2-photo hv2-service-photo ${crop}`} style={{ backgroundImage: `url(${image ?? serviceSheet})` }} aria-hidden="true">
               <span><Icon size={25} strokeWidth={1.7} /></span>
             </div>
             <div className="hv2-service-body">
@@ -131,6 +149,27 @@ export function HomePage({ navigate }: { navigate: Navigate }) {
       </div>
     </section>
 
+    <section className="hv2-section hv2-workflow-section" aria-labelledby="home-workflow-title">
+      <div className="hv2-container">
+        <div className="hv2-section-head hv2-section-head-center hv2-workflow-heading">
+          <span className="hv2-eyebrow">Quy trình phối hợp</span>
+          <h2 id="home-workflow-title">Quy trình làm việc nhanh chóng – minh bạch</h2>
+          <p>Năm bước rõ ràng từ tiếp nhận nhu cầu đến bàn giao và hỗ trợ sau thi công.</p>
+        </div>
+        <ol className="hv2-workflow-grid">
+          {workflowSteps.map(([Icon, title, text], index) => <li key={title}>
+            <div className="hv2-workflow-meta">
+              <span className="hv2-workflow-icon" aria-hidden="true"><Icon size={27} strokeWidth={1.8} /></span>
+              <span className="hv2-workflow-number">Bước {String(index + 1).padStart(2, '0')}</span>
+            </div>
+            <h3>{title}</h3>
+            <p>{text}</p>
+            {index < workflowSteps.length - 1 && <span className="hv2-workflow-connector" aria-hidden="true"><ArrowRight size={16} strokeWidth={2.2} /></span>}
+          </li>)}
+        </ol>
+      </div>
+    </section>
+
     <section className="hv2-section hv2-products-section" aria-labelledby="home-products-title">
       <div className="hv2-container">
         <div className="hv2-section-head hv2-section-head-row hv2-section-head-compact">
@@ -153,8 +192,11 @@ export function HomePage({ navigate }: { navigate: Navigate }) {
           <button className="hv2-text-link" type="button" onClick={() => navigate('/gioi-thieu')}>Tìm hiểu về Điện 24H <ArrowRight size={18} /></button>
         </div>
         <div className="hv2-assurances">
-          {assurances.map(([Icon, title, text]) => <article key={title}>
-            <Icon size={30} strokeWidth={1.7} />
+          {assurances.map(([Icon, title, text, tag]) => <article key={title}>
+            <div className="hv2-assurance-top">
+              <span className="hv2-assurance-icon" aria-hidden="true"><Icon size={28} strokeWidth={1.8} /></span>
+              <span className="hv2-assurance-tag">{tag}</span>
+            </div>
             <h3>{title}</h3>
             <p>{text}</p>
           </article>)}
@@ -162,16 +204,26 @@ export function HomePage({ navigate }: { navigate: Navigate }) {
       </div>
     </section>
 
-    <section className="hv2-cta-section" aria-labelledby="home-cta-title">
-      <div className="hv2-container hv2-cta">
-        <div>
-          <span className="hv2-eyebrow hv2-eyebrow-light">Đăng ký tư vấn</span>
-          <h2 id="home-cta-title">Cần xử lý sự cố hoặc tư vấn giải pháp điện?</h2>
-          <p>Để lại thông tin để đội kỹ thuật Điện 24H liên hệ hỗ trợ.</p>
+    <section className="hv2-consult-section" aria-labelledby="home-consult-title">
+      <div className="hv2-container hv2-consult-card">
+        <div className="hv2-consult-faq">
+          <h2 id="home-consult-title">Câu hỏi thường gặp</h2>
+          <FaqBlock initialActive={null} />
         </div>
-        <div className="hv2-cta-actions">
-          <a className="hv2-button hv2-button-primary" href="tel:0888979111"><PhoneCall size={19} /> 0888.979.111</a>
-          <button className="hv2-button hv2-button-outline-light" type="button" onClick={() => navigate('/lien-he')}>Đăng ký tư vấn</button>
+        <div className="hv2-consult-form">
+          <QuoteForm title="Yêu cầu báo giá nhanh" hideLabels />
+        </div>
+        <div
+          className="hv2-consult-engineer"
+          style={{ backgroundImage: `url(${engineerImg})` }}
+          role="img"
+          aria-label="Hình minh họa kỹ thuật viên Điện 24H"
+        >
+          <div>
+            <span>Kinh nghiệm thực tế<b>10+ năm</b></span>
+            <span>Tiếp nhận sự cố<b>24/7</b></span>
+            <span>Hotline kỹ thuật<b>0888.979.111</b></span>
+          </div>
         </div>
       </div>
     </section>

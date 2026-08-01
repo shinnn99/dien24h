@@ -1,5 +1,6 @@
 import { useId, useState } from 'react'
 import type { FormEvent, ReactNode } from 'react'
+import { ArrowRight, Minus, PhoneCall, Plus } from 'lucide-react'
 import type { Navigate } from '../App'
 import heroImg from '../assets/dien24h-hero.png'
 import { email, faqs, phoneDisplay, phoneHref } from '../data'
@@ -39,12 +40,12 @@ export function PageHero({ navigate, title, text, eyebrow, compact = false, chil
   </section>
 }
 
-export function CapabilityStrip({ items }: { items?: [string, string, string][] }) {
+export function CapabilityStrip({ items, className = '' }: { items?: [string, string, string][]; className?: string }) {
   const data = items || [['10+', 'Năm kinh nghiệm', 'Kinh nghiệm thực tế'], ['24/7', 'Sửa chữa điện', 'Phục vụ ngày và đêm'], ['6', 'Nhóm dịch vụ', 'Giải pháp điện toàn diện'], ['Đồng Nai', 'Khu vực trọng tâm', 'Biên Hòa – Đồng Nai']]
-  return <div className="capability-wrap"><div className="container capability-strip">{data.map(([n, title, sub]) => <div key={title}><b>{n}</b><span><strong>{title}</strong><small>{sub}</small></span></div>)}</div></div>
+  return <div className={`capability-wrap ${className}`.trim()}><div className="container capability-strip">{data.map(([n, title, sub]) => <div key={title}><b>{n}</b><span><strong>{title}</strong><small>{sub}</small></span></div>)}</div></div>
 }
 
-export function QuoteForm({ title = 'Yêu cầu báo giá nhanh', compact = false }: { title?: string; compact?: boolean }) {
+export function QuoteForm({ title = 'Yêu cầu báo giá nhanh', compact = false, hideLabels = false }: { title?: string; compact?: boolean; hideLabels?: boolean }) {
   const [prepared, setPrepared] = useState(false)
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -63,32 +64,35 @@ export function QuoteForm({ title = 'Yêu cầu báo giá nhanh', compact = fals
     window.location.href = `mailto:${email}?subject=${subject}&body=${body}`
     setPrepared(true)
   }
-  return <form className={`quote-form ${compact ? 'compact' : ''}`} onSubmit={submit}>
+  return <form className={`quote-form ${compact ? 'compact' : ''} ${hideLabels ? 'labels-hidden' : ''}`.trim()} onSubmit={submit}>
     <h3>{title}</h3>
     {prepared && <div className="success" role="status">Email đã được chuẩn bị. Kiểm tra ứng dụng email và bấm Gửi; thông tin trong biểu mẫu vẫn được giữ lại. Nếu cần hỗ trợ ngay, gọi <a href={phoneHref}>{phoneDisplay}</a>.</div>}
-    <div className="form-row"><label>Họ và tên *<input name="name" required autoComplete="name" placeholder="Nhập họ và tên" /></label><label>Số điện thoại *<input name="phone" required type="tel" inputMode="tel" autoComplete="tel" placeholder="Ví dụ: 090..." /></label></div>
+    <div className="form-row"><label><span className="quote-field-label">Họ và tên *</span><input name="name" required autoComplete="name" placeholder="Nhập họ và tên" /></label><label><span className="quote-field-label">Số điện thoại *</span><input name="phone" required type="tel" inputMode="tel" autoComplete="tel" placeholder="Ví dụ: 090..." /></label></div>
     <CustomSelect
       label="Dịch vụ quan tâm *"
+      hideLabel={hideLabels}
       name="need"
       required
       placeholder="Chọn dịch vụ"
       options={quoteNeedOptions}
     />
-    <label>Ghi chú<textarea name="note" placeholder="Tình trạng hoặc hạng mục cần tư vấn..." /></label>
-    <button className="button primary submit">{prepared ? 'MỞ LẠI EMAIL ĐỂ GỬI →' : 'MỞ EMAIL ĐỂ GỬI YÊU CẦU →'}</button>
+    <label><span className="quote-field-label">Ghi chú</span><textarea name="note" placeholder="Tình trạng hoặc hạng mục cần tư vấn..." /></label>
+    <button className="button primary submit"><span>{prepared ? 'MỞ LẠI EMAIL ĐỂ GỬI' : 'MỞ EMAIL ĐỂ GỬI YÊU CẦU'}</span><ArrowRight size={18} aria-hidden="true" /></button>
     <small>Sau khi nhận yêu cầu, kỹ sư sẽ liên hệ lại sau khoảng 15 phút.</small>
   </form>
 }
 
-export function FaqBlock({ questions = faqs, title = 'Câu hỏi thường gặp' }: { questions?: string[][]; title?: string }) {
-  const [active, setActive] = useState<number | null>(0)
+export function FaqBlock({ questions = faqs, title = 'Câu hỏi thường gặp', initialActive = 0, alwaysOpen = false }: { questions?: string[][]; title?: string; initialActive?: number | null; alwaysOpen?: boolean }) {
+  const [active, setActive] = useState<number | null>(initialActive)
   const blockId = useId().replace(/:/g, '')
   return <section className="faq-block"><div className="section-title row-title"><div><Eyebrow>GIẢI ĐÁP NHANH</Eyebrow><h2>{title}</h2></div><p>Thông tin giúp bạn chuẩn bị yêu cầu kỹ thuật và nhận báo giá chính xác hơn.</p></div><div className="faqs">{questions.map(([q, a], i) => {
-    const open = active === i
+    const open = alwaysOpen || active === i
     const buttonId = `${blockId}-question-${i}`
     const panelId = `${blockId}-answer-${i}`
-    return <div className={`faq-item ${open ? 'active' : ''}`} key={q}>
-      <button id={buttonId} type="button" aria-expanded={open} aria-controls={panelId} onClick={() => setActive(open ? null : i)}><span>{q}<b aria-hidden="true">{open ? '−' : '+'}</b></span></button>
+    return <div className={`faq-item ${open ? 'active' : ''} ${alwaysOpen ? 'always-open' : ''}`.trim()} key={q}>
+      {alwaysOpen
+        ? <h3 id={buttonId} className="faq-question">{q}</h3>
+        : <button id={buttonId} type="button" aria-expanded={open} aria-controls={panelId} onClick={() => setActive(open ? null : i)}><span>{q}<b aria-hidden="true">{open ? <Minus size={20} /> : <Plus size={20} />}</b></span></button>}
       {open && <p id={panelId} role="region" aria-labelledby={buttonId}>{a}</p>}
     </div>
   })}</div></section>
@@ -99,5 +103,5 @@ export function DarkCta({ navigate, title = 'Bạn đang có hạng mục cần 
 }
 
 export function ContactMini() {
-  return <div className="contact-mini"><span>☎</span><div><small>Hotline kỹ thuật</small><a href={phoneHref}>{phoneDisplay}</a><p>{email}</p></div></div>
+  return <div className="contact-mini"><span><PhoneCall size={22} aria-hidden="true" /></span><div><small>Hotline kỹ thuật</small><a href={phoneHref}>{phoneDisplay}</a><p>{email}</p></div></div>
 }

@@ -38,12 +38,6 @@ const customerGroups: [LucideIcon, string, string][] = [
 
 const testimonials = [
   {
-    quote: 'Điện 24H hỗ trợ rất nhanh khi nhà máy chúng tôi gặp sự cố mất điện. Đội ngũ kỹ sư chuyên nghiệp, xử lý triệt để vấn đề và tư vấn giải pháp rất hiệu quả.',
-    name: 'Ông Nguyễn Văn Hùng',
-    role: 'Giám đốc kỹ thuật – Nhà máy AMATA',
-    initials: 'NH',
-  },
-  {
     quote: 'Đội kỹ thuật khảo sát kỹ trước khi thi công trạm biến áp, phối hợp đúng tiến độ và bàn giao thông tin rõ ràng để chúng tôi thuận tiện theo dõi.',
     name: 'Bộ phận kỹ thuật',
     role: 'Doanh nghiệp sản xuất – Đồng Nai',

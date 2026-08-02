@@ -5,6 +5,7 @@ import { BackToTop } from './components/BackToTop'
 import {
   AboutPage,
   ArticlePage,
+  CatalogCategoryPage,
   ContactPage,
   HomePage,
   NotFoundPage,
@@ -15,6 +16,7 @@ import {
 import './App.css'
 import './typography.css'
 import './home-v2.css'
+import './transformer-page.css'
 
 export type Navigate = (href: string) => void
 
@@ -70,7 +72,12 @@ function App() {
       '/dich-vu/may-phat-dien': 'Cho thuê & cung cấp máy phát điện | Điện 24H',
       '/dich-vu/chong-set': 'Thi công chống sét & tiếp địa | Điện 24H',
       '/san-pham': 'Vật tư & thiết bị điện cho công trình | Điện 24H',
-      '/san-pham/may-bien-ap': 'Máy biến áp 22 kV Thibidi, Shilin EMC, MBT | Điện 24H',
+      '/san-pham/may-bien-ap': 'Máy biến áp 22 kV THIBIDI, SHIHLIN, EMC, MBT | Điện 24H',
+      '/san-pham/day-cap-dien': 'Dây cáp điện hạ thế, trung thế cho công trình | Điện 24H',
+      '/san-pham/thiet-bi-dong-cat': 'Thiết bị đóng cắt MCB, MCCB, ACB | Điện 24H',
+      '/san-pham/tu-dien-tu-tu-bu': 'Tủ điện & tủ tụ bù theo hồ sơ công trình | Điện 24H',
+      '/san-pham/solar': 'Module quang điện & inverter Solar doanh nghiệp | Điện 24H',
+      '/san-pham/thiet-bi-chong-set': 'Thiết bị chống sét trực tiếp & lan truyền | Điện 24H',
       '/kien-thuc': 'Kiến thức điện công nghiệp | Điện 24H',
       '/kien-thuc/chi-phi-lap-tram-bien-ap': 'Chi phí lắp trạm biến áp gồm những gì? | Điện 24H',
       '/gioi-thieu': 'Về Điện 24H Đồng Nai | Hơn 10 năm kinh nghiệm',
@@ -85,7 +92,12 @@ function App() {
       '/dich-vu/may-phat-dien': 'Cho thuê máy phát điện công nghiệp ngắn hoặc dài hạn, cung cấp máy mới, máy đã qua sử dụng và bảo trì định kỳ.',
       '/dich-vu/chong-set': 'Thi công chống sét trực tiếp, chống sét lan truyền, tiếp địa và đo điện trở đất.',
       '/san-pham': 'Máy biến áp, dây cáp điện, thiết bị đóng cắt, tủ điện, Solar và thiết bị chống sét cho nhu cầu công trình.',
-      '/san-pham/may-bien-ap': 'Máy biến áp 22 kV của Thibidi, Shilin EMC và MBT; liên hệ Điện 24H để nhận tư vấn và báo giá.',
+      '/san-pham/may-bien-ap': 'Danh mục máy biến áp 22 kV THIBIDI, SHIHLIN, EMC và MBT; đối chiếu loại máy, hồ sơ kỹ thuật và nhận báo giá theo công trình.',
+      '/san-pham/day-cap-dien': 'Đối chiếu dây cáp điện CADIVI, LS VINA, Trần Phú và TAYA theo cấp điện áp, cấu tạo, tuyến lắp đặt và đúng hồ sơ hãng.',
+      '/san-pham/thiet-bi-dong-cat': 'Đối chiếu MCB, MCCB, ACB và thiết bị bảo vệ của Schneider Electric, LS ELECTRIC, Mitsubishi Electric và CHINT theo đúng model.',
+      '/san-pham/tu-dien-tu-tu-bu': 'Danh mục nền tảng tủ phân phối, MCC và tủ tụ bù; rà dòng định mức, Icw, cấp IP, kết cấu và hồ sơ theo công trình.',
+      '/san-pham/solar': 'Đối chiếu module quang điện LONGi, JinkoSolar cùng inverter Huawei FusionSolar, Sungrow theo dữ liệu tải, mái và điểm đấu nối.',
+      '/san-pham/thiet-bi-chong-set': 'Đối chiếu chống sét trực tiếp, SPD Type 1, Type 2, Type 3 và yêu cầu tiếp địa theo hệ thống điện cùng hiện trạng công trình.',
       '/kien-thuc': 'Thư viện kiến thức điện công nghiệp dành cho người phụ trách kỹ thuật, mua hàng và vận hành nhà máy.',
       '/kien-thuc/chi-phi-lap-tram-bien-ap': 'Tổng hợp các nhóm chi phí thiết bị, vật tư, xây dựng, nhân công và thí nghiệm khi lắp trạm biến áp.',
       '/gioi-thieu': 'Điện 24H Đồng Nai giới thiệu hơn 10 năm kinh nghiệm cùng sáu nhóm dịch vụ điện công nghiệp và dân dụng.',
@@ -139,6 +151,11 @@ function App() {
     if (path === '/dich-vu/chong-set') return <ServicePage navigate={navigate} variant="lightning" />
     if (path === '/san-pham') return <ProductsPage navigate={navigate} />
     if (path === '/san-pham/may-bien-ap') return <ProductDetailPage navigate={navigate} />
+    if (path === '/san-pham/day-cap-dien') return <CatalogCategoryPage key="cables" category="cables" navigate={navigate} />
+    if (path === '/san-pham/thiet-bi-dong-cat') return <CatalogCategoryPage key="switchgear" category="switchgear" navigate={navigate} />
+    if (path === '/san-pham/tu-dien-tu-tu-bu') return <CatalogCategoryPage key="cabinets" category="cabinets" navigate={navigate} />
+    if (path === '/san-pham/solar') return <CatalogCategoryPage key="solar" category="solar" navigate={navigate} />
+    if (path === '/san-pham/thiet-bi-chong-set') return <CatalogCategoryPage key="lightning" category="lightning" navigate={navigate} />
     if (path === '/kien-thuc') return <ArticlePage navigate={navigate} index />
     if (path === '/kien-thuc/chi-phi-lap-tram-bien-ap') return <ArticlePage navigate={navigate} />
     if (path === '/gioi-thieu') return <AboutPage navigate={navigate} />

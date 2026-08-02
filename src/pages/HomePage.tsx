@@ -51,10 +51,10 @@ const customerNeeds = [
 ]
 
 const products = [
-  ['Máy biến áp 22 kV', 'pd-1'],
-  ['Dây cáp hạ thế & trung thế', 'pd-2'],
-  ['Thiết bị đóng cắt', 'pd-3'],
-  ['Tủ điện & tủ tụ bù', 'pd-4'],
+  ['Máy biến áp 22 kV', 'pd-1', '/san-pham/may-bien-ap'],
+  ['Dây cáp hạ thế & trung thế', 'pd-2', '/san-pham/day-cap-dien'],
+  ['Thiết bị đóng cắt', 'pd-3', '/san-pham/thiet-bi-dong-cat'],
+  ['Tủ điện & tủ tụ bù', 'pd-4', '/san-pham/tu-dien-tu-tu-bu'],
 ]
 
 const workflowSteps: [IconType, string, string][] = [
@@ -177,7 +177,7 @@ export function HomePage({ navigate }: { navigate: Navigate }) {
           <button className="hv2-text-link" type="button" onClick={() => navigate('/san-pham')}>Xem tất cả sản phẩm <ArrowRight size={18} /></button>
         </div>
         <div className="hv2-product-grid">
-          {products.map(([title, crop]) => <button key={title} type="button" onClick={() => navigate('/san-pham')}>
+          {products.map(([title, crop, href]) => <button key={title} type="button" onClick={() => navigate(href)}>
             <span className={`hv2-photo hv2-product-photo ${crop}`} style={{ backgroundImage: `url(${productSheet})` }} aria-hidden="true" />
             <span><strong>{title}</strong><ArrowRight size={18} /></span>
           </button>)}

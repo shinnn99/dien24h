@@ -20,6 +20,9 @@ export default {
         '/dich-vu/dien-cong-nghiep',
         '/dich-vu/solar', '/dich-vu/chong-set', '/dich-vu/may-phat-dien',
         '/san-pham', '/san-pham/may-bien-ap',
+        '/san-pham/day-cap-dien', '/san-pham/thiet-bi-dong-cat',
+        '/san-pham/tu-dien-tu-tu-bu', '/san-pham/solar',
+        '/san-pham/thiet-bi-chong-set',
         '/kien-thuc', '/kien-thuc/chi-phi-lap-tram-bien-ap',
         '/gioi-thieu', '/lien-he',
       ])

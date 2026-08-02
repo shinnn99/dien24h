@@ -27,11 +27,11 @@ const dropdownLinks: Record<DropdownKey, { label: string; href: string }[]> = {
   products: [
     { label: 'Tất cả sản phẩm', href: '/san-pham' },
     { label: 'Máy biến áp', href: '/san-pham/may-bien-ap' },
-    { label: 'Dây cáp điện', href: '/san-pham' },
-    { label: 'Thiết bị đóng cắt', href: '/san-pham' },
-    { label: 'Tủ điện & tủ tụ bù', href: '/san-pham' },
-    { label: 'Solar', href: '/san-pham' },
-    { label: 'Thiết bị chống sét', href: '/san-pham' },
+    { label: 'Dây cáp điện', href: '/san-pham/day-cap-dien' },
+    { label: 'Thiết bị đóng cắt', href: '/san-pham/thiet-bi-dong-cat' },
+    { label: 'Tủ điện & tủ tụ bù', href: '/san-pham/tu-dien-tu-tu-bu' },
+    { label: 'Solar', href: '/san-pham/solar' },
+    { label: 'Thiết bị chống sét', href: '/san-pham/thiet-bi-chong-set' },
   ],
 }
 
@@ -189,9 +189,18 @@ export function SiteHeader({ navigate, path }: { navigate: Navigate; path: strin
               {item.label}<ChevronDown size={14} />
             </button>
             <div className="chrome-dropdown" id={`chrome-dropdown-${dropdown}`}>
-              {dropdownLinks[dropdown].map(link => (
-                <SiteLink key={link.label} href={link.href} navigate={navigate} onNavigate={closeNavigation}>{link.label}</SiteLink>
-              ))}
+              {dropdownLinks[dropdown].map(link => {
+                const childRouteActive = path === link.href
+                  || (link.href !== '/san-pham' && path.startsWith(`${link.href}/`))
+                return <SiteLink
+                  key={link.label}
+                  href={link.href}
+                  navigate={navigate}
+                  onNavigate={closeNavigation}
+                  className={childRouteActive ? 'is-active' : undefined}
+                  active={childRouteActive}
+                >{link.label}</SiteLink>
+              })}
             </div>
           </div>
         })}

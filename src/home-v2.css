@@ -163,6 +163,23 @@
   white-space:nowrap;
 }
 .chrome-dropdown a:hover,.chrome-dropdown a:focus-visible{background:#eef4fc;color:var(--hv2-blue);outline:0}
+.chrome-dropdown a.is-active{
+  position:relative;
+  padding-left:18px;
+  background:#eaf2fd;
+  color:var(--hv2-blue);
+  font-weight:800;
+}
+.chrome-dropdown a.is-active::before{
+  content:"";
+  position:absolute;
+  top:9px;
+  bottom:9px;
+  left:6px;
+  width:3px;
+  border-radius:999px;
+  background:var(--hv2-orange);
+}
 .chrome-phone{
   min-height:44px;
   margin-left:28px;
